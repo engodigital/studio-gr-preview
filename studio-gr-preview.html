@@ -71,27 +71,11 @@
       text-decoration: none;
     }
 
-    .nav-logo-mark {
-      width: 40px;
-      height: 40px;
-      background: var(--gold);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 900;
-      font-size: 18px;
-      color: var(--dark);
-      letter-spacing: -1px;
-    }
-
-    .nav-logo-text {
-      font-family: 'Montserrat', sans-serif;
-      font-weight: 700;
-      font-size: 18px;
-      color: var(--white);
-      letter-spacing: -0.3px;
+    .nav-logo-img {
+      height: 38px;
+      width: auto;
+      object-fit: contain;
+      display: block;
     }
 
     .nav-menu {
@@ -103,11 +87,12 @@
 
     .nav-menu a {
       text-decoration: none;
-      color: var(--gray-light);
+      color: var(--white);
       font-size: 14px;
       font-weight: 500;
       transition: color 0.2s;
       letter-spacing: 0.2px;
+      opacity: 0.85;
     }
     .nav-menu a:hover { color: var(--white); }
 
@@ -1426,10 +1411,7 @@
   <!-- ── NAVIGATION ── -->
   <nav>
     <div class="nav-inner">
-      <a href="#" class="nav-logo">
-        <div class="nav-logo-mark">GR</div>
-        <div class="nav-logo-text">Studio GR</div>
-      </a>
+      <a href="#" class="nav-logo"><img src="https://storage.googleapis.com/msgsndr/Vlybbph2lwD1CXos345s/media/65aeab372de82a26f9d8b7c0.png" alt="Studio GR" class="nav-logo-img"></a>
       <ul class="nav-menu">
         <li><a href="chi-siamo.html">Chi Siamo</a></li>
         <li><a href="servizi.html">Servizi</a></li>
