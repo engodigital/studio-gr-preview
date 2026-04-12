@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valore Professionale — Studio GR | Selezione Personale Commerciale</title>
+  <meta name="description" content="Ricerca e selezione di profili commerciali e manageriali. Accreditati dal Ministero del Lavoro dal 2011. Processo con i-Profile per selezioni oggettive e durature.">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="main.css">
+  <style>
+    .vp-intro { padding: 100px 48px; background: var(--dark); }
+    .vp-intro-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .vp-intro h2 { font-family: 'Montserrat', sans-serif; font-size: clamp(28px,3vw,40px); font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 20px; }
+    .vp-intro h2 em { color: var(--gold); font-style: italic; }
+    .vp-intro p { font-size: 16px; color: var(--gray-light); line-height: 1.8; margin-bottom: 16px; }
+
+    .accred-badge { display: inline-flex; align-items: center; gap: 12px; background: rgba(55,202,55,0.08); border: 1px solid rgba(55,202,55,0.2); border-radius: 10px; padding: 12px 20px; margin-top: 24px; }
+    .accred-badge i { color: var(--green); font-size: 20px; }
+    .accred-badge-text strong { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; color: var(--white); display: block; }
+    .accred-badge-text span { font-size: 12px; color: var(--gray); }
+
+    .vp-visual { background: var(--dark-3); border: 1px solid rgba(255,255,255,0.07); border-radius: 20px; padding: 40px; position: relative; overflow: hidden; }
+    .vp-visual::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--green), transparent); }
+    .vp-stat-row { display: flex; flex-direction: column; gap: 16px; }
+    .vp-stat-item { display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .vp-stat-item:last-child { border-bottom: none; }
+    .vp-stat-label { font-size: 14px; color: var(--gray-light); }
+    .vp-stat-val { font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 900; color: var(--gold); }
+
+    .process-section { padding: 100px 48px; background: var(--dark-2); }
+    .process-inner { max-width: 1400px; margin: 0 auto; }
+    .process-timeline { margin-top: 56px; display: flex; flex-direction: column; gap: 0; }
+    .process-step { display: grid; grid-template-columns: 80px 1fr; gap: 32px; padding: 32px 0; border-bottom: 1px solid rgba(255,255,255,0.05); position: relative; }
+    .process-step:last-child { border-bottom: none; }
+    .process-step-num { font-family: 'Montserrat', sans-serif; font-size: 40px; font-weight: 900; color: rgba(251,194,29,0.15); line-height: 1; }
+    .process-step-content {}
+    .process-step-title { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 12px; }
+    .process-step-title .step-tag { font-size: 11px; font-weight: 700; background: rgba(251,194,29,0.1); color: var(--gold); border-radius: 4px; padding: 3px 8px; }
+    .process-step-text { font-size: 14px; color: var(--gray-light); line-height: 1.7; }
+
+    .iprofile-teaser { padding: 80px 48px; background: var(--dark); }
+    .iprofile-teaser-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .iprofile-teaser-card { background: linear-gradient(145deg, #1a1000, #2d1e00); border: 1px solid rgba(251,194,29,0.15); border-radius: 20px; padding: 40px; }
+    .iprofile-teaser-card-title { font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 900; margin-bottom: 12px; }
+    .iprofile-teaser-card-text { font-size: 14px; color: var(--gray-light); line-height: 1.7; margin-bottom: 24px; }
+    .iprofile-mini-bar { margin-bottom: 12px; }
+    .iprofile-mini-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--gray-light); margin-bottom: 4px; }
+    .iprofile-mini-label span:last-child { color: var(--gold); font-weight: 700; font-family: 'Montserrat', sans-serif; }
+    .iprofile-mini-bg { height: 4px; background: rgba(255,255,255,0.06); border-radius: 2px; }
+    .iprofile-mini-fill { height: 100%; border-radius: 2px; background: linear-gradient(90deg, var(--gold), var(--gold-dark)); }
+
+    .garanzia-section { padding: 80px 48px; background: var(--dark-2); }
+    .garanzia-inner { max-width: 1400px; margin: 0 auto; }
+    .garanzia-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+    .garanzia-card { background: var(--dark-3); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 28px; text-align: center; }
+    .garanzia-icon { font-size: 36px; color: var(--gold); margin-bottom: 16px; }
+    .garanzia-title { font-family: 'Montserrat', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+    .garanzia-text { font-size: 13px; color: var(--gray-light); line-height: 1.65; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="studio-gr-preview.html" class="nav-logo"><div class="nav-logo-mark">GR</div><div class="nav-logo-text">Studio GR</div></a>
+    <ul class="nav-menu">
+      <li><a href="chi-siamo.html">Chi Siamo</a></li>
+      <li><a href="servizi.html" class="active">Servizi</a></li>
+      <li><a href="risorse.html">Risorse</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="testimonianze.html">Testimonianze</a></li>
+      <li><a href="contatti.html" class="nav-cta">Consulenza Gratuita</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-inner">
+    <div class="page-hero-breadcrumb">
+      <a href="studio-gr-preview.html">Home</a> <i class="fa-solid fa-chevron-right" style="font-size:10px"></i>
+      <a href="servizi.html">Servizi</a> <i class="fa-solid fa-chevron-right" style="font-size:10px"></i>
+      <span>Valore Professionale</span>
+    </div>
+    <h1>Valore<br><em>Professionale</em></h1>
+    <p>Troviamo i venditori e i manager giusti per la tua azienda. Selezione oggettiva con i-Profile. Accreditati dal Ministero del Lavoro dal 2011.</p>
+  </div>
+</section>
+
+<section class="vp-intro">
+  <div class="vp-intro-inner">
+    <div>
+      <div class="badge-gold" style="margin-bottom:24px"><i class="fa-solid fa-magnifying-glass-chart"></i> Selezione del Personale</div>
+      <h2>Il costo di un'assunzione<br>sbagliata è <em>enorme</em>.<br>Noi lo eliminiamo.</h2>
+      <p>Un venditore sbagliato costa in media 6–12 mesi di stipendio, più il danno alla rete, ai clienti e al morale del team. Valore Professionale nasce per azzerare questo rischio.</p>
+      <p>Usiamo <strong>i-Profile</strong> — il sistema di valutazione del personale basato sui 10 ingredienti della produttività — per selezionare non solo chi sa vendere oggi, ma chi si integra nella tua cultura e cresce con te.</p>
+      <div class="accred-badge">
+        <i class="fa-solid fa-shield-check"></i>
+        <div class="accred-badge-text">
+          <strong>Agenzia Accreditata — Ministero del Lavoro</strong>
+          <span>Autorizzazione al lavoro n° — dal 2011</span>
+        </div>
+      </div>
+      <div style="margin-top:28px;display:flex;gap:16px">
+        <a href="contatti.html" class="btn-primary"><i class="fa-solid fa-calendar-check"></i> Parla con Noi</a>
+        <a href="i-profile.html" class="btn-secondary">Scopri i-Profile <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div class="vp-visual">
+      <div style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gold);margin-bottom:24px">I Nostri Standard</div>
+      <div class="vp-stat-row">
+        <div class="vp-stat-item"><span class="vp-stat-label">Selezione completata in</span><span class="vp-stat-val">30 gg</span></div>
+        <div class="vp-stat-item"><span class="vp-stat-label">Retention candidati a 12 mesi</span><span class="vp-stat-val">82%</span></div>
+        <div class="vp-stat-item"><span class="vp-stat-label">Garanzia sostituzione</span><span class="vp-stat-val" style="color:var(--green)"><i class="fa-solid fa-check"></i></span></div>
+        <div class="vp-stat-item"><span class="vp-stat-label">Follow-up post inserimento</span><span class="vp-stat-val" style="color:var(--green)">3+6 mesi</span></div>
+        <div class="vp-stat-item"><span class="vp-stat-label">i-Profile assessment incluso</span><span class="vp-stat-val" style="color:var(--green)"><i class="fa-solid fa-check"></i></span></div>
+        <div class="vp-stat-item"><span class="vp-stat-label">Attivo dal</span><span class="vp-stat-val">2011</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process-section">
+  <div class="process-inner">
+    <div class="section-label">Il Processo</div>
+    <h2 class="section-title">Come Selezioniamo<br>i Tuoi Candidati</h2>
+    <p class="section-sub">Un processo rigoroso in 6 fasi. Ogni step è pensato per ridurre il rischio e aumentare la probabilità di successo del candidato.</p>
+    <div class="process-timeline">
+      <div class="process-step">
+        <div class="process-step-num">01</div>
+        <div class="process-step-content">
+          <div class="process-step-title">Brief del Profilo <span class="step-tag">Settimana 1</span></div>
+          <div class="process-step-text">Incontro con te per capire esattamente cosa cerchi: competenze tecniche, soft skills, cultura aziendale, obiettivi del ruolo. Più siamo precisi ora, meglio andrà la selezione.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-num">02</div>
+        <div class="process-step-content">
+          <div class="process-step-title">Ricerca Attiva <span class="step-tag">Settimana 1–2</span></div>
+          <div class="process-step-text">Attivazione del nostro database di candidati qualificati nel commerciale, ricerca su LinkedIn, contatti della nostra rete. Non aspettiamo che arrivino le CV — andiamo a cercarle.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-num">03</div>
+        <div class="process-step-content">
+          <div class="process-step-title">Screening e Colloqui <span class="step-tag">Settimana 2–3</span></div>
+          <div class="process-step-text">Screening delle candidature, colloqui conoscitivi, verifica delle referenze. Filtriamo fino ai 3–5 candidati più adatti al profilo richiesto.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-num">04</div>
+        <div class="process-step-content">
+          <div class="process-step-title">i-Profile Assessment <span class="step-tag">Settimana 3</span></div>
+          <div class="process-step-text">I candidati finalisti completano l'assessment i-Profile: 242 domande che misurano i 10 ingredienti della produttività. Selezione oggettiva, non basata sull'istinto.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-num">05</div>
+        <div class="process-step-content">
+          <div class="process-step-title">Presentazione Shortlist <span class="step-tag">Settimana 3–4</span></div>
+          <div class="process-step-text">Ti presentiamo i candidati selezionati con report completo: CV, risultati i-Profile, note dei colloqui, raccomandazione motivata. Tu scegli chi incontrare.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-step-num">06</div>
+        <div class="process-step-content">
+          <div class="process-step-title">Inserimento e Follow-up <span class="step-tag">Post-Selezione</span></div>
+          <div class="process-step-text">Supporto nell'onboarding del candidato. Follow-up a 3 e 6 mesi per verificare l'integrazione. Garanzia di sostituzione in caso di abbandono entro 6 mesi.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="iprofile-teaser">
+  <div class="iprofile-teaser-inner">
+    <div>
+      <div class="section-label">Lo Strumento</div>
+      <h2 class="section-title">Perché usiamo<br>i-Profile?</h2>
+      <p style="font-size:16px;color:var(--gray-light);line-height:1.8;margin-bottom:20px">L'intuizione non basta per selezionare bene. i-Profile aggiunge uno strato di oggettività che riduce drasticamente il rischio di errore.</p>
+      <p style="font-size:16px;color:var(--gray-light);line-height:1.8;margin-bottom:32px">Misura i 10 ingredienti della produttività individuale: non solo "sa vendere?" — ma "si motiva da solo?", "gestisce lo stress?", "è autonomo o ha bisogno di guida?".</p>
+      <a href="i-profile.html" class="btn-primary">Scopri i-Profile <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="iprofile-teaser-card">
+      <div class="badge-gold" style="margin-bottom:20px"><i class="fa-solid fa-chart-bar"></i> Esempio Report i-Profile</div>
+      <div class="iprofile-mini-bar"><div class="iprofile-mini-label"><span>Motivazione autonoma</span><span>87%</span></div><div class="iprofile-mini-bg"><div class="iprofile-mini-fill" style="width:87%"></div></div></div>
+      <div class="iprofile-mini-bar"><div class="iprofile-mini-label"><span>Orientamento al risultato</span><span>92%</span></div><div class="iprofile-mini-bg"><div class="iprofile-mini-fill" style="width:92%"></div></div></div>
+      <div class="iprofile-mini-bar"><div class="iprofile-mini-label"><span>Gestione dello stress</span><span>74%</span></div><div class="iprofile-mini-bg"><div class="iprofile-mini-fill" style="width:74%"></div></div></div>
+      <div class="iprofile-mini-bar"><div class="iprofile-mini-label"><span>Comunicazione</span><span>81%</span></div><div class="iprofile-mini-bg"><div class="iprofile-mini-fill" style="width:81%"></div></div></div>
+      <div class="iprofile-mini-bar"><div class="iprofile-mini-label"><span>Autonomia operativa</span><span>68%</span></div><div class="iprofile-mini-bg"><div class="iprofile-mini-fill" style="width:68%"></div></div></div>
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.07);display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:12px;color:var(--gray)">Adeguatezza al ruolo</span>
+        <span style="font-family:'Montserrat',sans-serif;font-size:28px;font-weight:900;color:var(--gold)">82<span style="font-size:16px">/100</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="garanzia-section">
+  <div class="garanzia-inner">
+    <div class="section-label">Le Nostre Garanzie</div>
+    <h2 class="section-title">Cosa ti Garantiamo</h2>
+    <div class="garanzia-grid">
+      <div class="garanzia-card">
+        <div class="garanzia-icon"><i class="fa-solid fa-clock"></i></div>
+        <div class="garanzia-title">30 Giorni</div>
+        <div class="garanzia-text">Presentiamo la shortlist di candidati qualificati entro 30 giorni dal brief. Tempistiche chiare, nessun ritardo senza spiegazione.</div>
+      </div>
+      <div class="garanzia-card">
+        <div class="garanzia-icon"><i class="fa-solid fa-rotate"></i></div>
+        <div class="garanzia-title">Garanzia di Sostituzione</div>
+        <div class="garanzia-text">Se il candidato lascia nei primi 6 mesi per ragioni a noi imputabili, ricerchiamo gratuitamente il sostituto. Perché ci mettiamo la faccia.</div>
+      </div>
+      <div class="garanzia-card">
+        <div class="garanzia-icon"><i class="fa-solid fa-chart-line"></i></div>
+        <div class="garanzia-title">Follow-up a 3 e 6 Mesi</div>
+        <div class="garanzia-text">Non sparimo dopo la firma. Monitoriamo l'integrazione del candidato a 3 e 6 mesi, con report e raccomandazioni per l'onboarding.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-section-bg"></div>
+  <div class="cta-section-inner">
+    <div>
+      <h2 class="cta-section-title">Cerchi il Venditore<br>Giusto?</h2>
+      <p class="cta-section-sub">Parliamoci. Descriviamo insieme il profilo ideale e iniziamo la ricerca entro 48 ore.</p>
+    </div>
+    <div class="cta-section-actions">
+      <a href="contatti.html" class="btn-dark"><i class="fa-solid fa-calendar-check"></i> Avvia la Ricerca</a>
+      <div class="cta-note"><i class="fa-solid fa-shield-check"></i> Consulenza iniziale gratuita</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div><div class="footer-logo"><div class="footer-logo-mark">GR</div><div class="footer-logo-text">Studio GR</div></div><div class="footer-tagline">Da 30 anni trasformiamo imprenditori e reti vendita in macchine da risultato.</div><div class="footer-socials"><a href="https://www.facebook.com/StudioGr" target="_blank" class="footer-social"><i class="fa-brands fa-facebook-f"></i></a><a href="https://www.linkedin.com/company/studio-g-r-srl-analisi-e-sviluppo-delle-risorse-umane/" target="_blank" class="footer-social"><i class="fa-brands fa-linkedin-in"></i></a><a href="https://www.youtube.com/@RobertoGiangregorio" target="_blank" class="footer-social"><i class="fa-brands fa-youtube"></i></a><a href="https://x.com/studiogrmodena" target="_blank" class="footer-social"><i class="fa-brands fa-x-twitter"></i></a></div></div>
+      <div><div class="footer-col-title">Servizi</div><ul class="footer-links"><li><a href="assistenza-strategica.html">Assistenza Strategica</a></li><li><a href="percorso-vendere-bene.html">PerCorso Vendere Bene</a></li><li><a href="valore-professionale.html">Valore Professionale</a></li><li><a href="i-profile.html">i-Profile Assessment</a></li></ul></div>
+      <div><div class="footer-col-title">Risorse</div><ul class="footer-links"><li><a href="libri.html">I Libri di Roberto</a></li><li><a href="materiali-gratuiti.html">Materiali Gratuiti</a></li><li><a href="https://www.venderebene.it" target="_blank">Blog Vendere Bene</a></li><li><a href="https://www.retevendita.blog" target="_blank">Blog Rete Vendita</a></li></ul></div>
+      <div><div class="footer-col-title">Contatti</div><div class="footer-contact-item"><div class="footer-contact-icon"><i class="fa-solid fa-location-dot"></i></div><div class="footer-contact-text">Modena, Italia</div></div><div class="footer-contact-item"><div class="footer-contact-icon"><i class="fa-solid fa-envelope"></i></div><div class="footer-contact-text">info@studiogr.com</div></div></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2026 Studio GR S.r.l. — Tutti i diritti riservati.</div><div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Cookie Policy</a></div></div>
+  </div>
+</footer>
+</body>
+</html>

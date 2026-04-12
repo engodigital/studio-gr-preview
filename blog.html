@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — Studio GR | Vendita e Reti Vendita</title>
+  <meta name="description" content="Due blog di Roberto Giangregorio: Vendere Bene per i venditori e Rete Vendita Blog per gli imprenditori. Contenuti pratici, zero teoria inutile.">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="main.css">
+  <style>
+    .blog-split { padding: 80px 48px; background: var(--dark); }
+    .blog-split-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+    .blog-channel-card { border-radius: 20px; padding: 56px; display: flex; flex-direction: column; gap: 24px; min-height: 480px; position: relative; overflow: hidden; text-decoration: none; transition: transform 0.25s; }
+    .blog-channel-card:hover { transform: translateY(-4px); }
+    .blog-channel-card.gold { background: linear-gradient(145deg, #1a1000, #2a1a00, #1a1000); border: 1px solid rgba(251,194,29,0.15); }
+    .blog-channel-card.green { background: linear-gradient(145deg, #001a08, #002d12, #001a08); border: 1px solid rgba(55,202,55,0.15); }
+
+    .blog-glow-card { position: absolute; width: 300px; height: 300px; border-radius: 50%; top: -60px; right: -60px; pointer-events: none; }
+    .blog-channel-card.gold .blog-glow-card { background: radial-gradient(circle, rgba(251,194,29,0.12), transparent 70%); }
+    .blog-channel-card.green .blog-glow-card { background: radial-gradient(circle, rgba(55,202,55,0.12), transparent 70%); }
+
+    .blog-channel-icon { width: 64px; height: 64px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; }
+    .blog-channel-card.gold .blog-channel-icon { background: rgba(251,194,29,0.1); color: var(--gold); }
+    .blog-channel-card.green .blog-channel-icon { background: rgba(55,202,55,0.1); color: var(--green); }
+
+    .blog-channel-for { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
+    .blog-channel-card.gold .blog-channel-for { color: var(--gold); }
+    .blog-channel-card.green .blog-channel-for { color: var(--green); }
+
+    .blog-channel-title { font-family: 'Montserrat', sans-serif; font-size: 36px; font-weight: 900; color: var(--white); line-height: 1.1; letter-spacing: -1.5px; }
+    .blog-channel-desc { font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.7; flex: 1; }
+    .blog-channel-url { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    .blog-channel-card.gold .blog-channel-url { color: var(--gold); }
+    .blog-channel-card.green .blog-channel-url { color: var(--green); }
+
+    .blog-topics { padding: 80px 48px; background: var(--dark-2); }
+    .blog-topics-inner { max-width: 1400px; margin: 0 auto; }
+    .blog-topics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 56px; }
+    .blog-topics-col-title { font-family: 'Montserrat', sans-serif; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+    .blog-topics-col-title.gold { color: var(--gold); }
+    .blog-topics-col-title.green { color: var(--green); }
+    .topic-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .topic-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--dark-3); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; font-size: 14px; color: var(--gray-light); transition: all 0.2s; text-decoration: none; }
+    .topic-item:hover { border-color: rgba(251,194,29,0.2); color: var(--white); }
+    .topic-item i { color: var(--gold); width: 16px; }
+    .topic-item.green-item:hover { border-color: rgba(55,202,55,0.2); }
+    .topic-item.green-item i { color: var(--green); }
+
+    .blog-newsletter { padding: 80px 48px; background: var(--dark); }
+    .blog-newsletter-inner { max-width: 640px; margin: 0 auto; text-align: center; }
+    .newsletter-box { background: var(--dark-3); border: 1px solid rgba(255,255,255,0.07); border-radius: 20px; padding: 56px; }
+    .newsletter-icon { width: 64px; height: 64px; border-radius: 50%; background: rgba(251,194,29,0.1); display: flex; align-items: center; justify-content: center; font-size: 26px; color: var(--gold); margin: 0 auto 20px; }
+    .newsletter-title { font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 900; margin-bottom: 12px; letter-spacing: -1px; }
+    .newsletter-sub { font-size: 15px; color: var(--gray-light); line-height: 1.65; margin-bottom: 28px; }
+    .newsletter-form { display: flex; gap: 12px; }
+    .newsletter-input { flex: 1; background: var(--dark-4); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 14px 16px; color: var(--white); font-family: 'Poppins', sans-serif; font-size: 14px; outline: none; transition: border-color 0.2s; }
+    .newsletter-input:focus { border-color: var(--gold); }
+    .newsletter-input::placeholder { color: var(--gray); }
+    .newsletter-btn { background: var(--gold); color: var(--dark); font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 14px; padding: 14px 24px; border: none; border-radius: 8px; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+    .newsletter-btn:hover { background: var(--gold-dark); }
+    .newsletter-note { font-size: 12px; color: var(--gray); margin-top: 14px; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="studio-gr-preview.html" class="nav-logo"><div class="nav-logo-mark">GR</div><div class="nav-logo-text">Studio GR</div></a>
+    <ul class="nav-menu">
+      <li><a href="chi-siamo.html">Chi Siamo</a></li>
+      <li><a href="servizi.html">Servizi</a></li>
+      <li><a href="risorse.html">Risorse</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+      <li><a href="testimonianze.html">Testimonianze</a></li>
+      <li><a href="contatti.html" class="nav-cta">Consulenza Gratuita</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-inner">
+    <div class="page-hero-breadcrumb"><a href="studio-gr-preview.html">Home</a> <i class="fa-solid fa-chevron-right" style="font-size:10px"></i> <span>Blog</span></div>
+    <h1>Due Blog,<br>Un Solo <em>Obiettivo</em></h1>
+    <p>Contenuti pratici e concreti su vendita e reti vendita. Scegli il tuo ruolo — venditore o imprenditore — e inizia a leggere.</p>
+  </div>
+</section>
+
+<section class="blog-split">
+  <div class="blog-split-inner">
+    <a href="https://www.venderebene.it" target="_blank" class="blog-channel-card gold">
+      <div class="blog-glow-card"></div>
+      <div class="blog-channel-icon"><i class="fa-solid fa-chart-bar"></i></div>
+      <div class="blog-channel-for">Per i Venditori</div>
+      <div class="blog-channel-title">Vendere<br>Bene Blog</div>
+      <div class="blog-channel-desc">Tecniche di vendita, script per le trattative, gestione delle obiezioni, closing efficace. Il blog verticale per chi è sul campo ogni giorno e vuole strumenti pratici da applicare subito.</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <span style="background:rgba(251,194,29,0.1);border:1px solid rgba(251,194,29,0.2);border-radius:4px;padding:4px 10px;font-size:11px;font-family:'Montserrat',sans-serif;font-weight:700;color:var(--gold)">Tecniche di Vendita</span>
+        <span style="background:rgba(251,194,29,0.1);border:1px solid rgba(251,194,29,0.2);border-radius:4px;padding:4px 10px;font-size:11px;font-family:'Montserrat',sans-serif;font-weight:700;color:var(--gold)">Closing</span>
+        <span style="background:rgba(251,194,29,0.1);border:1px solid rgba(251,194,29,0.2);border-radius:4px;padding:4px 10px;font-size:11px;font-family:'Montserrat',sans-serif;font-weight:700;color:var(--gold)">Obiezioni</span>
+        <span style="background:rgba(251,194,29,0.1);border:1px solid rgba(251,194,29,0.2);border-radius:4px;padding:4px 10px;font-size:11px;font-family:'Montserrat',sans-serif;font-weight:700;color:var(--gold)">Negoziazione</span>
+      </div>
+      <div class="blog-channel-url">Vai al blog <i class="fa-solid fa-arrow-right"></i></div>
+    </a>
+
+    <a href="https://www.retevendita.blog" target="_blank" class="blog-channel-card green">
+      <div class="blog-glow-card"></div>
+      <div class="blog-channel-icon"><i class="fa-solid fa-sitemap"></i></div>
+      <div class="blog-channel-for">Per gli Imprenditori</div>
+      <div class="blog-channel-title">Rete Vendita<br>Blog</div>
+      <div class="blog-channel-desc">Come costruire una rete vendita efficace, reclutare commerciali, impostare KPI, gestire incentivi e motivare il team. Il blog per chi guida, non solo per chi vende.</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <span style="background:rgba(55,202,55,0.1);border:1px solid rgba(55,202,55,0.2);border-radius:4px;padding:4px 10px;font-size:11px;font-family:'Montserrat',sans-serif;font-weight:700;color:var(--green)">Reti Vendita</span>
+        <span style="background:rgba(55,202,55,0.1);border:1px solid rgba(55,202,55,0.2);border-radius:4px;padding:4px 10px;font-size:11px;font-family:'Montserrat',sans-serif;font-weight:700;color:var(--green)">KPI</span>
+        <span style="background:rgba(55,202,55,0.1);border:1px solid rgba(55,202,55,0.2);border-radius:4px;padding:4px 10px;font-size:11px;font-family:'Montserrat',sans-serif;font-weight:700;color:var(--green)">Leadership</span>
+        <span style="background:rgba(55,202,55,0.1);border:1px solid rgba(55,202,55,0.2);border-radius:4px;padding:4px 10px;font-size:11px;font-family:'Montserrat',sans-serif;font-weight:700;color:var(--green)">Incentivi</span>
+      </div>
+      <div class="blog-channel-url">Vai al blog <i class="fa-solid fa-arrow-right"></i></div>
+    </a>
+  </div>
+</section>
+
+<section class="blog-topics">
+  <div class="blog-topics-inner">
+    <div class="section-label">Gli Argomenti</div>
+    <h2 class="section-title">Di Cosa Scriviamo</h2>
+    <div class="blog-topics-grid">
+      <div>
+        <div class="blog-topics-col-title gold"><i class="fa-solid fa-chart-bar"></i> Vendere Bene — Argomenti</div>
+        <ul class="topic-list">
+          <li class="topic-item"><i class="fa-solid fa-arrow-right"></i> Come gestire le obiezioni sul prezzo</li>
+          <li class="topic-item"><i class="fa-solid fa-arrow-right"></i> Script di apertura per chiamate a freddo</li>
+          <li class="topic-item"><i class="fa-solid fa-arrow-right"></i> Le 5 tecniche di closing più efficaci</li>
+          <li class="topic-item"><i class="fa-solid fa-arrow-right"></i> Come leggere i segnali d'acquisto</li>
+          <li class="topic-item"><i class="fa-solid fa-arrow-right"></i> Negoziare senza svendere</li>
+          <li class="topic-item"><i class="fa-solid fa-arrow-right"></i> Gestire il rifiuto senza perdere motivazione</li>
+        </ul>
+      </div>
+      <div>
+        <div class="blog-topics-col-title green"><i class="fa-solid fa-sitemap"></i> Rete Vendita — Argomenti</div>
+        <ul class="topic-list">
+          <li class="topic-item green-item"><i class="fa-solid fa-arrow-right"></i> Come costruire una rete vendita da zero</li>
+          <li class="topic-item green-item"><i class="fa-solid fa-arrow-right"></i> I KPI che ogni direttore vendite deve monitorare</li>
+          <li class="topic-item green-item"><i class="fa-solid fa-arrow-right"></i> Come strutturare i piani incentivi</li>
+          <li class="topic-item green-item"><i class="fa-solid fa-arrow-right"></i> Reclutare commerciali: gli errori più comuni</li>
+          <li class="topic-item green-item"><i class="fa-solid fa-arrow-right"></i> Come gestire i low performer</li>
+          <li class="topic-item green-item"><i class="fa-solid fa-arrow-right"></i> Onboarding dei nuovi venditori: il metodo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="blog-newsletter">
+  <div class="blog-newsletter-inner">
+    <div class="newsletter-box">
+      <div class="newsletter-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+      <div class="newsletter-title">Nuovi articoli ogni settimana</div>
+      <div class="newsletter-sub">Iscriviti alla newsletter di Roberto. Contenuti pratici su vendita e reti vendita direttamente nella tua inbox. Zero spam.</div>
+      <div class="newsletter-form">
+        <input type="email" class="newsletter-input" placeholder="La tua email">
+        <button class="newsletter-btn">Iscriviti</button>
+      </div>
+      <div class="newsletter-note">Puoi disiscriverti quando vuoi. Privacy garantita.</div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-section-bg"></div>
+  <div class="cta-section-inner">
+    <div>
+      <h2 class="cta-section-title">Dalla Teoria<br>alla Pratica</h2>
+      <p class="cta-section-sub">Il blog è un punto di partenza. Se vuoi risultati concreti, prenota una consulenza con Roberto.</p>
+    </div>
+    <div class="cta-section-actions">
+      <a href="contatti.html" class="btn-dark"><i class="fa-solid fa-calendar-check"></i> Consulenza Gratuita</a>
+      <div class="cta-note"><i class="fa-solid fa-shield-check"></i> 30 minuti, senza impegno</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div><div class="footer-logo"><div class="footer-logo-mark">GR</div><div class="footer-logo-text">Studio GR</div></div><div class="footer-tagline">Da 30 anni trasformiamo imprenditori e reti vendita in macchine da risultato.</div><div class="footer-socials"><a href="https://www.facebook.com/StudioGr" target="_blank" class="footer-social"><i class="fa-brands fa-facebook-f"></i></a><a href="https://www.linkedin.com/company/studio-g-r-srl-analisi-e-sviluppo-delle-risorse-umane/" target="_blank" class="footer-social"><i class="fa-brands fa-linkedin-in"></i></a><a href="https://www.youtube.com/@RobertoGiangregorio" target="_blank" class="footer-social"><i class="fa-brands fa-youtube"></i></a><a href="https://x.com/studiogrmodena" target="_blank" class="footer-social"><i class="fa-brands fa-x-twitter"></i></a></div></div>
+      <div><div class="footer-col-title">Servizi</div><ul class="footer-links"><li><a href="assistenza-strategica.html">Assistenza Strategica</a></li><li><a href="percorso-vendere-bene.html">PerCorso Vendere Bene</a></li><li><a href="valore-professionale.html">Valore Professionale</a></li><li><a href="i-profile.html">i-Profile Assessment</a></li></ul></div>
+      <div><div class="footer-col-title">Risorse</div><ul class="footer-links"><li><a href="libri.html">I Libri di Roberto</a></li><li><a href="materiali-gratuiti.html">Materiali Gratuiti</a></li><li><a href="https://www.venderebene.it" target="_blank">Blog Vendere Bene</a></li><li><a href="https://www.retevendita.blog" target="_blank">Blog Rete Vendita</a></li></ul></div>
+      <div><div class="footer-col-title">Contatti</div><div class="footer-contact-item"><div class="footer-contact-icon"><i class="fa-solid fa-location-dot"></i></div><div class="footer-contact-text">Modena, Italia</div></div><div class="footer-contact-item"><div class="footer-contact-icon"><i class="fa-solid fa-envelope"></i></div><div class="footer-contact-text">info@studiogr.com</div></div></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2026 Studio GR S.r.l. — Tutti i diritti riservati.</div><div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Cookie Policy</a></div></div>
+  </div>
+</footer>
+</body>
+</html>

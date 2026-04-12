@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Risorse — Studio GR | Strumenti per Vendere Meglio</title>
+  <meta name="description" content="Libri, strumenti diagnostici, materiali gratuiti e blog di Roberto Giangregorio. Tutto ciò che serve per costruire una rete vendita vincente.">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="main.css">
+  <style>
+    /* ── RESOURCE HUB GRID ── */
+    .res-hub { padding: 100px 48px; background: var(--dark); }
+    .res-hub-inner { max-width: 1400px; margin: 0 auto; }
+
+    .res-featured {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    .res-card {
+      border-radius: 20px;
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s;
+    }
+    .res-card:hover { transform: translateY(-4px); }
+
+    /* Libri card */
+    .res-card-libri {
+      background: linear-gradient(145deg, #0f0d00, #1c1800, #0f0d00);
+      border: 1px solid rgba(251,194,29,0.15);
+      min-height: 340px;
+    }
+    .res-card-libri .res-glow {
+      position: absolute; width: 400px; height: 400px; border-radius: 50%;
+      top: -100px; right: -80px; pointer-events: none;
+      background: radial-gradient(circle, rgba(251,194,29,0.10), transparent 70%);
+    }
+
+    /* i-Profile card */
+    .res-card-iprofile {
+      background: linear-gradient(145deg, #04060e, #070c1a, #04060e);
+      border: 1px solid rgba(80,130,255,0.15);
+      min-height: 340px;
+    }
+    .res-card-iprofile .res-glow {
+      position: absolute; width: 400px; height: 400px; border-radius: 50%;
+      top: -100px; right: -80px; pointer-events: none;
+      background: radial-gradient(circle, rgba(80,130,255,0.10), transparent 70%);
+    }
+
+    /* Blog card */
+    .res-card-blog {
+      background: linear-gradient(145deg, #020e07, #041708, #020e07);
+      border: 1px solid rgba(55,202,55,0.15);
+    }
+
+    /* Materiali card */
+    .res-card-materiali {
+      background: linear-gradient(145deg, #0a0a0a, #151515, #0a0a0a);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .res-secondary {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .res-card-tag {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 2px;
+    }
+    .res-card-libri .res-card-tag { color: var(--gold); }
+    .res-card-iprofile .res-card-tag { color: #7aa8ff; }
+    .res-card-blog .res-card-tag { color: var(--green); }
+    .res-card-materiali .res-card-tag { color: var(--gray-light); }
+
+    .res-card-icon {
+      width: 64px; height: 64px; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+    }
+    .res-card-libri .res-card-icon { background: rgba(251,194,29,0.1); color: var(--gold); }
+    .res-card-iprofile .res-card-icon { background: rgba(80,130,255,0.1); color: #7aa8ff; }
+    .res-card-blog .res-card-icon { background: rgba(55,202,55,0.1); color: var(--green); }
+    .res-card-materiali .res-card-icon { background: rgba(255,255,255,0.05); color: var(--gray-light); }
+
+    .res-card-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 30px; font-weight: 900;
+      color: var(--white); line-height: 1.1;
+      letter-spacing: -1px;
+    }
+    .res-card-desc {
+      font-size: 15px; color: rgba(255,255,255,0.5);
+      line-height: 1.7; flex: 1;
+    }
+    .res-card-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px; font-weight: 700;
+    }
+    .res-card-libri .res-card-cta { color: var(--gold); }
+    .res-card-iprofile .res-card-cta { color: #7aa8ff; }
+    .res-card-blog .res-card-cta { color: var(--green); }
+    .res-card-materiali .res-card-cta { color: var(--gray-light); }
+
+    /* Chips sotto la descrizione */
+    .res-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .res-chip {
+      display: inline-block;
+      border-radius: 4px; padding: 4px 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .chip-gold { background: rgba(251,194,29,0.1); color: var(--gold); border: 1px solid rgba(251,194,29,0.2); }
+    .chip-blue { background: rgba(80,130,255,0.1); color: #7aa8ff; border: 1px solid rgba(80,130,255,0.2); }
+    .chip-green { background: rgba(55,202,55,0.1); color: var(--green); border: 1px solid rgba(55,202,55,0.2); }
+    .chip-gray { background: rgba(255,255,255,0.05); color: var(--gray-light); border: 1px solid rgba(255,255,255,0.1); }
+
+    /* ── NUMERI STRIP ── */
+    .res-numbers {
+      padding: 56px 48px;
+      background: var(--dark-2);
+      border-top: 1px solid rgba(255,255,255,0.04);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .res-numbers-inner {
+      max-width: 1400px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0; text-align: center;
+    }
+    .res-number-item {
+      padding: 0 32px;
+      border-right: 1px solid rgba(255,255,255,0.06);
+    }
+    .res-number-item:last-child { border-right: none; }
+    .res-number-val {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 42px; font-weight: 900;
+      color: var(--gold); letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .res-number-label { font-size: 13px; color: var(--gray); line-height: 1.5; }
+
+    /* ── COME USARE ── */
+    .res-howto { padding: 100px 48px; background: var(--dark); }
+    .res-howto-inner { max-width: 1400px; margin: 0 auto; }
+    .res-howto-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px; margin-top: 56px;
+    }
+    .howto-card {
+      background: var(--dark-3);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px; padding: 36px;
+      transition: all 0.25s;
+    }
+    .howto-card:hover { border-color: rgba(251,194,29,0.2); transform: translateY(-3px); }
+    .howto-persona {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(251,194,29,0.08); border: 1px solid rgba(251,194,29,0.15);
+      border-radius: 20px; padding: 5px 14px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px; font-weight: 700;
+      color: var(--gold); text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+    .howto-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 20px; font-weight: 800;
+      margin-bottom: 14px; letter-spacing: -0.5px;
+    }
+    .howto-steps { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .howto-step {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 14px; color: var(--gray-light); line-height: 1.5;
+    }
+    .howto-step-icon { color: var(--gold); flex-shrink: 0; font-size: 12px; margin-top: 3px; }
+    .howto-step a { color: var(--gold); text-decoration: none; font-weight: 600; }
+    .howto-step a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="studio-gr-preview.html" class="nav-logo"><div class="nav-logo-mark">GR</div><div class="nav-logo-text">Studio GR</div></a>
+    <ul class="nav-menu">
+      <li><a href="chi-siamo.html">Chi Siamo</a></li>
+      <li><a href="servizi.html">Servizi</a></li>
+      <li><a href="risorse.html" class="active">Risorse</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="testimonianze.html">Testimonianze</a></li>
+      <li><a href="contatti.html" class="nav-cta">Consulenza Gratuita</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-inner">
+    <div class="page-hero-breadcrumb">
+      <a href="studio-gr-preview.html">Home</a>
+      <i class="fa-solid fa-chevron-right" style="font-size:10px"></i>
+      <span>Risorse</span>
+    </div>
+    <div class="section-label">Strumenti e Contenuti</div>
+    <h1>Tutto quello che serve<br>per <em>vendere meglio</em></h1>
+    <p>Libri, strumenti diagnostici, materiali gratuiti e blog. Conoscenza pratica, costruita in 30 anni di campo.</p>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section class="res-numbers">
+  <div class="res-numbers-inner">
+    <div class="res-number-item">
+      <div class="res-number-val">3</div>
+      <div class="res-number-label">Libri pubblicati<br>su vendita e reti</div>
+    </div>
+    <div class="res-number-item">
+      <div class="res-number-val">242</div>
+      <div class="res-number-label">Domande nel test<br>i-Profile</div>
+    </div>
+    <div class="res-number-item">
+      <div class="res-number-val">2</div>
+      <div class="res-number-label">Blog attivi con<br>contenuti settimanali</div>
+    </div>
+    <div class="res-number-item">
+      <div class="res-number-val">100%</div>
+      <div class="res-number-label">Gratuito per<br>chi vuole iniziare</div>
+    </div>
+  </div>
+</section>
+
+<!-- RESOURCE HUB -->
+<section class="res-hub">
+  <div class="res-hub-inner">
+
+    <div style="margin-bottom: 64px;">
+      <div class="section-label">Le Risorse</div>
+      <h2 class="section-title">Scegli da dove<br>vuoi partire</h2>
+      <p class="section-sub">Ogni risorsa è costruita attorno a un problema reale. Scegli quella che ti riguarda.</p>
+    </div>
+
+    <!-- Featured 2 col -->
+    <div class="res-featured">
+
+      <!-- Libri -->
+      <a href="libri.html" class="res-card res-card-libri">
+        <div class="res-glow"></div>
+        <div style="position:relative; z-index:1;">
+          <div class="res-card-tag">Libri</div>
+        </div>
+        <div class="res-card-icon" style="position:relative; z-index:1;">
+          <i class="fa-solid fa-book-open"></i>
+        </div>
+        <div style="position:relative; z-index:1; flex:1; display:flex; flex-direction:column; gap:14px;">
+          <div class="res-card-title">I Libri di<br>Roberto Giangregorio</div>
+          <div class="res-card-desc">Tre libri scritti da chi ha costruito e guidato reti vendita in prima persona. Niente teoria da biblioteca — solo quello che funziona sul campo.</div>
+          <div class="res-chips">
+            <span class="res-chip chip-gold">Vendita</span>
+            <span class="res-chip chip-gold">Reti Vendita</span>
+            <span class="res-chip chip-gold">Management</span>
+          </div>
+          <div class="res-card-cta">Scopri i libri <i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+      </a>
+
+      <!-- i-Profile -->
+      <a href="i-profile.html" class="res-card res-card-iprofile">
+        <div class="res-glow"></div>
+        <div style="position:relative; z-index:1;">
+          <div class="res-card-tag">Strumento Diagnostico</div>
+        </div>
+        <div class="res-card-icon" style="position:relative; z-index:1;">
+          <i class="fa-solid fa-chart-radar"></i>
+        </div>
+        <div style="position:relative; z-index:1; flex:1; display:flex; flex-direction:column; gap:14px;">
+          <div class="res-card-title">i-Profile<br>Assessment</div>
+          <div class="res-card-desc">242 domande. 10 ingredienti della produttività. 20 anni di sviluppo. Lo strumento scientifico per selezionare venditori e sviluppare team ad alte performance.</div>
+          <div class="res-chips">
+            <span class="res-chip chip-blue">Selezione</span>
+            <span class="res-chip chip-blue">Assessment</span>
+            <span class="res-chip chip-blue">Team</span>
+          </div>
+          <div class="res-card-cta">Scopri i-Profile <i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Secondary 2 col -->
+    <div class="res-secondary">
+
+      <!-- Blog -->
+      <a href="blog.html" class="res-card res-card-blog">
+        <div class="res-card-icon"><i class="fa-solid fa-rss"></i></div>
+        <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
+          <div class="res-card-tag">Blog</div>
+          <div class="res-card-title" style="font-size:24px;">Due Blog,<br>Due Verticali</div>
+          <div class="res-card-desc" style="font-size:14px;">Vendere Bene per chi vende. Rete Vendita Blog per chi gestisce o vuole costruire una rete. Contenuti pratici ogni settimana.</div>
+          <div class="res-chips">
+            <span class="res-chip chip-green">venderebene.it</span>
+            <span class="res-chip chip-green">retevendita.blog</span>
+          </div>
+          <div class="res-card-cta">Leggi gli articoli <i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+      </a>
+
+      <!-- Materiali gratuiti -->
+      <a href="materiali-gratuiti.html" class="res-card res-card-materiali">
+        <div class="res-card-icon"><i class="fa-solid fa-download"></i></div>
+        <div style="flex:1; display:flex; flex-direction:column; gap:12px;">
+          <div class="res-card-tag">Download Gratuiti</div>
+          <div class="res-card-title" style="font-size:24px;">Materiali<br>Gratuiti</div>
+          <div class="res-card-desc" style="font-size:14px;">Checklist, template, guide pratiche e estratti. Strumenti pronti all'uso che puoi applicare subito — senza aspettare un corso.</div>
+          <div class="res-chips">
+            <span class="res-chip chip-gray">Checklist</span>
+            <span class="res-chip chip-gray">Template</span>
+            <span class="res-chip chip-gray">Guide</span>
+          </div>
+          <div class="res-card-cta">Scarica gratis <i class="fa-solid fa-arrow-right"></i></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- COME USARE -->
+<section class="res-howto">
+  <div class="res-howto-inner">
+    <div class="section-label">Percorsi Consigliati</div>
+    <h2 class="section-title">Da dove iniziare?</h2>
+    <p class="section-sub">Dipende da chi sei e cosa stai cercando. Ecco tre percorsi consigliati.</p>
+
+    <div class="res-howto-grid">
+      <div class="howto-card">
+        <div class="howto-persona"><i class="fa-solid fa-user-tie"></i> Venditore</div>
+        <div class="howto-title">Voglio migliorare<br>le mie performance</div>
+        <ul class="howto-steps">
+          <li class="howto-step">
+            <i class="fa-solid fa-circle-1 howto-step-icon"></i>
+            <span>Inizia dal blog <a href="blog.html">Vendere Bene</a> — articoli pratici ogni settimana</span>
+          </li>
+          <li class="howto-step">
+            <i class="fa-solid fa-circle-2 howto-step-icon"></i>
+            <span>Scarica la checklist per l'analisi dei bisogni dai <a href="materiali-gratuiti.html">materiali gratuiti</a></span>
+          </li>
+          <li class="howto-step">
+            <i class="fa-solid fa-circle-3 howto-step-icon"></i>
+            <span>Leggi <a href="libri.html">Vendere Bene</a> — il libro sul metodo</span>
+          </li>
+          <li class="howto-step">
+            <i class="fa-solid fa-circle-4 howto-step-icon"></i>
+            <span>Fai il test <a href="i-profile.html">i-Profile</a> per conoscere i tuoi punti di forza</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="howto-card">
+        <div class="howto-persona"><i class="fa-solid fa-building"></i> Imprenditore</div>
+        <div class="howto-title">Voglio costruire<br>una rete vendita</div>
+        <ul class="howto-steps">
+          <li class="howto-step">
+            <i class="fa-solid fa-circle-1 howto-step-icon"></i>
+            <span>Leggi il blog <a href="blog.html">Rete Vendita</a> — strategia e gestione delle reti</span>
+          </li>
+          <li class="howto-step">
+            <i class="fa-solid fa-circle-2 howto-step-icon"></i>
+            <span>Scopri <a href="i-profile.html">i-Profile</a> per selezionare i venditori giusti</span>
+          </li>
+          <li class="howto-step">
+            <i class="fa-solid fa-circle-3 howto-step-icon"></i>
+            <span>Leggi <a href="libri.html">il libro sulla rete vendita</a> — struttura, processo, KPI</span>
+          </li>
+          <li class="howto-step">
+            <i class="fa-solid fa-circle-4 howto-step-icon"></i>
+            <span>Prenota una <a href="contatti.html">consulenza gratuita</a> con Roberto</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="howto-card">
+        <div class="howto-persona"><i class="fa-solid fa-users-gear"></i> HR / Manager</div>
+        <div class="howto-title">Voglio sviluppare<br>il mio team</div>
+        <ul class="howto-steps">
+          <li class="howto-step">
+            <i class="fa-solid fa-circle-1 howto-step-icon"></i>
+            <span>Inizia da <a href="i-profile.html">i-Profile</a> — assessment individuale e di team</span>
+          </li>
+          <li class="howto-step">
+            <i class="fa-solid fa-circle-2 howto-step-icon"></i>
+            <span>Scarica il template di valutazione dai <a href="materiali-gratuiti.html">materiali gratuiti</a></span>
+          </li>
+          <li class="howto-step">
+            <i class="fa-solid fa-circle-3 howto-step-icon"></i>
+            <span>Esplora i percorsi formativi in <a href="servizi.html">Servizi</a></span>
+          </li>
+          <li class="howto-step">
+            <i class="fa-solid fa-circle-4 howto-step-icon"></i>
+            <span>Contattaci per un <a href="contatti.html">piano personalizzato</a></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-section-bg"></div>
+  <div class="cta-section-inner">
+    <div>
+      <div class="cta-section-title">Non sai da dove<br>iniziare?</div>
+      <p class="cta-section-sub">Prenota una chiamata gratuita con Roberto. In 30 minuti capiamo insieme qual è la risorsa o il percorso più adatto alla tua situazione.</p>
+    </div>
+    <div class="cta-section-actions">
+      <a href="contatti.html" class="btn-dark">Prenota la chiamata <i class="fa-solid fa-arrow-right"></i></a>
+      <div class="cta-note"><i class="fa-solid fa-lock" style="font-size:11px"></i> Nessun impegno — 30 minuti gratuiti</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">
+          <div class="footer-logo-mark">GR</div>
+          <div class="footer-logo-text">Studio GR</div>
+        </div>
+        <p class="footer-tagline">Dal 1990 formiamo e selezioniamo reti vendita ad alte performance. 165.000+ persone formate.</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" class="footer-social"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" class="footer-social"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Servizi</div>
+        <ul class="footer-links">
+          <li><a href="assistenza-strategica.html">Assistenza Strategica</a></li>
+          <li><a href="percorso-vendere-bene.html">Percorso Vendere Bene</a></li>
+          <li><a href="valore-professionale.html">Valore Professionale</a></li>
+          <li><a href="i-profile.html">i-Profile Assessment</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Risorse</div>
+        <ul class="footer-links">
+          <li><a href="risorse.html">Tutte le Risorse</a></li>
+          <li><a href="libri.html">Libri</a></li>
+          <li><a href="materiali-gratuiti.html">Materiali Gratuiti</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="testimonianze.html">Testimonianze</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contatti</div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-envelope footer-contact-icon"></i>
+          <div class="footer-contact-text">info@studiogr.com</div>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-phone footer-contact-icon"></i>
+          <div class="footer-contact-text">+39 02 0000 0000</div>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-location-dot footer-contact-icon"></i>
+          <div class="footer-contact-text">Milano, Italia</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2024 Studio GR — Roberto Giangregorio. P.IVA 00000000000</div>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Note Legali</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PerCorso Vendere Bene — Studio GR | Formazione Reti Vendita</title>
+  <meta name="description" content="Il programma formativo di Studio GR per costruire reti vendita vincenti. Testato su 165.000 professionisti in 30 anni. Non un corso — una trasformazione.">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="main.css">
+  <style>
+    .pvb-intro { padding: 100px 48px; background: var(--dark); }
+    .pvb-intro-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .pvb-intro h2 { font-family: 'Montserrat', sans-serif; font-size: clamp(28px,3vw,40px); font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 20px; }
+    .pvb-intro h2 em { color: var(--gold); font-style: italic; }
+    .pvb-intro p { font-size: 16px; color: var(--gray-light); line-height: 1.8; margin-bottom: 16px; }
+    .pvb-social-proof { display: flex; gap: 0; border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; overflow: hidden; }
+    .pvb-proof-item { flex: 1; padding: 28px; border-right: 1px solid rgba(255,255,255,0.07); text-align: center; }
+    .pvb-proof-item:last-child { border-right: none; }
+    .pvb-proof-val { font-family: 'Montserrat', sans-serif; font-size: 36px; font-weight: 900; color: var(--gold); line-height: 1; margin-bottom: 6px; }
+    .pvb-proof-label { font-size: 12px; color: var(--gray); }
+
+    .modules-section { padding: 100px 48px; background: var(--dark-2); }
+    .modules-inner { max-width: 1400px; margin: 0 auto; }
+    .modules-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 56px; }
+    .module-card { background: var(--dark-3); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 28px; position: relative; transition: all 0.25s; }
+    .module-card:hover { border-color: rgba(251,194,29,0.25); transform: translateY(-3px); }
+    .module-num { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); margin-bottom: 14px; }
+    .module-title { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 800; margin-bottom: 12px; line-height: 1.2; }
+    .module-points { list-style: none; }
+    .module-points li { font-size: 13px; color: var(--gray-light); padding: 4px 0; display: flex; gap: 8px; }
+    .module-points li::before { content: '→'; color: var(--gold); flex-shrink: 0; }
+
+    .results-section { padding: 100px 48px; background: var(--dark); }
+    .results-inner { max-width: 1400px; margin: 0 auto; }
+    .results-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 56px; }
+    .result-card { background: var(--dark-3); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 28px; text-align: center; }
+    .result-val { font-family: 'Montserrat', sans-serif; font-size: 48px; font-weight: 900; color: var(--gold); line-height: 1; margin-bottom: 8px; }
+    .result-label { font-size: 14px; color: var(--gray-light); font-weight: 500; margin-bottom: 6px; }
+    .result-note { font-size: 12px; color: var(--gray); }
+
+    .testi-pvb { padding: 100px 48px; background: var(--dark-2); }
+    .testi-pvb-inner { max-width: 1400px; margin: 0 auto; }
+    .testi-big { background: var(--dark-3); border: 1px solid rgba(255,255,255,0.07); border-radius: 20px; padding: 48px; position: relative; overflow: hidden; }
+    .testi-big::before { content: '"'; position: absolute; top: -20px; left: 32px; font-size: 180px; color: rgba(251,194,29,0.06); font-family: 'Montserrat', sans-serif; font-weight: 900; line-height: 1; }
+    .testi-big-text { font-size: 20px; color: var(--white); line-height: 1.7; font-style: italic; margin-bottom: 32px; position: relative; }
+    .testi-big-person { display: flex; align-items: center; gap: 16px; }
+    .testi-big-avatar { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 20px; color: var(--dark); }
+    .testi-big-name { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; }
+    .testi-big-role { font-size: 13px; color: var(--gold); }
+    .testi-big-result { margin-left: auto; background: rgba(55,202,55,0.1); border: 1px solid rgba(55,202,55,0.2); border-radius: 8px; padding: 12px 20px; text-align: center; }
+    .testi-big-result-val { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 900; color: var(--green); }
+    .testi-big-result-label { font-size: 11px; color: var(--gray); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="studio-gr-preview.html" class="nav-logo"><div class="nav-logo-mark">GR</div><div class="nav-logo-text">Studio GR</div></a>
+    <ul class="nav-menu">
+      <li><a href="chi-siamo.html">Chi Siamo</a></li>
+      <li><a href="servizi.html" class="active">Servizi</a></li>
+      <li><a href="risorse.html">Risorse</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="testimonianze.html">Testimonianze</a></li>
+      <li><a href="contatti.html" class="nav-cta">Consulenza Gratuita</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-inner">
+    <div class="page-hero-breadcrumb">
+      <a href="studio-gr-preview.html">Home</a> <i class="fa-solid fa-chevron-right" style="font-size:10px"></i>
+      <a href="servizi.html">Servizi</a> <i class="fa-solid fa-chevron-right" style="font-size:10px"></i>
+      <span>PerCorso Vendere Bene</span>
+    </div>
+    <h1>PerCorso<br><em>Vendere Bene</em></h1>
+    <p>Il programma formativo che ha trasformato il modo di vendere di 165.000 professionisti in 30 anni. Non un corso — un sistema completo per reti vendita vincenti.</p>
+  </div>
+</section>
+
+<section class="pvb-intro">
+  <div class="pvb-intro-inner">
+    <div>
+      <div class="badge-gold" style="margin-bottom:24px"><i class="fa-solid fa-trophy"></i> Il Programma Più Scelto</div>
+      <h2>Un <em>sistema</em>,<br>non un corso.<br>Risultati, non teoria.</h2>
+      <p>Il PerCorso Vendere Bene è il programma formativo costruito da Roberto Giangregorio in 30 anni di pratica reale. Non nasce da un'aula universitaria — nasce dal campo, da migliaia di trattative, da centinaia di reti vendita costruite e ricostruite.</p>
+      <p>È un percorso completo: formiamo i tuoi venditori, ottimizziamo i processi, impostiamo i KPI, costruiamo gli strumenti di controllo. <strong>Al termine, hai una rete vendita che sa cosa fare — anche quando Roberto non è in sala.</strong></p>
+      <div style="margin-top:32px;display:flex;gap:16px">
+        <a href="contatti.html" class="btn-primary"><i class="fa-solid fa-calendar-check"></i> Richiedi Informazioni</a>
+        <a href="libri.html" class="btn-secondary">Leggi il libro <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div>
+      <div class="pvb-social-proof">
+        <div class="pvb-proof-item">
+          <div class="pvb-proof-val">165K</div>
+          <div class="pvb-proof-label">Professionisti formati</div>
+        </div>
+        <div class="pvb-proof-item">
+          <div class="pvb-proof-val">30</div>
+          <div class="pvb-proof-label">Anni di pratica</div>
+        </div>
+        <div class="pvb-proof-item">
+          <div class="pvb-proof-val">+34%</div>
+          <div class="pvb-proof-label">Fatturato medio</div>
+        </div>
+      </div>
+      <div style="margin-top:20px;background:var(--dark-3);border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:28px">
+        <div class="video-placeholder" style="margin-bottom:0">
+          <div class="video-play"><i class="fa-solid fa-play"></i></div>
+          <div class="video-caption">Roberto presenta il PerCorso Vendere Bene</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="modules-section">
+  <div class="modules-inner">
+    <div class="section-label">Il Programma</div>
+    <h2 class="section-title">I Moduli del Percorso</h2>
+    <p class="section-sub">Ogni modulo è autonomo ma si integra nel sistema completo. Possiamo partire da dove sei.</p>
+    <div class="modules-grid">
+      <div class="module-card">
+        <div class="module-num">Modulo 01</div>
+        <div class="module-title">Le Fondamenta della Vendita</div>
+        <ul class="module-points">
+          <li>Il mindset del venditore vincente</li>
+          <li>Il processo di vendita strutturato</li>
+          <li>La gestione del pipeline</li>
+          <li>Obiettivi e pianificazione</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="module-num">Modulo 02</div>
+        <div class="module-title">Trovare e Qualificare i Clienti</div>
+        <ul class="module-points">
+          <li>Tecniche di prospecting efficaci</li>
+          <li>Come qualificare un lead</li>
+          <li>La gestione dei contatti a freddo</li>
+          <li>Script di contatto testati</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="module-num">Modulo 03</div>
+        <div class="module-title">La Trattativa di Vendita</div>
+        <ul class="module-points">
+          <li>La presentazione che convince</li>
+          <li>Come ascoltare per vendere</li>
+          <li>La gestione delle obiezioni</li>
+          <li>Il linguaggio del corpo nella vendita</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="module-num">Modulo 04</div>
+        <div class="module-title">Il Closing — Come Chiudere</div>
+        <ul class="module-points">
+          <li>I segnali di acquisto da cogliere</li>
+          <li>Le tecniche di closing più efficaci</li>
+          <li>Gestire la pressione sul prezzo</li>
+          <li>Come trasformare "ci penso" in "sì"</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="module-num">Modulo 05</div>
+        <div class="module-title">La Negoziazione Avanzata</div>
+        <ul class="module-points">
+          <li>Le fasi della negoziazione</li>
+          <li>Come difendere il prezzo</li>
+          <li>Tecniche di BATNA e leverage</li>
+          <li>Negoziare con buyer professionisti</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="module-num">Modulo 06</div>
+        <div class="module-title">Gestire e Far Crescere la Rete</div>
+        <ul class="module-points">
+          <li>Come motivare i venditori</li>
+          <li>KPI e sistemi di controllo</li>
+          <li>Gestire i low performer</li>
+          <li>Costruire una cultura della vendita</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="results-section">
+  <div class="results-inner">
+    <div class="section-label">I Risultati</div>
+    <h2 class="section-title">Cosa Ottieni<br>al Termine del Percorso</h2>
+    <p class="section-sub">Non promesse generiche. Risultati misurabili che i nostri clienti ottengono realmente.</p>
+    <div class="results-grid">
+      <div class="result-card">
+        <div class="result-val">+40%</div>
+        <div class="result-label">Tasso di chiusura</div>
+        <div class="result-note">media entro 6 mesi</div>
+      </div>
+      <div class="result-card">
+        <div class="result-val">+34%</div>
+        <div class="result-label">Fatturato</div>
+        <div class="result-note">media entro 8 mesi</div>
+      </div>
+      <div class="result-card">
+        <div class="result-val">-45%</div>
+        <div class="result-label">Turnover venditori</div>
+        <div class="result-note">rispetto alla media pre-percorso</div>
+      </div>
+      <div class="result-card">
+        <div class="result-val">97%</div>
+        <div class="result-label">Soddisfazione clienti</div>
+        <div class="result-note">consiglierebbero il percorso</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testi-pvb">
+  <div class="testi-pvb-inner">
+    <div class="section-label">Risultati Reali</div>
+    <h2 class="section-title" style="margin-bottom:48px">Chi ha già fatto<br>il Percorso</h2>
+    <div class="testi-big">
+      <div class="testi-big-text">
+        "Avevo una rete vendita di 12 persone che lavorava tanto ma produceva poco. Dopo il PerCorso Vendere Bene, in 8 mesi il fatturato è cresciuto del 34%, il tasso di chiusura è passato dal 18% al 31% e tre venditori che stavo per licenziare sono diventati i top performer. Non ci credevo fosse possibile."
+      </div>
+      <div class="testi-big-person">
+        <div class="testi-big-avatar">AM</div>
+        <div>
+          <div class="testi-big-name">Andrea M.</div>
+          <div class="testi-big-role">CEO, Settore Manifatturiero · Emilia-Romagna</div>
+        </div>
+        <div class="testi-big-result">
+          <div class="testi-big-result-val">+34%</div>
+          <div class="testi-big-result-label">Fatturato in 8 mesi</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-section-bg"></div>
+  <div class="cta-section-inner">
+    <div>
+      <h2 class="cta-section-title">La Tua Rete Vendita<br>Merita il Metodo Giusto</h2>
+      <p class="cta-section-sub">Parliamoci. 30 minuti con Roberto per capire se il PerCorso Vendere Bene è quello che fa per te.</p>
+    </div>
+    <div class="cta-section-actions">
+      <a href="contatti.html" class="btn-dark"><i class="fa-solid fa-calendar-check"></i> Richiedi Informazioni</a>
+      <div class="cta-note"><i class="fa-solid fa-shield-check"></i> Consulenza iniziale gratuita</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div><div class="footer-logo"><div class="footer-logo-mark">GR</div><div class="footer-logo-text">Studio GR</div></div><div class="footer-tagline">Da 30 anni trasformiamo imprenditori e reti vendita in macchine da risultato.</div><div class="footer-socials"><a href="https://www.facebook.com/StudioGr" target="_blank" class="footer-social"><i class="fa-brands fa-facebook-f"></i></a><a href="https://www.linkedin.com/company/studio-g-r-srl-analisi-e-sviluppo-delle-risorse-umane/" target="_blank" class="footer-social"><i class="fa-brands fa-linkedin-in"></i></a><a href="https://www.youtube.com/@RobertoGiangregorio" target="_blank" class="footer-social"><i class="fa-brands fa-youtube"></i></a><a href="https://x.com/studiogrmodena" target="_blank" class="footer-social"><i class="fa-brands fa-x-twitter"></i></a></div></div>
+      <div><div class="footer-col-title">Servizi</div><ul class="footer-links"><li><a href="assistenza-strategica.html">Assistenza Strategica</a></li><li><a href="percorso-vendere-bene.html">PerCorso Vendere Bene</a></li><li><a href="valore-professionale.html">Valore Professionale</a></li><li><a href="i-profile.html">i-Profile Assessment</a></li></ul></div>
+      <div><div class="footer-col-title">Risorse</div><ul class="footer-links"><li><a href="libri.html">I Libri di Roberto</a></li><li><a href="materiali-gratuiti.html">Materiali Gratuiti</a></li><li><a href="https://www.venderebene.it" target="_blank">Blog Vendere Bene</a></li><li><a href="https://www.retevendita.blog" target="_blank">Blog Rete Vendita</a></li></ul></div>
+      <div><div class="footer-col-title">Contatti</div><div class="footer-contact-item"><div class="footer-contact-icon"><i class="fa-solid fa-location-dot"></i></div><div class="footer-contact-text">Modena, Italia</div></div><div class="footer-contact-item"><div class="footer-contact-icon"><i class="fa-solid fa-envelope"></i></div><div class="footer-contact-text">info@studiogr.com</div></div></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2026 Studio GR S.r.l. — Tutti i diritti riservati.</div><div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Cookie Policy</a></div></div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Studio GR — Anteprima Sito Web</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0A0A0A; color: #fff;
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .wrap { max-width: 700px; width: 100%; padding: 48px 32px; text-align: center; }
+    .logo { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 48px; }
+    .logo-mark {
+      width: 48px; height: 48px; background: #FBC21D; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 20px; color: #0A0A0A;
+    }
+    .logo-text { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 22px; }
+    h1 { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 900; letter-spacing: -1px; margin-bottom: 10px; }
+    .sub { font-size: 15px; color: #888; margin-bottom: 48px; line-height: 1.6; }
+    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .card {
+      background: #111; border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px; padding: 32px 24px;
+      text-decoration: none; color: #fff;
+      transition: all 0.25s;
+      display: flex; flex-direction: column; gap: 12px; text-align: left;
+    }
+    .card:hover { border-color: rgba(251,194,29,0.35); transform: translateY(-3px); box-shadow: 0 16px 48px rgba(0,0,0,0.5); }
+    .card-icon { font-size: 28px; }
+    .card-label { font-size: 11px; font-family: 'Montserrat', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #FBC21D; }
+    .card-title { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 900; line-height: 1.2; }
+    .card-desc { font-size: 13px; color: #888; line-height: 1.6; }
+    .card-cta { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700; color: #FBC21D; margin-top: auto; display: flex; align-items: center; gap: 6px; }
+    .note { margin-top: 32px; font-size: 12px; color: #444; }
+    .badge { display: inline-block; background: rgba(251,194,29,0.1); border: 1px solid rgba(251,194,29,0.2); border-radius: 4px; padding: 3px 10px; font-size: 11px; color: #FBC21D; font-family: 'Montserrat', sans-serif; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="logo">
+      <div class="logo-mark">GR</div>
+      <div class="logo-text">Studio GR</div>
+    </div>
+
+    <div style="margin-bottom: 8px;">
+      <span class="badge">Anteprima interna · Aprile 2026</span>
+    </div>
+    <h1>Anteprima del nuovo sito web</h1>
+    <p class="sub">Due documenti per la riunione di lunedì: il blueprint del progetto e l'anteprima completa del sito. Clicca per aprire.</p>
+
+    <div class="cards">
+      <a href="sitemap-overview.html" class="card">
+        <div class="card-icon">🗺️</div>
+        <div class="card-label">Documento 1</div>
+        <div class="card-title">Blueprint del Sito</div>
+        <div class="card-desc">Architettura, sitemap delle 12 pagine, fasi di build, SEO e note di progetto. Da leggere in 60 secondi.</div>
+        <div class="card-cta">Apri il blueprint →</div>
+      </a>
+      <a href="studio-gr-preview.html" class="card">
+        <div class="card-icon">🌐</div>
+        <div class="card-label">Documento 2</div>
+        <div class="card-title">Anteprima Sito Completo</div>
+        <div class="card-desc">Homepage + 11 pagine collegate. Navigazione funzionante, design definitivo, tutti i contenuti.</div>
+        <div class="card-cta">Apri l'anteprima →</div>
+      </a>
+    </div>
+
+    <p class="note">GROWI · studiogr.com · Promozione Facile · 20-25 ore di realizzazione stimate</p>
+  </div>
+</body>
+</html>

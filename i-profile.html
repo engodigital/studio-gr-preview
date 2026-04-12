@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>i-Profile — Studio GR | Valutazione del Personale</title>
+  <meta name="description" content="i-Profile: il sistema di valutazione del personale che misura i 10 ingredienti della produttività. Scopri il potenziale reale del tuo team.">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="main.css">
+  <style>
+    .ip-intro { padding: 100px 48px; background: var(--dark); }
+    .ip-intro-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px; align-items: center; }
+    .ip-intro h2 { font-family: 'Montserrat', sans-serif; font-size: clamp(28px,3vw,42px); font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 20px; }
+    .ip-intro h2 em { color: var(--gold); font-style: italic; }
+    .ip-intro p { font-size: 16px; color: var(--gray-light); line-height: 1.8; margin-bottom: 16px; }
+
+    .ip-chart-box { background: var(--dark-3); border: 1px solid rgba(255,255,255,0.07); border-radius: 20px; padding: 40px; position: relative; overflow: hidden; }
+    .ip-chart-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), transparent); }
+    .ip-bar { margin-bottom: 14px; }
+    .ip-bar-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--gray-light); margin-bottom: 5px; }
+    .ip-bar-label span:last-child { font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--gold); }
+    .ip-bar-bg { height: 6px; background: rgba(255,255,255,0.06); border-radius: 3px; }
+    .ip-bar-fill { height: 100%; border-radius: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-dark)); }
+    .ip-score { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.07); }
+    .ip-score-label { font-size: 13px; color: var(--gray); }
+    .ip-score-val { font-family: 'Montserrat', sans-serif; font-size: 36px; font-weight: 900; color: var(--gold); }
+
+    .ingredients-section { padding: 100px 48px; background: var(--dark-2); }
+    .ingredients-inner { max-width: 1400px; margin: 0 auto; }
+    .ingredients-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-top: 56px; }
+    .ingredient-card { background: var(--dark-3); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 20px; text-align: center; transition: all 0.25s; }
+    .ingredient-card:hover { border-color: rgba(251,194,29,0.25); transform: translateY(-3px); }
+    .ingredient-icon { font-size: 28px; color: var(--gold); margin-bottom: 12px; }
+    .ingredient-name { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; line-height: 1.3; }
+
+    .use-cases { padding: 100px 48px; background: var(--dark); }
+    .use-cases-inner { max-width: 1400px; margin: 0 auto; }
+    .use-cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+    .use-case-card { background: var(--dark-3); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 36px; transition: all 0.25s; position: relative; overflow: hidden; }
+    .use-case-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--gold); transform: scaleX(0); transition: transform 0.25s; }
+    .use-case-card:hover { border-color: rgba(251,194,29,0.2); transform: translateY(-3px); }
+    .use-case-card:hover::after { transform: scaleX(1); }
+    .use-case-num { font-family: 'Montserrat', sans-serif; font-size: 56px; font-weight: 900; color: rgba(251,194,29,0.08); line-height: 1; margin-bottom: -10px; }
+    .use-case-icon { width: 52px; height: 52px; border-radius: 12px; background: rgba(251,194,29,0.1); display: flex; align-items: center; justify-content: center; font-size: 22px; color: var(--gold); margin-bottom: 20px; }
+    .use-case-title { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 800; margin-bottom: 12px; }
+    .use-case-text { font-size: 14px; color: var(--gray-light); line-height: 1.75; margin-bottom: 20px; }
+    .use-case-points { list-style: none; }
+    .use-case-points li { font-size: 13px; color: var(--gray); padding: 4px 0; display: flex; gap: 8px; }
+    .use-case-points li::before { content: '→'; color: var(--gold); }
+
+    .how-ip { padding: 100px 48px; background: var(--off-white); color: var(--dark); }
+    .how-ip-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .how-ip-steps { display: flex; flex-direction: column; gap: 24px; }
+    .how-ip-step { display: flex; gap: 20px; align-items: flex-start; }
+    .how-ip-step-num { width: 36px; height: 36px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 14px; color: var(--dark); flex-shrink: 0; }
+    .how-ip-step-title { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+    .how-ip-step-text { font-size: 13px; color: #666; line-height: 1.6; }
+    .how-ip-visual { background: var(--dark); border-radius: 20px; padding: 40px; color: var(--white); }
+    .how-ip-visual-title { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 800; margin-bottom: 20px; }
+    .ip-stat-row { display: flex; flex-direction: column; gap: 12px; }
+    .ip-stat-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .ip-stat-item:last-child { border-bottom: none; }
+    .ip-stat-item span:first-child { font-size: 13px; color: var(--gray-light); }
+    .ip-stat-item span:last-child { font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--gold); font-size: 14px; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="studio-gr-preview.html" class="nav-logo"><div class="nav-logo-mark">GR</div><div class="nav-logo-text">Studio GR</div></a>
+    <ul class="nav-menu">
+      <li><a href="chi-siamo.html">Chi Siamo</a></li>
+      <li><a href="servizi.html">Servizi</a></li>
+      <li><a href="risorse.html" class="active">Risorse</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="testimonianze.html">Testimonianze</a></li>
+      <li><a href="contatti.html" class="nav-cta">Consulenza Gratuita</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-inner">
+    <div class="page-hero-breadcrumb">
+      <a href="studio-gr-preview.html">Home</a> <i class="fa-solid fa-chevron-right" style="font-size:10px"></i>
+      <a href="risorse.html">Risorse</a> <i class="fa-solid fa-chevron-right" style="font-size:10px"></i>
+      <span>i-Profile</span>
+    </div>
+    <h1>Conosci il Vero<br>Potenziale del <em>Tuo Team</em></h1>
+    <p>i-Profile misura i 10 ingredienti della produttività individuale. Non chi sembra bravo — chi lo è davvero, e perché.</p>
+  </div>
+</section>
+
+<section class="ip-intro">
+  <div class="ip-intro-inner">
+    <div>
+      <div class="badge-gold" style="margin-bottom:24px"><i class="fa-solid fa-chart-radar"></i> Strumento Proprietario</div>
+      <h2>20 anni di ricerca.<br>10 ingredienti.<br><em>Un solo report</em> che cambia le decisioni.</h2>
+      <p>i-Profile è il sistema di valutazione del personale sviluppato in oltre 20 anni di ricerca e applicazione reale su migliaia di professionisti in tutto il mondo.</p>
+      <p>Non misura solo la competenza tecnica. Misura i <strong>10 ingredienti della produttività</strong>: gli elementi che determinano se una persona darà il massimo nella tua azienda, si integrerà nel team e crescerà nel tempo.</p>
+      <p>Usiamo i-Profile in tre contesti: selezione del personale, sviluppo dei collaboratori attuali e crescita manageriale.</p>
+      <div style="margin-top:32px;display:flex;gap:16px">
+        <a href="contatti.html" class="btn-primary"><i class="fa-solid fa-calendar-check"></i> Richiedi i-Profile</a>
+        <a href="valore-professionale.html" class="btn-secondary">Vedi Valore Professionale <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div class="ip-chart-box">
+      <div style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--gold);margin-bottom:24px">Esempio Report i-Profile</div>
+      <div class="ip-bar"><div class="ip-bar-label"><span>Motivazione autonoma</span><span>87%</span></div><div class="ip-bar-bg"><div class="ip-bar-fill" style="width:87%"></div></div></div>
+      <div class="ip-bar"><div class="ip-bar-label"><span>Orientamento al risultato</span><span>92%</span></div><div class="ip-bar-bg"><div class="ip-bar-fill" style="width:92%"></div></div></div>
+      <div class="ip-bar"><div class="ip-bar-label"><span>Comunicazione</span><span>74%</span></div><div class="ip-bar-bg"><div class="ip-bar-fill" style="width:74%"></div></div></div>
+      <div class="ip-bar"><div class="ip-bar-label"><span>Gestione dello stress</span><span>81%</span></div><div class="ip-bar-bg"><div class="ip-bar-fill" style="width:81%"></div></div></div>
+      <div class="ip-bar"><div class="ip-bar-label"><span>Leadership</span><span>68%</span></div><div class="ip-bar-bg"><div class="ip-bar-fill" style="width:68%"></div></div></div>
+      <div class="ip-bar"><div class="ip-bar-label"><span>Problem solving</span><span>79%</span></div><div class="ip-bar-bg"><div class="ip-bar-fill" style="width:79%"></div></div></div>
+      <div class="ip-bar"><div class="ip-bar-label"><span>Collaborazione</span><span>88%</span></div><div class="ip-bar-bg"><div class="ip-bar-fill" style="width:88%"></div></div></div>
+      <div class="ip-bar"><div class="ip-bar-label"><span>Autonomia operativa</span><span>65%</span></div><div class="ip-bar-bg"><div class="ip-bar-fill" style="width:65%"></div></div></div>
+      <div class="ip-bar"><div class="ip-bar-label"><span>Adattabilità</span><span>83%</span></div><div class="ip-bar-bg"><div class="ip-bar-fill" style="width:83%"></div></div></div>
+      <div class="ip-bar"><div class="ip-bar-label"><span>Proattività</span><span>77%</span></div><div class="ip-bar-bg"><div class="ip-bar-fill" style="width:77%"></div></div></div>
+      <div class="ip-score"><span class="ip-score-label">Punteggio complessivo</span><span class="ip-score-val">79<span style="font-size:20px">/100</span></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="ingredients-section">
+  <div class="ingredients-inner">
+    <div class="section-label">Il Sistema</div>
+    <h2 class="section-title">I 10 Ingredienti<br>della Produttività</h2>
+    <p class="section-sub">i-Profile misura queste 10 dimensioni per costruire un quadro completo e oggettivo della persona.</p>
+    <div class="ingredients-grid">
+      <div class="ingredient-card"><div class="ingredient-icon"><i class="fa-solid fa-fire"></i></div><div class="ingredient-name">Motivazione Autonoma</div></div>
+      <div class="ingredient-card"><div class="ingredient-icon"><i class="fa-solid fa-bullseye"></i></div><div class="ingredient-name">Orientamento al Risultato</div></div>
+      <div class="ingredient-card"><div class="ingredient-icon"><i class="fa-solid fa-comments"></i></div><div class="ingredient-name">Comunicazione</div></div>
+      <div class="ingredient-card"><div class="ingredient-icon"><i class="fa-solid fa-wind"></i></div><div class="ingredient-name">Gestione dello Stress</div></div>
+      <div class="ingredient-card"><div class="ingredient-icon"><i class="fa-solid fa-crown"></i></div><div class="ingredient-name">Leadership</div></div>
+      <div class="ingredient-card"><div class="ingredient-icon"><i class="fa-solid fa-puzzle-piece"></i></div><div class="ingredient-name">Problem Solving</div></div>
+      <div class="ingredient-card"><div class="ingredient-icon"><i class="fa-solid fa-people-group"></i></div><div class="ingredient-name">Collaborazione</div></div>
+      <div class="ingredient-card"><div class="ingredient-icon"><i class="fa-solid fa-person-running"></i></div><div class="ingredient-name">Autonomia Operativa</div></div>
+      <div class="ingredient-card"><div class="ingredient-icon"><i class="fa-solid fa-arrows-rotate"></i></div><div class="ingredient-name">Adattabilità</div></div>
+      <div class="ingredient-card"><div class="ingredient-icon"><i class="fa-solid fa-rocket"></i></div><div class="ingredient-name">Proattività</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="use-cases">
+  <div class="use-cases-inner">
+    <div class="section-label">Come si Usa</div>
+    <h2 class="section-title">3 Contesti,<br>Un Solo Strumento</h2>
+    <div class="use-cases-grid">
+      <div class="use-case-card">
+        <div class="use-case-num">01</div>
+        <div class="use-case-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+        <div class="use-case-title">Selezione del Personale</div>
+        <div class="use-case-text">Aggiungi uno strato di oggettività al processo di selezione. Non scegli basandoti solo sull'istinto o sul colloquio — scegli con i dati.</div>
+        <ul class="use-case-points">
+          <li>Profiling pre-colloquio</li>
+          <li>Confronto tra candidati</li>
+          <li>Valutazione fit culturale</li>
+          <li>Previsione performance</li>
+        </ul>
+      </div>
+      <div class="use-case-card">
+        <div class="use-case-icon"><i class="fa-solid fa-users-gear"></i></div>
+        <div class="use-case-title">Sviluppo del Team</div>
+        <div class="use-case-text">Capisci dove ogni collaboratore è forte e dove ha margine di crescita. Smetti di gestire tutti allo stesso modo — personalizza.</div>
+        <ul class="use-case-points">
+          <li>Analisi punti di forza</li>
+          <li>Piani di sviluppo individuali</li>
+          <li>Ottimizzazione dei ruoli</li>
+          <li>Gestione motivazionale</li>
+        </ul>
+      </div>
+      <div class="use-case-card">
+        <div class="use-case-icon"><i class="fa-solid fa-crown"></i></div>
+        <div class="use-case-title">Crescita Manageriale</div>
+        <div class="use-case-text">Scopri come massimizzare le tue capacità di manager e leader. Identifica le aree in cui sei già eccellente e quelle in cui puoi crescere.</div>
+        <ul class="use-case-points">
+          <li>Auto-conoscenza del manager</li>
+          <li>Sviluppo stile di leadership</li>
+          <li>Identificazione aree critiche</li>
+          <li>Piano di crescita personale</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="how-ip">
+  <div class="how-ip-inner">
+    <div>
+      <div class="section-label dark">Come Funziona</div>
+      <h2 class="section-title" style="color:var(--dark)">Il Processo<br>i-Profile</h2>
+      <p style="font-size:16px;color:#666;line-height:1.7;margin-bottom:40px">Semplice da fare, potente nell'output. Un assessment online seguito da un debriefing con i nostri consulenti.</p>
+      <div class="how-ip-steps">
+        <div class="how-ip-step"><div class="how-ip-step-num">1</div><div><div class="how-ip-step-title">Briefing con Studio GR</div><div class="how-ip-step-text">Capiamo il contesto: per quale ruolo, quale obiettivo, quante persone da valutare.</div></div></div>
+        <div class="how-ip-step"><div class="how-ip-step-num">2</div><div><div class="how-ip-step-title">Compilazione Assessment Online</div><div class="how-ip-step-text">Il candidato/collaboratore completa il questionario online. Tempo medio: 30–45 minuti. Può farlo da qualsiasi device.</div></div></div>
+        <div class="how-ip-step"><div class="how-ip-step-num">3</div><div><div class="how-ip-step-title">Report Dettagliato</div><div class="how-ip-step-text">Riceviamo il report con i punteggi sulle 10 dimensioni, l'indice di adeguatezza al ruolo e le note interpretative.</div></div></div>
+        <div class="how-ip-step"><div class="how-ip-step-num">4</div><div><div class="how-ip-step-title">Debriefing con il Cliente</div><div class="how-ip-step-text">Sessione con Roberto o un consulente Studio GR per leggere insieme i risultati e tradurli in decisioni concrete.</div></div></div>
+      </div>
+    </div>
+    <div class="how-ip-visual">
+      <div class="how-ip-visual-title">Caratteristiche del Sistema</div>
+      <div class="ip-stat-row">
+        <div class="ip-stat-item"><span>Domande assessment</span><span>242</span></div>
+        <div class="ip-stat-item"><span>Dimensioni misurate</span><span>10</span></div>
+        <div class="ip-stat-item"><span>Tempo compilazione</span><span>30–45 min</span></div>
+        <div class="ip-stat-item"><span>Anni di sviluppo</span><span>20+</span></div>
+        <div class="ip-stat-item"><span>Modalità</span><span>Online</span></div>
+        <div class="ip-stat-item"><span>Debriefing incluso</span><span style="color:var(--green)"><i class="fa-solid fa-check"></i></span></div>
+        <div class="ip-stat-item"><span>Report individuale</span><span style="color:var(--green)"><i class="fa-solid fa-check"></i></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-section-bg"></div>
+  <div class="cta-section-inner">
+    <div>
+      <h2 class="cta-section-title">Vuoi Conoscere<br>il Potenziale del Tuo Team?</h2>
+      <p class="cta-section-sub">Contattaci per richiedere i-Profile per un candidato, un collaboratore o il tuo intero team commerciale.</p>
+    </div>
+    <div class="cta-section-actions">
+      <a href="contatti.html" class="btn-dark"><i class="fa-solid fa-calendar-check"></i> Richiedi i-Profile</a>
+      <div class="cta-note"><i class="fa-solid fa-shield-check"></i> Consulenza iniziale gratuita</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div><div class="footer-logo"><div class="footer-logo-mark">GR</div><div class="footer-logo-text">Studio GR</div></div><div class="footer-tagline">Da 30 anni trasformiamo imprenditori e reti vendita in macchine da risultato.</div><div class="footer-socials"><a href="https://www.facebook.com/StudioGr" target="_blank" class="footer-social"><i class="fa-brands fa-facebook-f"></i></a><a href="https://www.linkedin.com/company/studio-g-r-srl-analisi-e-sviluppo-delle-risorse-umane/" target="_blank" class="footer-social"><i class="fa-brands fa-linkedin-in"></i></a><a href="https://www.youtube.com/@RobertoGiangregorio" target="_blank" class="footer-social"><i class="fa-brands fa-youtube"></i></a><a href="https://x.com/studiogrmodena" target="_blank" class="footer-social"><i class="fa-brands fa-x-twitter"></i></a></div></div>
+      <div><div class="footer-col-title">Servizi</div><ul class="footer-links"><li><a href="assistenza-strategica.html">Assistenza Strategica</a></li><li><a href="percorso-vendere-bene.html">PerCorso Vendere Bene</a></li><li><a href="valore-professionale.html">Valore Professionale</a></li><li><a href="i-profile.html">i-Profile Assessment</a></li></ul></div>
+      <div><div class="footer-col-title">Risorse</div><ul class="footer-links"><li><a href="libri.html">I Libri di Roberto</a></li><li><a href="materiali-gratuiti.html">Materiali Gratuiti</a></li><li><a href="https://www.venderebene.it" target="_blank">Blog Vendere Bene</a></li><li><a href="https://www.retevendita.blog" target="_blank">Blog Rete Vendita</a></li></ul></div>
+      <div><div class="footer-col-title">Contatti</div><div class="footer-contact-item"><div class="footer-contact-icon"><i class="fa-solid fa-location-dot"></i></div><div class="footer-contact-text">Modena, Italia</div></div><div class="footer-contact-item"><div class="footer-contact-icon"><i class="fa-solid fa-envelope"></i></div><div class="footer-contact-text">info@studiogr.com</div></div></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2026 Studio GR S.r.l. — Tutti i diritti riservati.</div><div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Cookie Policy</a></div></div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>studiogr.com — Blueprint di Progetto</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #FBC21D;
+      --dark: #0D0D0D;
+      --dark-2: #1A1A1A;
+      --dark-3: #262626;
+      --white: #FFFFFF;
+      --gray: #888888;
+      --green: #37ca37;
+    }
+
+    body {
+      background: var(--dark);
+      color: var(--white);
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      border-bottom: 1px solid #2a2a2a;
+      padding: 28px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-text {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: -0.5px;
+    }
+    .logo-text span { color: var(--gold); }
+
+    .header-meta {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .badge {
+      background: var(--dark-3);
+      border: 1px solid #333;
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 12px;
+      color: var(--gray);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+    }
+    .badge.gold { border-color: var(--gold); color: var(--gold); }
+    .badge.green { border-color: var(--green); color: var(--green); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 48px 48px 40px;
+      border-bottom: 1px solid #1e1e1e;
+    }
+
+    .hero h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 12px;
+    }
+    .hero h1 em { color: var(--gold); font-style: normal; }
+
+    .hero p {
+      color: var(--gray);
+      max-width: 640px;
+      font-size: 15px;
+    }
+
+    .stats-row {
+      display: flex;
+      gap: 32px;
+      margin-top: 28px;
+    }
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .stat-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--gold);
+    }
+    .stat-label {
+      font-size: 11px;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── GRID ── */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 0;
+      border-bottom: 1px solid #1e1e1e;
+    }
+
+    .grid-col {
+      padding: 36px 48px;
+      border-right: 1px solid #1e1e1e;
+    }
+    .grid-col:last-child { border-right: none; }
+
+    .col-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    /* ── SITEMAP TREE ── */
+    .tree { list-style: none; }
+
+    .tree > li {
+      margin-bottom: 4px;
+    }
+
+    .tree-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      transition: background 0.15s;
+      cursor: default;
+    }
+    .tree-item:hover { background: var(--dark-3); }
+
+    .tree-item .url {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .tree-item .label {
+      font-size: 11px;
+      color: var(--gray);
+      margin-left: 4px;
+    }
+
+    .tree-item .pill {
+      margin-left: auto;
+      font-size: 10px;
+      font-weight: 700;
+      font-family: 'Montserrat', sans-serif;
+      padding: 2px 8px;
+      border-radius: 10px;
+      white-space: nowrap;
+    }
+
+    .pill-p1 { background: rgba(251,194,29,0.15); color: var(--gold); }
+    .pill-p2 { background: rgba(55,202,55,0.12); color: var(--green); }
+    .pill-p3 { background: rgba(255,255,255,0.08); color: #888; }
+
+    .subtree {
+      list-style: none;
+      margin-left: 20px;
+      border-left: 1px solid #2a2a2a;
+      padding-left: 16px;
+      margin-bottom: 4px;
+    }
+
+    .subtree li .tree-item .url { font-size: 11px; color: #aaa; }
+
+    .tier-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #444;
+      margin: 20px 0 8px;
+    }
+    .tier-label:first-child { margin-top: 0; }
+
+    /* ── FASI ── */
+    .phase {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .phase-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--dark-3);
+      border: 1.5px solid #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--gray);
+      flex-shrink: 0;
+    }
+    .phase:nth-child(1) .phase-num { border-color: var(--gold); color: var(--gold); background: rgba(251,194,29,0.1); }
+    .phase:nth-child(2) .phase-num { border-color: var(--green); color: var(--green); background: rgba(55,202,55,0.1); }
+
+    .phase-content {}
+    .phase-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+    .phase-pages {
+      font-size: 12px;
+      color: var(--gray);
+    }
+    .phase-pages span {
+      display: inline-block;
+      background: var(--dark-3);
+      border-radius: 4px;
+      padding: 1px 7px;
+      margin: 2px 2px 2px 0;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      color: #999;
+    }
+
+    .phase-connector {
+      width: 1px;
+      height: 12px;
+      background: #2a2a2a;
+      margin-left: 16px;
+      margin-bottom: 8px;
+    }
+
+    /* ── NOTE ── */
+    .note-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid #1e1e1e;
+    }
+    .note-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    .note-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .note-icon.gold { background: rgba(251,194,29,0.1); }
+    .note-icon.green { background: rgba(55,202,55,0.1); }
+    .note-icon.gray { background: var(--dark-3); }
+
+    .note-text strong {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 2px;
+    }
+    .note-text p {
+      font-size: 12px;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+
+    /* ── SEO SECTION ── */
+    .seo-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0;
+      border-bottom: 1px solid #1e1e1e;
+    }
+
+    .seo-col {
+      padding: 28px 48px;
+      border-right: 1px solid #1e1e1e;
+    }
+    .seo-col:last-child { border-right: none; }
+
+    .seo-col h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+
+    .kw-list { list-style: none; }
+    .kw-list li {
+      font-size: 12px;
+      color: var(--gray);
+      padding: 3px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .kw-list li::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .schema-list { display: flex; flex-wrap: wrap; gap: 6px; }
+    .schema-tag {
+      font-size: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      background: var(--dark-3);
+      border: 1px solid #333;
+      border-radius: 4px;
+      padding: 3px 9px;
+      color: #aaa;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #444;
+      font-size: 11px;
+    }
+    .footer a { color: var(--gold); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo-text">Studio <span>GR</span></div>
+    <div class="header-meta">
+      <span class="badge">studiogr.com</span>
+      <span class="badge gold">12 Pagine</span>
+      <span class="badge green">GROWI · Desktop-First · SEO</span>
+      <span class="badge">Aprile 2026</span>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Blueprint del nuovo <em>studiogr.com</em></h1>
+    <p>Architettura ispirata a OSM Partners. Contenuto esistente riorganizzato. Obiettivo: qualità percepita superiore con il 30% delle pagine.</p>
+
+    <div class="stats-row">
+      <div class="stat">
+        <span class="stat-num">12</span>
+        <span class="stat-label">Pagine totali</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">5</span>
+        <span class="stat-label">Fasi di build</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">2</span>
+        <span class="stat-label">Blog verticali</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">20-25h</span>
+        <span class="stat-label">Ore di realizzazione</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN GRID: SITEMAP + FASI + NOTE -->
+  <div class="main-grid">
+
+    <!-- COL 1: SITEMAP -->
+    <div class="grid-col">
+      <div class="col-title">Sitemap</div>
+
+      <div class="tier-label">Navigazione Principale</div>
+      <ul class="tree">
+        <li>
+          <div class="tree-item">
+            <span class="url">/</span>
+            <span class="label">Home</span>
+            <span class="pill pill-p1">Fase 1</span>
+          </div>
+        </li>
+        <li>
+          <div class="tree-item">
+            <span class="url">/chi-siamo/</span>
+            <span class="label">Chi Siamo + Staff</span>
+            <span class="pill pill-p1">Fase 1</span>
+          </div>
+          <ul class="subtree">
+            <li><div class="tree-item"><span class="url">/chi-siamo/roberto/</span><span class="label">Link-in-bio Roberto</span></div></li>
+            <li><div class="tree-item"><span class="url">/chi-siamo/[nome]/</span><span class="label">Link-in-bio Staff</span></div></li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="tier-label">Servizi</div>
+      <ul class="tree">
+        <li>
+          <div class="tree-item">
+            <span class="url">/servizi/</span>
+            <span class="label">Hub servizi</span>
+            <span class="pill pill-p2">Fase 2</span>
+          </div>
+        </li>
+        <ul class="subtree">
+          <li><div class="tree-item"><span class="url">/servizi/assistenza-strategica/</span><span class="pill pill-p2">Fase 2</span></div></li>
+          <li><div class="tree-item"><span class="url">/servizi/percorso-vendere-bene/</span><span class="pill pill-p2">Fase 2</span></div></li>
+          <li><div class="tree-item"><span class="url">/servizi/valore-professionale/</span><span class="pill pill-p3">Fase 4</span></div></li>
+        </ul>
+      </ul>
+
+      <div class="tier-label">Risorse</div>
+      <ul class="tree">
+        <li>
+          <div class="tree-item">
+            <span class="url">/risorse/</span>
+            <span class="label">Hub risorse</span>
+            <span class="pill pill-p2">Fase 3</span>
+          </div>
+        </li>
+        <ul class="subtree">
+          <li><div class="tree-item"><span class="url">/risorse/libri/</span><span class="label">3 libri + estratti</span><span class="pill pill-p2">Fase 3</span></div></li>
+          <li><div class="tree-item"><span class="url">/risorse/i-profile/</span><span class="label">Analisi proprietaria</span><span class="pill pill-p2">Fase 3</span></div></li>
+          <li><div class="tree-item"><span class="url">/risorse/materiali-gratuiti/</span><span class="pill pill-p3">Fase 5</span></div></li>
+        </ul>
+      </ul>
+
+      <div class="tier-label">Blog & Conversione</div>
+      <ul class="tree">
+        <li>
+          <div class="tree-item">
+            <span class="url">/blog/</span>
+            <span class="label">2 verticali</span>
+            <span class="pill pill-p3">Fase 5</span>
+          </div>
+        </li>
+        <ul class="subtree">
+          <li><div class="tree-item"><span class="url">/blog/vendere-bene/</span><span class="label">Per i venditori</span></div></li>
+          <li><div class="tree-item"><span class="url">/blog/rete-vendita/</span><span class="label">Per gli imprenditori</span></div></li>
+        </ul>
+        <li><div class="tree-item"><span class="url">/testimonianze/</span><span class="pill pill-p3">Fase 4</span></div></li>
+        <li><div class="tree-item"><span class="url">/contatti/</span><span class="pill pill-p3">Fase 4</span></div></li>
+      </ul>
+    </div>
+
+    <!-- COL 2: FASI -->
+    <div class="grid-col">
+      <div class="col-title">Sequenza di Build</div>
+
+      <div class="phase">
+        <div class="phase-num">1</div>
+        <div class="phase-content">
+          <div class="phase-title">Foundation — Impatto Immediato</div>
+          <div class="phase-pages">
+            <span>HOME</span>
+            <span>Chi Siamo</span>
+          </div>
+        </div>
+      </div>
+      <div class="phase-connector"></div>
+
+      <div class="phase">
+        <div class="phase-num">2</div>
+        <div class="phase-content">
+          <div class="phase-title">Core Business</div>
+          <div class="phase-pages">
+            <span>Servizi Hub</span>
+            <span>Assistenza Strategica</span>
+            <span>Percorso Vendere Bene</span>
+          </div>
+        </div>
+      </div>
+      <div class="phase-connector"></div>
+
+      <div class="phase">
+        <div class="phase-num">3</div>
+        <div class="phase-content">
+          <div class="phase-title">Lead Magnet & Differenziazione</div>
+          <div class="phase-pages">
+            <span>Risorse Hub</span>
+            <span>Libri</span>
+            <span>i-Profile</span>
+          </div>
+        </div>
+      </div>
+      <div class="phase-connector"></div>
+
+      <div class="phase">
+        <div class="phase-num">4</div>
+        <div class="phase-content">
+          <div class="phase-title">Completamento</div>
+          <div class="phase-pages">
+            <span>Valore Professionale</span>
+            <span>Testimonianze</span>
+            <span>Contatti</span>
+          </div>
+        </div>
+      </div>
+      <div class="phase-connector"></div>
+
+      <div class="phase">
+        <div class="phase-num">5</div>
+        <div class="phase-content">
+          <div class="phase-title">Opzionale / Poi</div>
+          <div class="phase-pages">
+            <span>Materiali Gratuiti</span>
+            <span>Blog</span>
+            <span>Link-in-bio Staff</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COL 3: NOTE -->
+    <div class="grid-col">
+      <div class="col-title">Decisioni prese nel brief</div>
+
+      <div class="note-item">
+        <div class="note-icon gold">👤</div>
+        <div class="note-text">
+          <strong>Chi Siamo — due livelli</strong>
+          <p>Pagina generale del team, poi sub-page stile <em>link-in-bio</em> per ogni persona (calendario, contatti, social).</p>
+        </div>
+      </div>
+
+      <div class="note-item">
+        <div class="note-icon gold">🧪</div>
+        <div class="note-text">
+          <strong>i-Profile — servizio specifico</strong>
+          <p>Non un lead magnet, è un servizio. Contenuto da sviluppare partendo dalla pagina OSM come riferimento.</p>
+        </div>
+      </div>
+
+      <div class="note-item">
+        <div class="note-icon green">📝</div>
+        <div class="note-text">
+          <strong>Blog: 2 verticali confermati</strong>
+          <p><strong>venderebene.it/blog</strong> — per i venditori<br><strong>retevendita.blog</strong> — per gli imprenditori</p>
+        </div>
+      </div>
+
+      <div class="note-item">
+        <div class="note-icon gray">🏗️</div>
+        <div class="note-text">
+          <strong>GROWI — operazioni manuali</strong>
+          <p>Le API non consentono di modificare l'editor sito. L'implementazione avviene manualmente su GROWI.</p>
+        </div>
+      </div>
+
+      <div class="note-item">
+        <div class="note-icon gray">🎬</div>
+        <div class="note-text">
+          <strong>Video — profilo GROWI</strong>
+          <p>Tutto il contenuto video è sul profilo GROWI di Roberto. Link pubblici da fornire.</p>
+        </div>
+      </div>
+
+      <div class="note-item">
+        <div class="note-icon gray">🖼️</div>
+        <div class="note-text">
+          <strong>Logo — dal sito attuale</strong>
+          <p>Scaricabile direttamente da studiogr.com.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SEO SECTION -->
+  <div class="seo-section">
+    <div class="seo-col">
+      <h4>Keyword Target</h4>
+      <ul class="kw-list">
+        <li>consulenza reti vendita</li>
+        <li>formazione venditori Italia</li>
+        <li>coach vendita imprenditori</li>
+        <li>Roberto Giangregorio</li>
+        <li>percorso vendere bene</li>
+        <li>selezione commerciali</li>
+        <li>come costruire rete vendita</li>
+      </ul>
+    </div>
+    <div class="seo-col">
+      <h4>Schema Markup</h4>
+      <div class="schema-list">
+        <span class="schema-tag">Organization</span>
+        <span class="schema-tag">Person</span>
+        <span class="schema-tag">Book</span>
+        <span class="schema-tag">Service</span>
+        <span class="schema-tag">FAQPage</span>
+        <span class="schema-tag">BlogPosting</span>
+        <span class="schema-tag">BreadcrumbList</span>
+      </div>
+    </div>
+    <div class="seo-col">
+      <h4>Principi SEO</h4>
+      <ul class="kw-list">
+        <li>Title + meta unici per ogni pagina</li>
+        <li>URL slug puliti e semantici</li>
+        <li>800–1.500 parole per pagina servizio</li>
+        <li>Internal linking strutturato</li>
+        <li>Redirect 301 dalle URL .htm attuali</li>
+        <li>Core Web Vitals monitorati</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span>Studio GR · Promozione Facile · Blueprint v1.0 · Aprile 2026</span>
+    <span>Piattaforma: GROWI · Sito duplicato pronto per editing · Stima: 20-25 ore di lavoro</span>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Testimonianze — Studio GR | Risultati Reali</title>
+  <meta name="description" content="Cosa dicono i clienti di Studio GR: risultati reali su reti vendita, formazione commerciale e selezione del personale. Numeri, non promesse.">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="main.css">
+  <style>
+    .testi-numbers { padding: 64px 48px; background: var(--dark-2); border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .testi-numbers-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
+    .tn-item { text-align: center; padding: 0 32px; border-right: 1px solid rgba(255,255,255,0.06); }
+    .tn-item:last-child { border-right: none; }
+    .tn-val { font-family: 'Montserrat', sans-serif; font-size: 52px; font-weight: 900; color: var(--gold); line-height: 1; letter-spacing: -3px; margin-bottom: 10px; }
+    .tn-label { font-size: 15px; color: var(--gray-light); font-weight: 500; }
+
+    .video-testi { padding: 100px 48px; background: var(--dark); }
+    .video-testi-inner { max-width: 1400px; margin: 0 auto; }
+    .video-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+
+    .testi-grid-section { padding: 100px 48px; background: var(--dark-2); }
+    .testi-grid-inner { max-width: 1400px; margin: 0 auto; }
+    .testi-masonry { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 56px; }
+    .testi-card { background: var(--dark-3); border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 16px; transition: border-color 0.25s; }
+    .testi-card:hover { border-color: rgba(251,194,29,0.2); }
+    .testi-stars { display: flex; gap: 4px; color: var(--gold); font-size: 12px; }
+    .testi-quote-text { font-size: 14px; color: var(--gray-light); line-height: 1.75; font-style: italic; flex: 1; }
+    .testi-quote-text::before { content: '"'; }
+    .testi-quote-text::after { content: '"'; }
+    .testi-result-chip { display: inline-flex; align-items: center; gap: 6px; background: rgba(55,202,55,0.1); border: 1px solid rgba(55,202,55,0.2); border-radius: 6px; padding: 4px 10px; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700; color: var(--green); align-self: flex-start; }
+    .testi-person-row { display: flex; align-items: center; gap: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .testi-avatar-sm { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 14px; color: var(--dark); flex-shrink: 0; }
+    .testi-name-sm { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; }
+    .testi-role-sm { font-size: 11px; color: var(--gray); }
+
+    .case-studies { padding: 100px 48px; background: var(--dark); }
+    .case-studies-inner { max-width: 1400px; margin: 0 auto; }
+    .case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 56px; }
+    .case-card { background: var(--dark-3); border: 1px solid rgba(255,255,255,0.07); border-radius: 20px; padding: 40px; }
+    .case-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(251,194,29,0.1); border: 1px solid rgba(251,194,29,0.2); border-radius: 4px; padding: 4px 10px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; color: var(--gold); margin-bottom: 20px; }
+    .case-title { font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 800; margin-bottom: 12px; }
+    .case-challenge { font-size: 14px; color: var(--gray); line-height: 1.65; margin-bottom: 24px; }
+    .case-results { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+    .case-result { background: var(--dark-4); border-radius: 8px; padding: 14px; text-align: center; }
+    .case-result-val { font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: 900; color: var(--gold); line-height: 1; margin-bottom: 4px; }
+    .case-result-label { font-size: 11px; color: var(--gray); }
+    .case-client { font-size: 13px; color: var(--gray-light); font-style: italic; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="studio-gr-preview.html" class="nav-logo"><div class="nav-logo-mark">GR</div><div class="nav-logo-text">Studio GR</div></a>
+    <ul class="nav-menu">
+      <li><a href="chi-siamo.html">Chi Siamo</a></li>
+      <li><a href="servizi.html">Servizi</a></li>
+      <li><a href="risorse.html">Risorse</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="testimonianze.html" class="active">Testimonianze</a></li>
+      <li><a href="contatti.html" class="nav-cta">Consulenza Gratuita</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-inner">
+    <div class="page-hero-breadcrumb"><a href="studio-gr-preview.html">Home</a> <i class="fa-solid fa-chevron-right" style="font-size:10px"></i> <span>Testimonianze</span></div>
+    <h1>Numeri Reali,<br><em>Non Promesse</em></h1>
+    <p>Non chiediamo di fidarti di noi. Ti chiediamo di leggere cosa dicono chi ha già fatto il percorso — e i numeri che hanno ottenuto.</p>
+  </div>
+</section>
+
+<section class="testi-numbers">
+  <div class="testi-numbers-inner">
+    <div class="tn-item"><div class="tn-val">165K<span style="font-size:0.5em">+</span></div><div class="tn-label">Professionisti Formati</div></div>
+    <div class="tn-item"><div class="tn-val">97<span style="font-size:0.55em">%</span></div><div class="tn-label">Clienti Soddisfatti</div></div>
+    <div class="tn-item"><div class="tn-val">+34<span style="font-size:0.55em">%</span></div><div class="tn-label">Fatturato Medio Post-Percorso</div></div>
+    <div class="tn-item"><div class="tn-val">30<span style="font-size:0.55em"> anni</span></div><div class="tn-label">di Risultati Documentati</div></div>
+  </div>
+</section>
+
+<section class="video-testi">
+  <div class="video-testi-inner">
+    <div class="section-label">Video</div>
+    <h2 class="section-title">Sentili Raccontare</h2>
+    <p class="section-sub">Le parole dei clienti valgono più delle nostre. Guarda cosa dicono in prima persona.</p>
+    <div class="video-grid">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="video-placeholder"><div class="video-play"><i class="fa-solid fa-play"></i></div><div class="video-caption">Andrea M. — Settore Manifatturiero</div></div>
+        <div style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700">Andrea M.</div>
+        <div style="font-size:13px;color:var(--gray)">CEO · Settore Manifatturiero · <span style="color:var(--green);font-weight:700">+34% fatturato in 8 mesi</span></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="video-placeholder"><div class="video-play"><i class="fa-solid fa-play"></i></div><div class="video-caption">Laura C. — Settore Servizi</div></div>
+        <div style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700">Laura C.</div>
+        <div style="font-size:13px;color:var(--gray)">Dir. HR · Settore Servizi · <span style="color:var(--green);font-weight:700">3 commerciali selezionati in 28 giorni</span></div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="video-placeholder"><div class="video-play"><i class="fa-solid fa-play"></i></div><div class="video-caption">Francesco P. — Settore Distribuzione</div></div>
+        <div style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700">Francesco P.</div>
+        <div style="font-size:13px;color:var(--gray)">Imprenditore · Settore Distribuzione · <span style="color:var(--green);font-weight:700">Rete vendita raddoppiata in 12 mesi</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="testi-grid-section">
+  <div class="testi-grid-inner">
+    <div class="section-label">Recensioni</div>
+    <h2 class="section-title">Cosa Dicono i Clienti</h2>
+    <div class="testi-masonry">
+      <div class="testi-card">
+        <div class="testi-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <div class="testi-quote-text">Dopo il PerCorso Vendere Bene, il nostro fatturato è cresciuto del 34% in 8 mesi. Non ci credevo fosse possibile con gli stessi venditori. Il metodo fa davvero la differenza.</div>
+        <div class="testi-result-chip"><i class="fa-solid fa-arrow-trend-up"></i> +34% fatturato</div>
+        <div class="testi-person-row"><div class="testi-avatar-sm">AM</div><div><div class="testi-name-sm">Andrea M.</div><div class="testi-role-sm">CEO · Manifatturiero · Emilia-Romagna</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <div class="testi-quote-text">Grazie a Valore Professionale, abbiamo selezionato 3 commerciali in meno di un mese. Uno di loro ha già chiuso il doppio del target nel primo trimestre.</div>
+        <div class="testi-result-chip"><i class="fa-solid fa-users"></i> Selezione in 28 giorni</div>
+        <div class="testi-person-row"><div class="testi-avatar-sm">LC</div><div><div class="testi-name-sm">Laura C.</div><div class="testi-role-sm">Direttore HR · Servizi · Milano</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <div class="testi-quote-text">L'assistenza strategica con Roberto ha cambiato il mio modo di guidare l'azienda. Ho finalmente chiarezza sulle priorità e il team segue la direzione.</div>
+        <div class="testi-result-chip"><i class="fa-solid fa-chart-line"></i> Business trasformato</div>
+        <div class="testi-person-row"><div class="testi-avatar-sm">FP</div><div><div class="testi-name-sm">Francesco P.</div><div class="testi-role-sm">Imprenditore · Distribuzione · Veneto</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <div class="testi-quote-text">Avevo una rete vendita che funzionava a intermittenza. Dopo 6 mesi con Studio GR, i miei venditori hanno finalmente un processo. Il tasso di chiusura è passato dal 18% al 31%.</div>
+        <div class="testi-result-chip"><i class="fa-solid fa-handshake"></i> +72% tasso di chiusura</div>
+        <div class="testi-person-row"><div class="testi-avatar-sm">MR</div><div><div class="testi-name-sm">Marco R.</div><div class="testi-role-sm">Direttore Commerciale · B2B · Lombardia</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <div class="testi-quote-text">i-Profile mi ha aperto gli occhi su persone che pensavo non avessero potenziale. E mi ha evitato di assumere qualcuno che in colloquio sembrava perfetto ma non lo era affatto.</div>
+        <div class="testi-result-chip"><i class="fa-solid fa-shield-check"></i> Selezione sicura</div>
+        <div class="testi-person-row"><div class="testi-avatar-sm">SB</div><div><div class="testi-name-sm">Simona B.</div><div class="testi-role-sm">Imprenditrice · Retail · Piemonte</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <div class="testi-quote-text">Roberto non ti dà le risposte — ti aiuta a trovare le tue. E le risposte che ho trovato con lui hanno cambiato il mio business e il modo in cui mi relaziono con il mio team.</div>
+        <div class="testi-result-chip"><i class="fa-solid fa-crown"></i> Leadership migliorata</div>
+        <div class="testi-person-row"><div class="testi-avatar-sm">GT</div><div><div class="testi-name-sm">Giorgio T.</div><div class="testi-role-sm">CEO · Tecnologia · Toscana</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="case-studies">
+  <div class="case-studies-inner">
+    <div class="section-label">Casi Studio</div>
+    <h2 class="section-title">Risultati in Dettaglio</h2>
+    <div class="case-grid">
+      <div class="case-card">
+        <div class="case-tag"><i class="fa-solid fa-trophy"></i> PerCorso Vendere Bene</div>
+        <div class="case-title">PMI Manifatturiera — Rete di 12 Venditori</div>
+        <div class="case-challenge"><strong>La sfida:</strong> Rete vendita che produceva sotto le aspettative da 2 anni. Venditori demotivati, pipeline disorganizzata, tasso di chiusura al 18%. L'imprenditore stava valutando di licenziare 4 persone.</div>
+        <div class="case-results">
+          <div class="case-result"><div class="case-result-val">+34%</div><div class="case-result-label">Fatturato</div></div>
+          <div class="case-result"><div class="case-result-val">31%</div><div class="case-result-label">Tasso chiusura</div></div>
+          <div class="case-result"><div class="case-result-val">8 mesi</div><div class="case-result-label">Per i risultati</div></div>
+        </div>
+        <div class="case-client">— CEO, Settore Manifatturiero, Emilia-Romagna</div>
+      </div>
+      <div class="case-card">
+        <div class="case-tag"><i class="fa-solid fa-magnifying-glass-chart"></i> Valore Professionale</div>
+        <div class="case-title">Azienda Servizi B2B — Espansione Commerciale</div>
+        <div class="case-challenge"><strong>La sfida:</strong> Azienda in crescita che doveva assumere 3 commerciali in tempi rapidi. Precedenti selezioni fatte autonomamente avevano prodotto 2 abbandoni nei primi 6 mesi.</div>
+        <div class="case-results">
+          <div class="case-result"><div class="case-result-val">28 gg</div><div class="case-result-label">Selezione</div></div>
+          <div class="case-result"><div class="case-result-val">3/3</div><div class="case-result-label">Ancora in azienda</div></div>
+          <div class="case-result"><div class="case-result-val">+180%</div><div class="case-result-label">Target Q1</div></div>
+        </div>
+        <div class="case-client">— Direttore HR, Settore Servizi, Milano</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-section-bg"></div>
+  <div class="cta-section-inner">
+    <div>
+      <h2 class="cta-section-title">Vuoi Essere<br>il Prossimo Caso Studio?</h2>
+      <p class="cta-section-sub">Inizia da una consulenza gratuita. 30 minuti per capire il percorso giusto per te.</p>
+    </div>
+    <div class="cta-section-actions">
+      <a href="contatti.html" class="btn-dark"><i class="fa-solid fa-calendar-check"></i> Prenota Gratis</a>
+      <div class="cta-note"><i class="fa-solid fa-shield-check"></i> Nessun impegno</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div><div class="footer-logo"><div class="footer-logo-mark">GR</div><div class="footer-logo-text">Studio GR</div></div><div class="footer-tagline">Da 30 anni trasformiamo imprenditori e reti vendita in macchine da risultato.</div><div class="footer-socials"><a href="https://www.facebook.com/StudioGr" target="_blank" class="footer-social"><i class="fa-brands fa-facebook-f"></i></a><a href="https://www.linkedin.com/company/studio-g-r-srl-analisi-e-sviluppo-delle-risorse-umane/" target="_blank" class="footer-social"><i class="fa-brands fa-linkedin-in"></i></a><a href="https://www.youtube.com/@RobertoGiangregorio" target="_blank" class="footer-social"><i class="fa-brands fa-youtube"></i></a><a href="https://x.com/studiogrmodena" target="_blank" class="footer-social"><i class="fa-brands fa-x-twitter"></i></a></div></div>
+      <div><div class="footer-col-title">Servizi</div><ul class="footer-links"><li><a href="assistenza-strategica.html">Assistenza Strategica</a></li><li><a href="percorso-vendere-bene.html">PerCorso Vendere Bene</a></li><li><a href="valore-professionale.html">Valore Professionale</a></li><li><a href="i-profile.html">i-Profile Assessment</a></li></ul></div>
+      <div><div class="footer-col-title">Risorse</div><ul class="footer-links"><li><a href="libri.html">I Libri di Roberto</a></li><li><a href="materiali-gratuiti.html">Materiali Gratuiti</a></li><li><a href="https://www.venderebene.it" target="_blank">Blog Vendere Bene</a></li><li><a href="https://www.retevendita.blog" target="_blank">Blog Rete Vendita</a></li></ul></div>
+      <div><div class="footer-col-title">Contatti</div><div class="footer-contact-item"><div class="footer-contact-icon"><i class="fa-solid fa-location-dot"></i></div><div class="footer-contact-text">Modena, Italia</div></div><div class="footer-contact-item"><div class="footer-contact-icon"><i class="fa-solid fa-envelope"></i></div><div class="footer-contact-text">info@studiogr.com</div></div></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2026 Studio GR S.r.l. — Tutti i diritti riservati.</div><div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Cookie Policy</a></div></div>
+  </div>
+</footer>
+</body>
+</html>

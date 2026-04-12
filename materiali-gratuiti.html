@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Materiali Gratuiti — Studio GR | Strumenti per Venditori e Manager</title>
+  <meta name="description" content="Checklist, template, guide e estratti gratuiti di Studio GR. Strumenti pratici per venditori e manager commerciali — scarica subito, applica domani.">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="main.css">
+  <style>
+    /* ── FILTER BAR ── */
+    .mat-filter-bar {
+      padding: 32px 48px;
+      background: var(--dark-2);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .mat-filter-inner {
+      max-width: 1400px; margin: 0 auto;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .mat-filter-label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 2px;
+      color: var(--gray); margin-right: 8px;
+    }
+    .mat-filter-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--dark-3); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 6px; padding: 8px 18px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px; font-weight: 700;
+      color: var(--gray-light); cursor: pointer;
+      transition: all 0.2s;
+    }
+    .mat-filter-btn.active,
+    .mat-filter-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(251,194,29,0.06); }
+
+    /* ── MATERIALS GRID ── */
+    .mat-grid-section { padding: 80px 48px; background: var(--dark); }
+    .mat-grid-inner { max-width: 1400px; margin: 0 auto; }
+
+    .mat-category-title {
+      display: flex; align-items: center; gap: 16px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px; font-weight: 800;
+      margin-bottom: 28px; margin-top: 64px;
+    }
+    .mat-category-title:first-child { margin-top: 0; }
+    .mat-category-line { flex: 1; height: 1px; background: rgba(255,255,255,0.07); }
+    .mat-category-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(251,194,29,0.08); border: 1px solid rgba(251,194,29,0.15);
+      border-radius: 4px; padding: 3px 10px;
+      font-size: 11px; font-weight: 700;
+      color: var(--gold); text-transform: uppercase; letter-spacing: 0.5px;
+    }
+
+    .mat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    /* Material Card */
+    .mat-card {
+      background: var(--dark-3);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 28px;
+      display: flex; flex-direction: column; gap: 16px;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .mat-card:hover {
+      border-color: rgba(251,194,29,0.2);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+    }
+    .mat-card-glow {
+      position: absolute; width: 200px; height: 200px;
+      border-radius: 50%; top: -60px; right: -40px;
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(251,194,29,0.07), transparent 70%);
+      transition: opacity 0.25s;
+    }
+    .mat-card:hover .mat-card-glow { opacity: 1.5; }
+
+    .mat-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .mat-card-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: rgba(251,194,29,0.08); border: 1px solid rgba(251,194,29,0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; color: var(--gold); flex-shrink: 0;
+    }
+    .mat-card-type {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 4px; padding: 3px 9px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px; font-weight: 700;
+      color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .mat-card-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px; font-weight: 800;
+      line-height: 1.3; letter-spacing: -0.3px;
+    }
+    .mat-card-desc {
+      font-size: 13px; color: var(--gray-light);
+      line-height: 1.65; flex: 1;
+    }
+    .mat-card-meta {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 12px; color: var(--gray);
+      padding-top: 12px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .mat-card-meta-item { display: flex; align-items: center; gap: 5px; }
+    .mat-card-meta i { font-size: 11px; }
+    .mat-card-cta {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      background: rgba(251,194,29,0.08); border: 1px solid rgba(251,194,29,0.15);
+      border-radius: 8px; padding: 12px 20px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700; font-size: 13px;
+      color: var(--gold); text-decoration: none;
+      transition: all 0.2s; width: 100%;
+    }
+    .mat-card-cta:hover { background: var(--gold); color: var(--dark); border-color: var(--gold); }
+
+    /* Featured card (full width) */
+    .mat-card-featured {
+      grid-column: span 3;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      padding: 40px;
+      background: linear-gradient(135deg, #0f0d00, #1c1800, #0f0d00);
+      border-color: rgba(251,194,29,0.15);
+    }
+    .mat-card-featured .mat-card-title { font-size: 24px; }
+    .mat-card-featured .mat-card-desc { font-size: 15px; }
+    .mat-card-featured .mat-card-cta {
+      background: var(--gold); color: var(--dark);
+      border-color: var(--gold); font-size: 15px; padding: 16px 28px;
+    }
+    .mat-card-featured .mat-card-cta:hover { background: var(--gold-dark); }
+
+    .mat-featured-right { display: flex; flex-direction: column; gap: 20px; }
+    .mat-featured-bullets { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .mat-featured-bullet {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 14px; color: var(--gray-light);
+    }
+    .mat-featured-bullet i { color: var(--gold); flex-shrink: 0; font-size: 12px; margin-top: 3px; }
+
+    /* ── VALUE STRIP ── */
+    .mat-value-strip {
+      padding: 64px 48px;
+      background: var(--dark-2);
+      border-top: 1px solid rgba(255,255,255,0.04);
+    }
+    .mat-value-strip-inner {
+      max-width: 1400px; margin: 0 auto;
+      display: flex; align-items: center; gap: 48px;
+    }
+    .mat-value-main { flex: 1; }
+    .mat-value-main h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 28px; font-weight: 900;
+      letter-spacing: -1px; margin-bottom: 10px;
+    }
+    .mat-value-main p { font-size: 15px; color: var(--gray-light); line-height: 1.7; max-width: 500px; }
+    .mat-value-points {
+      display: flex; flex-direction: column; gap: 12px;
+      min-width: 280px;
+    }
+    .mat-value-point {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 14px; color: var(--gray-light);
+    }
+    .mat-value-point i { color: var(--gold); width: 16px; }
+
+    /* ── NEWSLETTER ── */
+    .mat-newsletter { padding: 80px 48px; background: var(--dark); }
+    .mat-newsletter-inner { max-width: 680px; margin: 0 auto; text-align: center; }
+    .newsletter-box-2 {
+      background: var(--dark-3);
+      border: 1px solid rgba(251,194,29,0.12);
+      border-radius: 24px; padding: 56px;
+    }
+    .nl-icon {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: rgba(251,194,29,0.08); border: 1px solid rgba(251,194,29,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px; color: var(--gold);
+      margin: 0 auto 20px;
+    }
+    .nl-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 28px; font-weight: 900;
+      letter-spacing: -1px; margin-bottom: 12px;
+    }
+    .nl-sub {
+      font-size: 15px; color: var(--gray-light);
+      line-height: 1.7; margin-bottom: 32px;
+    }
+    .nl-form { display: flex; gap: 12px; }
+    .nl-input {
+      flex: 1;
+      background: var(--dark-4); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px; padding: 15px 16px;
+      color: var(--white); font-family: 'Poppins', sans-serif; font-size: 14px;
+      outline: none; transition: border-color 0.2s;
+    }
+    .nl-input:focus { border-color: var(--gold); }
+    .nl-input::placeholder { color: var(--gray); }
+    .nl-btn {
+      background: var(--gold); color: var(--dark);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800; font-size: 14px;
+      padding: 15px 28px; border: none;
+      border-radius: 8px; cursor: pointer;
+      white-space: nowrap; transition: all 0.2s;
+    }
+    .nl-btn:hover { background: var(--gold-dark); }
+    .nl-note { font-size: 12px; color: var(--gray); margin-top: 14px; }
+    .nl-benefits { display: flex; justify-content: center; gap: 24px; margin-top: 28px; }
+    .nl-benefit { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--gray); }
+    .nl-benefit i { color: var(--gold); font-size: 11px; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="studio-gr-preview.html" class="nav-logo"><div class="nav-logo-mark">GR</div><div class="nav-logo-text">Studio GR</div></a>
+    <ul class="nav-menu">
+      <li><a href="chi-siamo.html">Chi Siamo</a></li>
+      <li><a href="servizi.html">Servizi</a></li>
+      <li><a href="risorse.html">Risorse</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="testimonianze.html">Testimonianze</a></li>
+      <li><a href="contatti.html" class="nav-cta">Consulenza Gratuita</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-inner">
+    <div class="page-hero-breadcrumb">
+      <a href="studio-gr-preview.html">Home</a>
+      <i class="fa-solid fa-chevron-right" style="font-size:10px"></i>
+      <a href="risorse.html">Risorse</a>
+      <i class="fa-solid fa-chevron-right" style="font-size:10px"></i>
+      <span>Materiali Gratuiti</span>
+    </div>
+    <div class="section-label">Download Gratuiti</div>
+    <h1>Strumenti pronti<br>da usare <em>subito</em></h1>
+    <p>Checklist, template, guide e estratti dei libri. Zero teoria — solo strumenti che puoi applicare domani mattina.</p>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<section class="mat-filter-bar">
+  <div class="mat-filter-inner">
+    <div class="mat-filter-label">Categoria:</div>
+    <button class="mat-filter-btn active"><i class="fa-solid fa-th"></i> Tutti</button>
+    <button class="mat-filter-btn"><i class="fa-solid fa-list-check"></i> Checklist</button>
+    <button class="mat-filter-btn"><i class="fa-solid fa-table-columns"></i> Template</button>
+    <button class="mat-filter-btn"><i class="fa-solid fa-file-pdf"></i> Estratti</button>
+    <button class="mat-filter-btn"><i class="fa-solid fa-map"></i> Guide</button>
+  </div>
+</section>
+
+<!-- VALUE STRIP -->
+<section class="mat-value-strip">
+  <div class="mat-value-strip-inner">
+    <div class="mat-value-main">
+      <h3>Tutto gratuito, zero</h3>
+      <h3 style="color: var(--gold)">registrazioni forzate</h3>
+      <p style="margin-top:14px">I materiali qui sotto sono liberamente scaricabili. Se vuoi ricevere i nuovi strumenti direttamente in email, puoi iscriverti alla newsletter — ma non è obbligatorio.</p>
+    </div>
+    <div class="mat-value-points">
+      <div class="mat-value-point"><i class="fa-solid fa-check"></i> Scaricabili immediatamente</div>
+      <div class="mat-value-point"><i class="fa-solid fa-check"></i> Pronti all'uso — nessuna personalizzazione richiesta</div>
+      <div class="mat-value-point"><i class="fa-solid fa-check"></i> Aggiornati continuamente</div>
+      <div class="mat-value-point"><i class="fa-solid fa-check"></i> Basati su 30 anni di esperienza reale</div>
+    </div>
+  </div>
+</section>
+
+<!-- MATERIALS GRID -->
+<section class="mat-grid-section">
+  <div class="mat-grid-inner">
+
+    <!-- CHECKLIST -->
+    <div class="mat-category-title">
+      <span class="mat-category-badge"><i class="fa-solid fa-list-check"></i> Checklist</span>
+      <div class="mat-category-line"></div>
+    </div>
+    <div class="mat-grid">
+
+      <!-- Featured: Analisi dei bisogni -->
+      <div class="mat-card mat-card-featured">
+        <div>
+          <div class="mat-card-glow"></div>
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+            <div class="mat-card-icon" style="width:56px; height:56px; font-size:24px;"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+            <div class="mat-card-type"><i class="fa-solid fa-star" style="color:var(--gold)"></i> Più scaricato</div>
+          </div>
+          <div class="mat-card-title" style="font-size:24px; margin-bottom:12px;">Checklist Analisi dei Bisogni</div>
+          <p class="mat-card-desc" style="font-size:15px;">Le 22 domande che ogni venditore professionista deve fare prima di proporre qualsiasi soluzione. Smetti di perdere trattative perché hai presentato troppo presto.</p>
+        </div>
+        <div class="mat-featured-right">
+          <ul class="mat-featured-bullets">
+            <li class="mat-featured-bullet"><i class="fa-solid fa-check"></i><span>22 domande strutturate in 4 aree chiave</span></li>
+            <li class="mat-featured-bullet"><i class="fa-solid fa-check"></i><span>Colonna "Note" per ogni risposta del cliente</span></li>
+            <li class="mat-featured-bullet"><i class="fa-solid fa-check"></i><span>Indicatori di "bisogno latente" vs "bisogno esplicito"</span></li>
+            <li class="mat-featured-bullet"><i class="fa-solid fa-check"></i><span>Testata su 10.000+ trattative in 15 anni</span></li>
+          </ul>
+          <div style="display:flex; align-items:center; gap:12px;">
+            <a href="contatti.html" class="mat-card-cta" style="width:auto; padding:16px 32px;">
+              <i class="fa-solid fa-download"></i> Scarica gratis — PDF
+            </a>
+            <div class="mat-card-meta" style="border:none; padding:0;">
+              <div class="mat-card-meta-item"><i class="fa-solid fa-file-pdf"></i> 2 pagine</div>
+              <div class="mat-card-meta-item"><i class="fa-solid fa-download"></i> 4.2K download</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mat-card">
+        <div class="mat-card-glow"></div>
+        <div class="mat-card-top">
+          <div class="mat-card-icon"><i class="fa-solid fa-phone"></i></div>
+          <div class="mat-card-type">Checklist</div>
+        </div>
+        <div class="mat-card-title">Checklist Pre-Chiamata</div>
+        <p class="mat-card-desc">Tutto quello che devi sapere sul cliente e sulla situazione prima di alzare il telefono. Elimina le telefonate improvvisate.</p>
+        <div class="mat-card-meta">
+          <div class="mat-card-meta-item"><i class="fa-solid fa-file-pdf"></i> 1 pagina</div>
+          <div class="mat-card-meta-item"><i class="fa-solid fa-download"></i> 2.8K download</div>
+        </div>
+        <a href="contatti.html" class="mat-card-cta"><i class="fa-solid fa-download"></i> Scarica gratis</a>
+      </div>
+
+      <div class="mat-card">
+        <div class="mat-card-glow"></div>
+        <div class="mat-card-top">
+          <div class="mat-card-icon"><i class="fa-solid fa-handshake"></i></div>
+          <div class="mat-card-type">Checklist</div>
+        </div>
+        <div class="mat-card-title">Checklist Post-Trattativa</div>
+        <p class="mat-card-desc">L'auto-debriefing che i venditori migliori fanno dopo ogni appuntamento. Impara dai successi e dagli insuccessi in modo sistematico.</p>
+        <div class="mat-card-meta">
+          <div class="mat-card-meta-item"><i class="fa-solid fa-file-pdf"></i> 1 pagina</div>
+          <div class="mat-card-meta-item"><i class="fa-solid fa-download"></i> 1.9K download</div>
+        </div>
+        <a href="contatti.html" class="mat-card-cta"><i class="fa-solid fa-download"></i> Scarica gratis</a>
+      </div>
+
+      <div class="mat-card">
+        <div class="mat-card-glow"></div>
+        <div class="mat-card-top">
+          <div class="mat-card-icon"><i class="fa-solid fa-users-gear"></i></div>
+          <div class="mat-card-type">Checklist</div>
+        </div>
+        <div class="mat-card-title">Checklist Selezione Venditori</div>
+        <p class="mat-card-desc">15 criteri per valutare un candidato venditore in colloquio. Smetti di assumere persone "simpatiche" che non vendono.</p>
+        <div class="mat-card-meta">
+          <div class="mat-card-meta-item"><i class="fa-solid fa-file-pdf"></i> 2 pagine</div>
+          <div class="mat-card-meta-item"><i class="fa-solid fa-download"></i> 3.1K download</div>
+        </div>
+        <a href="contatti.html" class="mat-card-cta"><i class="fa-solid fa-download"></i> Scarica gratis</a>
+      </div>
+
+    </div>
+
+    <!-- TEMPLATE -->
+    <div class="mat-category-title">
+      <span class="mat-category-badge" style="background:rgba(80,130,255,0.08); border-color:rgba(80,130,255,0.15); color:#7aa8ff"><i class="fa-solid fa-table-columns"></i> Template</span>
+      <div class="mat-category-line"></div>
+    </div>
+    <div class="mat-grid">
+
+      <div class="mat-card">
+        <div class="mat-card-glow" style="background: radial-gradient(circle, rgba(80,130,255,0.07), transparent 70%);"></div>
+        <div class="mat-card-top">
+          <div class="mat-card-icon" style="background:rgba(80,130,255,0.08); border-color:rgba(80,130,255,0.12); color:#7aa8ff"><i class="fa-solid fa-chart-line"></i></div>
+          <div class="mat-card-type">Template Excel</div>
+        </div>
+        <div class="mat-card-title">Dashboard KPI Vendita</div>
+        <p class="mat-card-desc">Il foglio Excel per tracciare i KPI fondamentali della tua rete: visite, conversion rate, valore medio ordine, pipeline. Grafici automatici inclusi.</p>
+        <div class="mat-card-meta">
+          <div class="mat-card-meta-item"><i class="fa-solid fa-file-excel"></i> Excel / Sheets</div>
+          <div class="mat-card-meta-item"><i class="fa-solid fa-download"></i> 5.6K download</div>
+        </div>
+        <a href="contatti.html" class="mat-card-cta" style="background:rgba(80,130,255,0.08); border-color:rgba(80,130,255,0.15); color:#7aa8ff">
+          <i class="fa-solid fa-download"></i> Scarica gratis
+        </a>
+      </div>
+
+      <div class="mat-card">
+        <div class="mat-card-glow" style="background: radial-gradient(circle, rgba(80,130,255,0.07), transparent 70%);"></div>
+        <div class="mat-card-top">
+          <div class="mat-card-icon" style="background:rgba(80,130,255,0.08); border-color:rgba(80,130,255,0.12); color:#7aa8ff"><i class="fa-solid fa-calendar-check"></i></div>
+          <div class="mat-card-type">Template Word</div>
+        </div>
+        <div class="mat-card-title">Piano di Sviluppo Individuale</div>
+        <p class="mat-card-desc">Il template per costruire un piano di sviluppo concreto con ogni venditore del tuo team. Obiettivi, azioni, scadenze, feedback.</p>
+        <div class="mat-card-meta">
+          <div class="mat-card-meta-item"><i class="fa-solid fa-file-word"></i> Word / Docs</div>
+          <div class="mat-card-meta-item"><i class="fa-solid fa-download"></i> 2.3K download</div>
+        </div>
+        <a href="contatti.html" class="mat-card-cta" style="background:rgba(80,130,255,0.08); border-color:rgba(80,130,255,0.15); color:#7aa8ff">
+          <i class="fa-solid fa-download"></i> Scarica gratis
+        </a>
+      </div>
+
+      <div class="mat-card">
+        <div class="mat-card-glow" style="background: radial-gradient(circle, rgba(80,130,255,0.07), transparent 70%);"></div>
+        <div class="mat-card-top">
+          <div class="mat-card-icon" style="background:rgba(80,130,255,0.08); border-color:rgba(80,130,255,0.12); color:#7aa8ff"><i class="fa-solid fa-route"></i></div>
+          <div class="mat-card-type">Template Excel</div>
+        </div>
+        <div class="mat-card-title">Piano Territorio & Zone</div>
+        <p class="mat-card-desc">Come suddividere il territorio tra i venditori in modo equo e produttivo. Con matrice di priorità clienti e potenziale per zona.</p>
+        <div class="mat-card-meta">
+          <div class="mat-card-meta-item"><i class="fa-solid fa-file-excel"></i> Excel / Sheets</div>
+          <div class="mat-card-meta-item"><i class="fa-solid fa-download"></i> 1.7K download</div>
+        </div>
+        <a href="contatti.html" class="mat-card-cta" style="background:rgba(80,130,255,0.08); border-color:rgba(80,130,255,0.15); color:#7aa8ff">
+          <i class="fa-solid fa-download"></i> Scarica gratis
+        </a>
+      </div>
+
+    </div>
+
+    <!-- ESTRATTI -->
+    <div class="mat-category-title">
+      <span class="mat-category-badge" style="background:rgba(55,202,55,0.08); border-color:rgba(55,202,55,0.15); color:var(--green)"><i class="fa-solid fa-file-pdf"></i> Estratti dai Libri</span>
+      <div class="mat-category-line"></div>
+    </div>
+    <div class="mat-grid">
+
+      <div class="mat-card">
+        <div class="mat-card-glow" style="background: radial-gradient(circle, rgba(55,202,55,0.07), transparent 70%);"></div>
+        <div class="mat-card-top">
+          <div class="mat-card-icon" style="background:rgba(55,202,55,0.08); border-color:rgba(55,202,55,0.12); color:var(--green)"><i class="fa-solid fa-book-open"></i></div>
+          <div class="mat-card-type">Estratto</div>
+        </div>
+        <div class="mat-card-title">Capitolo 1 — "Vendere Bene"</div>
+        <p class="mat-card-desc">Il primo capitolo del libro: perché il 80% dei venditori perde trattative che avrebbe potuto vincere — e cosa fare per non essere tra loro.</p>
+        <div class="mat-card-meta">
+          <div class="mat-card-meta-item"><i class="fa-solid fa-file-pdf"></i> 18 pagine</div>
+          <div class="mat-card-meta-item"><i class="fa-solid fa-download"></i> 7.1K download</div>
+        </div>
+        <a href="contatti.html" class="mat-card-cta" style="background:rgba(55,202,55,0.08); border-color:rgba(55,202,55,0.15); color:var(--green)">
+          <i class="fa-solid fa-download"></i> Scarica l'estratto
+        </a>
+      </div>
+
+      <div class="mat-card">
+        <div class="mat-card-glow" style="background: radial-gradient(circle, rgba(55,202,55,0.07), transparent 70%);"></div>
+        <div class="mat-card-top">
+          <div class="mat-card-icon" style="background:rgba(55,202,55,0.08); border-color:rgba(55,202,55,0.12); color:var(--green)"><i class="fa-solid fa-book-open"></i></div>
+          <div class="mat-card-type">Estratto</div>
+        </div>
+        <div class="mat-card-title">Capitolo 3 — "Costruire la Rete"</div>
+        <p class="mat-card-desc">Come definire la struttura ottimale di una rete vendita: zone, gerarchie, ratio venditore/cliente. Il capitolo più letto del secondo libro.</p>
+        <div class="mat-card-meta">
+          <div class="mat-card-meta-item"><i class="fa-solid fa-file-pdf"></i> 22 pagine</div>
+          <div class="mat-card-meta-item"><i class="fa-solid fa-download"></i> 4.8K download</div>
+        </div>
+        <a href="contatti.html" class="mat-card-cta" style="background:rgba(55,202,55,0.08); border-color:rgba(55,202,55,0.15); color:var(--green)">
+          <i class="fa-solid fa-download"></i> Scarica l'estratto
+        </a>
+      </div>
+
+      <div class="mat-card">
+        <div class="mat-card-glow" style="background: radial-gradient(circle, rgba(55,202,55,0.07), transparent 70%);"></div>
+        <div class="mat-card-top">
+          <div class="mat-card-icon" style="background:rgba(55,202,55,0.08); border-color:rgba(55,202,55,0.12); color:var(--green)"><i class="fa-solid fa-book-open"></i></div>
+          <div class="mat-card-type">Estratto</div>
+        </div>
+        <div class="mat-card-title">Capitolo 2 — "Il Manager Commerciale"</div>
+        <p class="mat-card-desc">La differenza tra un manager che controlla e uno che sviluppa. Il framework di coaching situazionale applicato alla vendita.</p>
+        <div class="mat-card-meta">
+          <div class="mat-card-meta-item"><i class="fa-solid fa-file-pdf"></i> 20 pagine</div>
+          <div class="mat-card-meta-item"><i class="fa-solid fa-download"></i> 3.4K download</div>
+        </div>
+        <a href="contatti.html" class="mat-card-cta" style="background:rgba(55,202,55,0.08); border-color:rgba(55,202,55,0.15); color:var(--green)">
+          <i class="fa-solid fa-download"></i> Scarica l'estratto
+        </a>
+      </div>
+
+    </div>
+
+    <!-- GUIDE -->
+    <div class="mat-category-title">
+      <span class="mat-category-badge" style="background:rgba(255,255,255,0.04); border-color:rgba(255,255,255,0.1); color:var(--gray-light)"><i class="fa-solid fa-map"></i> Guide</span>
+      <div class="mat-category-line"></div>
+    </div>
+    <div class="mat-grid">
+
+      <div class="mat-card">
+        <div class="mat-card-glow"></div>
+        <div class="mat-card-top">
+          <div class="mat-card-icon"><i class="fa-solid fa-person-walking-arrow-right"></i></div>
+          <div class="mat-card-type">Guida PDF</div>
+        </div>
+        <div class="mat-card-title">Guida all'Onboarding Veloce</div>
+        <p class="mat-card-desc">Come portare un nuovo venditore a piena produttività in 90 giorni. Piano settimana per settimana con milestone chiari.</p>
+        <div class="mat-card-meta">
+          <div class="mat-card-meta-item"><i class="fa-solid fa-file-pdf"></i> 12 pagine</div>
+          <div class="mat-card-meta-item"><i class="fa-solid fa-download"></i> 2.1K download</div>
+        </div>
+        <a href="contatti.html" class="mat-card-cta"><i class="fa-solid fa-download"></i> Scarica gratis</a>
+      </div>
+
+      <div class="mat-card">
+        <div class="mat-card-glow"></div>
+        <div class="mat-card-top">
+          <div class="mat-card-icon"><i class="fa-solid fa-comments"></i></div>
+          <div class="mat-card-type">Guida PDF</div>
+        </div>
+        <div class="mat-card-title">Gestire le Obiezioni</div>
+        <p class="mat-card-desc">Le 12 obiezioni più comuni nella vendita B2B e come rispondere in modo professionale. Con esempi di dialogo reali.</p>
+        <div class="mat-card-meta">
+          <div class="mat-card-meta-item"><i class="fa-solid fa-file-pdf"></i> 8 pagine</div>
+          <div class="mat-card-meta-item"><i class="fa-solid fa-download"></i> 6.3K download</div>
+        </div>
+        <a href="contatti.html" class="mat-card-cta"><i class="fa-solid fa-download"></i> Scarica gratis</a>
+      </div>
+
+      <div class="mat-card">
+        <div class="mat-card-glow"></div>
+        <div class="mat-card-top">
+          <div class="mat-card-icon"><i class="fa-solid fa-trophy"></i></div>
+          <div class="mat-card-type">Guida PDF</div>
+        </div>
+        <div class="mat-card-title">Sistema di Incentivi Efficace</div>
+        <p class="mat-card-desc">Come costruire un piano provvigionale che premi davvero i risultati giusti — senza demotivare chi è in crescita.</p>
+        <div class="mat-card-meta">
+          <div class="mat-card-meta-item"><i class="fa-solid fa-file-pdf"></i> 10 pagine</div>
+          <div class="mat-card-meta-item"><i class="fa-solid fa-download"></i> 1.8K download</div>
+        </div>
+        <a href="contatti.html" class="mat-card-cta"><i class="fa-solid fa-download"></i> Scarica gratis</a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="mat-newsletter">
+  <div class="mat-newsletter-inner">
+    <div class="newsletter-box-2">
+      <div class="nl-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+      <div class="nl-title">Nuovi materiali ogni mese</div>
+      <p class="nl-sub">Iscriviti per ricevere ogni mese nuovi strumenti, guide e aggiornamenti — direttamente nella tua inbox. Puoi cancellare in qualsiasi momento.</p>
+      <div class="nl-form">
+        <input type="email" class="nl-input" placeholder="La tua email professionale">
+        <button class="nl-btn">Iscriviti</button>
+      </div>
+      <div class="nl-note">Nessuno spam. Solo strumenti pratici. Cancellazione immediata.</div>
+      <div class="nl-benefits">
+        <div class="nl-benefit"><i class="fa-solid fa-check"></i> Nuovi materiali mensili</div>
+        <div class="nl-benefit"><i class="fa-solid fa-check"></i> Accesso anticipato ai contenuti</div>
+        <div class="nl-benefit"><i class="fa-solid fa-check"></i> Zero spam garantito</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-section-bg"></div>
+  <div class="cta-section-inner">
+    <div>
+      <div class="cta-section-title">Vuoi andare oltre<br>i materiali gratuiti?</div>
+      <p class="cta-section-sub">I materiali sono un punto di partenza. Per un percorso costruito sulla tua situazione specifica, prenota una chiamata con Roberto.</p>
+    </div>
+    <div class="cta-section-actions">
+      <a href="contatti.html" class="btn-dark">Prenota la chiamata <i class="fa-solid fa-arrow-right"></i></a>
+      <div class="cta-note"><i class="fa-solid fa-lock" style="font-size:11px"></i> Nessun impegno — 30 minuti gratuiti</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">
+          <div class="footer-logo-mark">GR</div>
+          <div class="footer-logo-text">Studio GR</div>
+        </div>
+        <p class="footer-tagline">Dal 1990 formiamo e selezioniamo reti vendita ad alte performance. 165.000+ persone formate.</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" class="footer-social"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" class="footer-social"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Servizi</div>
+        <ul class="footer-links">
+          <li><a href="assistenza-strategica.html">Assistenza Strategica</a></li>
+          <li><a href="percorso-vendere-bene.html">Percorso Vendere Bene</a></li>
+          <li><a href="valore-professionale.html">Valore Professionale</a></li>
+          <li><a href="i-profile.html">i-Profile Assessment</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Risorse</div>
+        <ul class="footer-links">
+          <li><a href="risorse.html">Tutte le Risorse</a></li>
+          <li><a href="libri.html">Libri</a></li>
+          <li><a href="materiali-gratuiti.html">Materiali Gratuiti</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="testimonianze.html">Testimonianze</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contatti</div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-envelope footer-contact-icon"></i>
+          <div class="footer-contact-text">info@studiogr.com</div>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-phone footer-contact-icon"></i>
+          <div class="footer-contact-text">+39 02 0000 0000</div>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-location-dot footer-contact-icon"></i>
+          <div class="footer-contact-text">Milano, Italia</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2024 Studio GR — Roberto Giangregorio. P.IVA 00000000000</div>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Note Legali</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

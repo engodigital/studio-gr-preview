@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Libri — Studio GR | Roberto Giangregorio</title>
+  <meta name="description" content="I libri di Roberto Giangregorio su vendita professionale, reti vendita e management. 30 anni di esperienza condensati in strumenti pratici.">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="main.css">
+  <style>
+    /* ── BOOK SCENE ── */
+    .books-section { padding: 100px 48px; background: var(--dark); }
+    .books-section-inner { max-width: 1400px; margin: 0 auto; }
+
+    .book-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      padding: 80px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .book-block:last-of-type { border-bottom: none; }
+    .book-block.reverse { direction: rtl; }
+    .book-block.reverse > * { direction: ltr; }
+
+    /* 3D Book */
+    .book-3d-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 800px;
+    }
+    .book-3d {
+      width: 220px;
+      height: 300px;
+      position: relative;
+      transform-style: preserve-3d;
+      transform: rotateY(-25deg) rotateX(5deg);
+      transition: transform 0.4s ease;
+      cursor: pointer;
+    }
+    .book-3d:hover { transform: rotateY(-12deg) rotateX(3deg) translateY(-8px); }
+
+    /* Front cover */
+    .book-face {
+      position: absolute;
+      inset: 0;
+      border-radius: 4px 12px 12px 4px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 28px 24px;
+      backface-visibility: hidden;
+      box-shadow: 8px 16px 48px rgba(0,0,0,0.6);
+    }
+    .book-spine {
+      position: absolute;
+      top: 0; bottom: 0;
+      left: -28px;
+      width: 28px;
+      border-radius: 4px 0 0 4px;
+      transform: rotateY(90deg) translateZ(-14px);
+      transform-origin: right center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .book-spine-text {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 1px;
+      transform: rotate(180deg);
+    }
+    .book-pages {
+      position: absolute;
+      top: 3px; bottom: 3px;
+      right: -8px;
+      width: 8px;
+      background: linear-gradient(to right, #e0d9c8, #f5f0e8, #e0d9c8);
+      transform: rotateY(90deg) translateZ(110px);
+      transform-origin: left center;
+    }
+
+    /* Book 1 — Vendere Bene */
+    .book-1 .book-face {
+      background: linear-gradient(135deg, #1a0800, #2d1200, #1a0800);
+      border: 1px solid rgba(251,194,29,0.2);
+    }
+    .book-1 .book-face::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 70% at 70% 30%, rgba(251,194,29,0.12), transparent 70%);
+      border-radius: inherit;
+    }
+    .book-1 .book-spine { background: linear-gradient(to bottom, #0d0400, #1a0800, #0d0400); }
+
+    /* Book 2 — Rete Vendita */
+    .book-2 .book-face {
+      background: linear-gradient(135deg, #00091a, #001230, #00091a);
+      border: 1px solid rgba(80,130,255,0.2);
+    }
+    .book-2 .book-face::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 70% at 70% 30%, rgba(80,130,255,0.12), transparent 70%);
+      border-radius: inherit;
+    }
+    .book-2 .book-spine { background: linear-gradient(to bottom, #000a1a, #001230, #000a1a); }
+
+    /* Book 3 — Management */
+    .book-3 .book-face {
+      background: linear-gradient(135deg, #030a00, #061500, #030a00);
+      border: 1px solid rgba(55,202,55,0.2);
+    }
+    .book-3 .book-face::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 70% at 70% 30%, rgba(55,202,55,0.10), transparent 70%);
+      border-radius: inherit;
+    }
+    .book-3 .book-spine { background: linear-gradient(to bottom, #020700, #061500, #020700); }
+
+    /* Book cover content */
+    .book-cover-top { position: relative; z-index: 1; }
+    .book-cover-line {
+      width: 32px; height: 3px;
+      margin-bottom: 12px;
+    }
+    .book-1 .book-cover-line { background: var(--gold); }
+    .book-2 .book-cover-line { background: #7aa8ff; }
+    .book-3 .book-cover-line { background: var(--green); }
+
+    .book-cover-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px; font-weight: 900;
+      color: var(--white); line-height: 1.15;
+      letter-spacing: -0.5px;
+    }
+    .book-cover-subtitle {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px; font-weight: 600;
+      color: rgba(255,255,255,0.4);
+      margin-top: 6px; letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .book-cover-bottom { position: relative; z-index: 1; }
+    .book-cover-author {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.5px;
+    }
+    .book-1 .book-cover-author { color: var(--gold); }
+    .book-2 .book-cover-author { color: #7aa8ff; }
+    .book-3 .book-cover-author { color: var(--green); }
+    .book-cover-studio {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px; color: rgba(255,255,255,0.25);
+      margin-top: 2px; letter-spacing: 0.5px;
+    }
+
+    /* Book deco element (varies per book) */
+    .book-cover-deco {
+      position: absolute;
+      right: 20px; top: 50%; transform: translateY(-50%);
+      z-index: 1;
+    }
+    .book-1 .book-cover-deco { color: rgba(251,194,29,0.15); font-size: 80px; }
+    .book-2 .book-cover-deco { color: rgba(80,130,255,0.12); font-size: 80px; }
+    .book-3 .book-cover-deco { color: rgba(55,202,55,0.10); font-size: 80px; }
+
+    /* Book info side */
+    .book-info { display: flex; flex-direction: column; gap: 24px; }
+    .book-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 2px;
+    }
+    .book-tag-1 { color: var(--gold); }
+    .book-tag-2 { color: #7aa8ff; }
+    .book-tag-3 { color: var(--green); }
+    .book-tag::before { content: ''; width: 20px; height: 2px; }
+    .book-tag-1::before { background: var(--gold); }
+    .book-tag-2::before { background: #7aa8ff; }
+    .book-tag-3::before { background: var(--green); }
+
+    .book-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(28px, 3.5vw, 40px);
+      font-weight: 900;
+      letter-spacing: -1.5px; line-height: 1.05;
+    }
+    .book-subtitle {
+      font-size: 15px; color: var(--gray-light); line-height: 1.7;
+    }
+    .book-features { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .book-feature {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 14px; color: var(--gray-light); line-height: 1.5;
+    }
+    .book-feature-icon { flex-shrink: 0; font-size: 12px; margin-top: 3px; }
+    .book-tag-1 ~ .book-features .book-feature-icon,
+    .bf-gold { color: var(--gold); }
+    .bf-blue { color: #7aa8ff; }
+    .bf-green { color: var(--green); }
+
+    .book-actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+    .btn-book-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800; font-size: 15px;
+      padding: 16px 28px; border-radius: 8px;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .btn-book-1 { background: var(--gold); color: var(--dark); }
+    .btn-book-1:hover { background: var(--gold-dark); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(251,194,29,0.3); }
+    .btn-book-2 { background: #7aa8ff; color: var(--dark); }
+    .btn-book-2:hover { background: #5a88ff; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(80,130,255,0.3); }
+    .btn-book-3 { background: var(--green); color: var(--dark); }
+    .btn-book-3:hover { background: var(--green-dark); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(55,202,55,0.3); }
+
+    .btn-extract {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700; font-size: 14px;
+      color: var(--gray-light); text-decoration: none;
+      padding: 14px 0;
+      transition: color 0.2s;
+    }
+    .btn-extract:hover { color: var(--white); }
+
+    /* ── PERCHÉ LEGGERE ── */
+    .why-read {
+      padding: 100px 48px;
+      background: var(--dark-2);
+    }
+    .why-read-inner { max-width: 1400px; margin: 0 auto; }
+    .why-read-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+    .why-card {
+      background: var(--dark-3);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px; padding: 32px;
+    }
+    .why-icon { font-size: 28px; margin-bottom: 16px; }
+    .why-title { font-family: 'Montserrat', sans-serif; font-size: 17px; font-weight: 800; margin-bottom: 10px; }
+    .why-text { font-size: 14px; color: var(--gray-light); line-height: 1.7; }
+
+    /* ── QUOTE ROBERTO ── */
+    .author-quote {
+      padding: 80px 48px;
+      background: var(--dark);
+    }
+    .author-quote-inner {
+      max-width: 860px; margin: 0 auto;
+      text-align: center;
+    }
+    .quote-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(22px, 2.8vw, 30px);
+      font-weight: 800; font-style: italic;
+      line-height: 1.4; letter-spacing: -0.5px;
+      color: var(--white); margin-bottom: 32px;
+    }
+    .quote-text strong { color: var(--gold); font-style: normal; }
+    .quote-author { display: flex; align-items: center; justify-content: center; gap: 16px; }
+    .quote-author-avatar {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--dark-3); border: 2px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 18px;
+      color: var(--gold);
+    }
+    .quote-author-info { text-align: left; }
+    .quote-author-name { font-family: 'Montserrat', sans-serif; font-size: 15px; font-weight: 700; }
+    .quote-author-role { font-size: 13px; color: var(--gray); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="studio-gr-preview.html" class="nav-logo"><div class="nav-logo-mark">GR</div><div class="nav-logo-text">Studio GR</div></a>
+    <ul class="nav-menu">
+      <li><a href="chi-siamo.html">Chi Siamo</a></li>
+      <li><a href="servizi.html">Servizi</a></li>
+      <li><a href="risorse.html">Risorse</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="testimonianze.html">Testimonianze</a></li>
+      <li><a href="contatti.html" class="nav-cta">Consulenza Gratuita</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-inner">
+    <div class="page-hero-breadcrumb">
+      <a href="studio-gr-preview.html">Home</a>
+      <i class="fa-solid fa-chevron-right" style="font-size:10px"></i>
+      <a href="risorse.html">Risorse</a>
+      <i class="fa-solid fa-chevron-right" style="font-size:10px"></i>
+      <span>Libri</span>
+    </div>
+    <div class="section-label">Pubblicazioni</div>
+    <h1>I Libri di<br><em>Roberto Giangregorio</em></h1>
+    <p>30 anni di esperienze sul campo condensati in strumenti pratici. Niente teoria astratta — solo quello che funziona quando sei davanti al cliente.</p>
+  </div>
+</section>
+
+<!-- BOOKS -->
+<section class="books-section">
+  <div class="books-section-inner">
+
+    <!-- LIBRO 1 — Vendere Bene -->
+    <div class="book-block">
+
+      <!-- 3D Book -->
+      <div class="book-3d-wrap">
+        <div class="book-3d book-1">
+          <div class="book-face">
+            <div class="book-cover-deco"><i class="fa-solid fa-handshake"></i></div>
+            <div class="book-cover-top">
+              <div class="book-cover-line"></div>
+              <div class="book-cover-title">Vendere<br>Bene</div>
+              <div class="book-cover-subtitle">Il metodo professionale<br>per chi vende ogni giorno</div>
+            </div>
+            <div class="book-cover-bottom">
+              <div class="book-cover-author">Roberto Giangregorio</div>
+              <div class="book-cover-studio">Studio GR</div>
+            </div>
+          </div>
+          <div class="book-spine book-1">
+            <div class="book-spine-text">Vendere Bene — Giangregorio</div>
+          </div>
+          <div class="book-pages"></div>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="book-info">
+        <div class="book-tag book-tag-1">Libro 1 · Vendita Professionale</div>
+        <h2 class="book-title">Vendere Bene</h2>
+        <p class="book-subtitle">Il manuale per i professionisti della vendita che vogliono passare dal volume al valore. Un metodo in 5 fasi che funziona nelle trattative complesse, con clienti difficili e in mercati competitivi.</p>
+        <ul class="book-features">
+          <li class="book-feature"><i class="fa-solid fa-check bf-gold book-feature-icon"></i><span>Il metodo di analisi dei bisogni che aumenta il tasso di chiusura</span></li>
+          <li class="book-feature"><i class="fa-solid fa-check bf-gold book-feature-icon"></i><span>Come gestire le obiezioni senza pressione e senza sconti inutili</span></li>
+          <li class="book-feature"><i class="fa-solid fa-check bf-gold book-feature-icon"></i><span>La strategia di follow-up che trasforma i "ci penso" in "sì"</span></li>
+          <li class="book-feature"><i class="fa-solid fa-check bf-gold book-feature-icon"></i><span>Esempi reali da 20+ anni di affiancamento sul campo</span></li>
+        </ul>
+        <div class="book-actions">
+          <a href="contatti.html" class="btn-book-primary btn-book-1"><i class="fa-solid fa-shopping-cart"></i> Acquista il libro</a>
+          <a href="materiali-gratuiti.html" class="btn-extract"><i class="fa-solid fa-file-pdf"></i> Leggi un estratto gratuito</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIBRO 2 — Rete Vendita -->
+    <div class="book-block reverse">
+
+      <!-- 3D Book -->
+      <div class="book-3d-wrap">
+        <div class="book-3d book-2">
+          <div class="book-face">
+            <div class="book-cover-deco"><i class="fa-solid fa-network-wired"></i></div>
+            <div class="book-cover-top">
+              <div class="book-cover-line"></div>
+              <div class="book-cover-title">Costruire<br>la Rete<br>Vendita</div>
+              <div class="book-cover-subtitle">Struttura, selezione e<br>performance del team</div>
+            </div>
+            <div class="book-cover-bottom">
+              <div class="book-cover-author">Roberto Giangregorio</div>
+              <div class="book-cover-studio">Studio GR</div>
+            </div>
+          </div>
+          <div class="book-spine book-2">
+            <div class="book-spine-text">Costruire la Rete Vendita — Giangregorio</div>
+          </div>
+          <div class="book-pages"></div>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="book-info">
+        <div class="book-tag book-tag-2">Libro 2 · Reti Vendita</div>
+        <h2 class="book-title">Costruire la<br>Rete Vendita</h2>
+        <p class="book-subtitle">Per imprenditori e direttori commerciali che vogliono creare o riorganizzare una rete vendita capace di crescere in modo autonomo e misurabile. Dalla selezione dei profili ai KPI di performance.</p>
+        <ul class="book-features">
+          <li class="book-feature"><i class="fa-solid fa-check bf-blue book-feature-icon"></i><span>Come definire la struttura ideale per la tua rete (zone, gerarchie, ruoli)</span></li>
+          <li class="book-feature"><i class="fa-solid fa-check bf-blue book-feature-icon"></i><span>Il processo di selezione con il metodo i-Profile</span></li>
+          <li class="book-feature"><i class="fa-solid fa-check bf-blue book-feature-icon"></i><span>KPI di vendita: quali misurare, come comunicarli, come usarli per motivare</span></li>
+          <li class="book-feature"><i class="fa-solid fa-check bf-blue book-feature-icon"></i><span>Onboarding accelerato: da zero a produttivo in 90 giorni</span></li>
+        </ul>
+        <div class="book-actions">
+          <a href="contatti.html" class="btn-book-primary btn-book-2"><i class="fa-solid fa-shopping-cart"></i> Acquista il libro</a>
+          <a href="materiali-gratuiti.html" class="btn-extract"><i class="fa-solid fa-file-pdf"></i> Leggi un estratto gratuito</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIBRO 3 — Management -->
+    <div class="book-block">
+
+      <!-- 3D Book -->
+      <div class="book-3d-wrap">
+        <div class="book-3d book-3">
+          <div class="book-face">
+            <div class="book-cover-deco"><i class="fa-solid fa-chess-king"></i></div>
+            <div class="book-cover-top">
+              <div class="book-cover-line"></div>
+              <div class="book-cover-title">Il Manager<br>Commerciale</div>
+              <div class="book-cover-subtitle">Leadership, coaching e<br>gestione delle performance</div>
+            </div>
+            <div class="book-cover-bottom">
+              <div class="book-cover-author">Roberto Giangregorio</div>
+              <div class="book-cover-studio">Studio GR</div>
+            </div>
+          </div>
+          <div class="book-spine book-3">
+            <div class="book-spine-text">Il Manager Commerciale — Giangregorio</div>
+          </div>
+          <div class="book-pages"></div>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="book-info">
+        <div class="book-tag book-tag-3">Libro 3 · Management</div>
+        <h2 class="book-title">Il Manager<br>Commerciale</h2>
+        <p class="book-subtitle">Per chi guida team di vendita e vuole trasformarsi da "super-venditore" a leader capace di moltiplicare i risultati attraverso le persone. Leadership situazionale applicata alla realtà commerciale italiana.</p>
+        <ul class="book-features">
+          <li class="book-feature"><i class="fa-solid fa-check bf-green book-feature-icon"></i><span>Come fare coaching sul campo senza micromanagement</span></li>
+          <li class="book-feature"><i class="fa-solid fa-check bf-green book-feature-icon"></i><span>Gestire venditori senior, junior e "resistenti" con approcci diversi</span></li>
+          <li class="book-feature"><i class="fa-solid fa-check bf-green book-feature-icon"></i><span>Riunioni commerciali che motivano invece di annoiare</span></li>
+          <li class="book-feature"><i class="fa-solid fa-check bf-green book-feature-icon"></i><span>Il piano di sviluppo individuale che funziona davvero</span></li>
+        </ul>
+        <div class="book-actions">
+          <a href="contatti.html" class="btn-book-primary btn-book-3"><i class="fa-solid fa-shopping-cart"></i> Acquista il libro</a>
+          <a href="materiali-gratuiti.html" class="btn-extract"><i class="fa-solid fa-file-pdf"></i> Leggi un estratto gratuito</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PERCHÉ LEGGERE -->
+<section class="why-read">
+  <div class="why-read-inner">
+    <div class="section-label">Perché leggere Roberto</div>
+    <h2 class="section-title">Non teorie — esperienze</h2>
+    <p class="section-sub">Ogni libro nasce da decenni di lavoro sul campo con reti vendita reali, non da ricerca accademica.</p>
+    <div class="why-read-grid">
+      <div class="why-card">
+        <div class="why-icon" style="color: var(--gold)"><i class="fa-solid fa-briefcase"></i></div>
+        <div class="why-title">30 anni sul campo</div>
+        <div class="why-text">Roberto ha costruito, guidato e riorganizzato reti vendita in mercati B2B e B2C. Scrive quello che ha vissuto, non quello che ha letto.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon" style="color: var(--gold)"><i class="fa-solid fa-users"></i></div>
+        <div class="why-title">165.000+ persone formate</div>
+        <div class="why-text">I metodi nei libri sono stati testati su decine di migliaia di venditori in aziende di settori diversi. Ciò che non funzionava è già stato eliminato.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon" style="color: var(--gold)"><i class="fa-solid fa-bolt"></i></div>
+        <div class="why-title">Applicabile da subito</div>
+        <div class="why-text">Ogni capitolo si chiude con strumenti pratici, checklist e template pronti all'uso. Non devi aspettare di finire il libro per ottenere risultati.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="author-quote">
+  <div class="author-quote-inner">
+    <div class="quote-text">
+      "Ho scritto questi libri perché volevo che ogni venditore o manager commerciale avesse accesso al <strong>meglio di quello che ho imparato</strong> — senza doversi fare 30 anni di errori come li ho fatti io."
+    </div>
+    <div class="quote-author">
+      <div class="quote-author-avatar">R</div>
+      <div class="quote-author-info">
+        <div class="quote-author-name">Roberto Giangregorio</div>
+        <div class="quote-author-role">Fondatore Studio GR · Autore</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-section-bg"></div>
+  <div class="cta-section-inner">
+    <div>
+      <div class="cta-section-title">Vuoi approfondire<br>con Roberto?</div>
+      <p class="cta-section-sub">I libri sono il punto di partenza. Per un percorso personalizzato sulla tua rete vendita, prenota una chiamata gratuita.</p>
+    </div>
+    <div class="cta-section-actions">
+      <a href="contatti.html" class="btn-dark">Prenota la chiamata <i class="fa-solid fa-arrow-right"></i></a>
+      <div class="cta-note"><i class="fa-solid fa-lock" style="font-size:11px"></i> Nessun impegno — 30 minuti gratuiti</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">
+          <div class="footer-logo-mark">GR</div>
+          <div class="footer-logo-text">Studio GR</div>
+        </div>
+        <p class="footer-tagline">Dal 1990 formiamo e selezioniamo reti vendita ad alte performance. 165.000+ persone formate.</p>
+        <div class="footer-socials">
+          <a href="#" class="footer-social"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" class="footer-social"><i class="fa-brands fa-youtube"></i></a>
+          <a href="#" class="footer-social"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Servizi</div>
+        <ul class="footer-links">
+          <li><a href="assistenza-strategica.html">Assistenza Strategica</a></li>
+          <li><a href="percorso-vendere-bene.html">Percorso Vendere Bene</a></li>
+          <li><a href="valore-professionale.html">Valore Professionale</a></li>
+          <li><a href="i-profile.html">i-Profile Assessment</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Risorse</div>
+        <ul class="footer-links">
+          <li><a href="risorse.html">Tutte le Risorse</a></li>
+          <li><a href="libri.html">Libri</a></li>
+          <li><a href="materiali-gratuiti.html">Materiali Gratuiti</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="testimonianze.html">Testimonianze</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contatti</div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-envelope footer-contact-icon"></i>
+          <div class="footer-contact-text">info@studiogr.com</div>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-phone footer-contact-icon"></i>
+          <div class="footer-contact-text">+39 02 0000 0000</div>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-location-dot footer-contact-icon"></i>
+          <div class="footer-contact-text">Milano, Italia</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2024 Studio GR — Roberto Giangregorio. P.IVA 00000000000</div>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+        <a href="#">Note Legali</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

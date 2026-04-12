@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I Nostri Servizi — Studio GR | Consulenza Reti Vendita</title>
+  <meta name="description" content="Assistenza Strategica, PerCorso Vendere Bene, Valore Professionale: i servizi di Studio GR per costruire reti vendita vincenti e selezionare i talenti giusti.">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="main.css">
+  <style>
+    .servizi-overview {
+      padding: 100px 48px;
+      background: var(--dark);
+    }
+    .servizi-overview-inner { max-width: 1400px; margin: 0 auto; }
+
+    .service-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      padding: 80px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .service-block:last-child { border-bottom: none; }
+    .service-block.reverse { direction: rtl; }
+    .service-block.reverse > * { direction: ltr; }
+
+    .service-number {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 120px; font-weight: 900;
+      color: rgba(255,255,255,0.03);
+      line-height: 1; letter-spacing: -6px;
+      margin-bottom: -40px;
+    }
+    .service-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(251,194,29,0.1);
+      border: 1px solid rgba(251,194,29,0.2);
+      border-radius: 20px; padding: 6px 16px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px; font-weight: 700;
+      color: var(--gold); text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+    .service-block h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 900; letter-spacing: -1.5px; line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .service-block h2 em { color: var(--gold); font-style: italic; }
+    .service-desc { font-size: 16px; color: var(--gray-light); line-height: 1.8; margin-bottom: 28px; }
+    .service-points { list-style: none; margin-bottom: 32px; }
+    .service-points li {
+      display: flex; gap: 12px; align-items: flex-start;
+      font-size: 14px; color: var(--gray-light);
+      padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .service-points li:last-child { border-bottom: none; }
+    .service-points li i { color: var(--gold); margin-top: 4px; width: 16px; flex-shrink: 0; }
+
+    .service-visual {
+      background: var(--dark-3);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px; padding: 40px;
+      position: relative; overflow: hidden;
+    }
+    .service-visual::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+    .service-visual-icon {
+      width: 72px; height: 72px; border-radius: 18px;
+      background: rgba(251,194,29,0.1);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px; color: var(--gold);
+      margin-bottom: 28px;
+    }
+    .service-visual-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 22px; font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .service-visual-sub { font-size: 14px; color: var(--gray); margin-bottom: 32px; }
+    .service-result-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .service-result-item:last-child { border-bottom: none; }
+    .service-result-label { font-size: 13px; color: var(--gray-light); }
+    .service-result-val {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px; font-weight: 900; color: var(--gold);
+    }
+
+    /* HOW WE WORK */
+    .how-section {
+      padding: 100px 48px;
+      background: var(--off-white);
+      color: var(--dark);
+    }
+    .how-inner { max-width: 1400px; margin: 0 auto; }
+    .how-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 0; margin-top: 56px;
+    }
+    .how-step {
+      padding: 36px; border-right: 1px solid #E0E0E0;
+      position: relative;
+    }
+    .how-step:last-child { border-right: none; }
+    .how-step-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 48px; font-weight: 900;
+      color: rgba(0,0,0,0.06); line-height: 1;
+      margin-bottom: -10px;
+    }
+    .how-step-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: rgba(251,194,29,0.12);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; color: var(--gold-dark);
+      margin-bottom: 16px;
+    }
+    .how-step-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 17px; font-weight: 800;
+      color: var(--dark); margin-bottom: 10px;
+    }
+    .how-step-text { font-size: 13px; color: #666; line-height: 1.65; }
+    .how-step-arrow {
+      position: absolute; top: 50%; right: -14px;
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--gold); color: var(--dark);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; z-index: 1;
+      transform: translateY(-50%);
+    }
+    .how-step:last-child .how-step-arrow { display: none; }
+
+    /* WHY US */
+    .why-section {
+      padding: 100px 48px;
+      background: var(--dark-2);
+    }
+    .why-inner { max-width: 1400px; margin: 0 auto; }
+    .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 56px; }
+    .why-card {
+      background: var(--dark-3);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px; padding: 32px;
+    }
+    .why-icon { font-size: 32px; color: var(--gold); margin-bottom: 16px; }
+    .why-title { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    .why-text { font-size: 14px; color: var(--gray-light); line-height: 1.7; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="studio-gr-preview.html" class="nav-logo">
+      <div class="nav-logo-mark">GR</div>
+      <div class="nav-logo-text">Studio GR</div>
+    </a>
+    <ul class="nav-menu">
+      <li><a href="chi-siamo.html">Chi Siamo</a></li>
+      <li><a href="servizi.html" class="active">Servizi</a></li>
+      <li><a href="risorse.html">Risorse</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="testimonianze.html">Testimonianze</a></li>
+      <li><a href="contatti.html" class="nav-cta">Consulenza Gratuita</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-inner">
+    <div class="page-hero-breadcrumb">
+      <a href="studio-gr-preview.html">Home</a>
+      <i class="fa-solid fa-chevron-right" style="font-size:10px"></i>
+      <span>Servizi</span>
+    </div>
+    <h1>Soluzioni su Misura<br>per il Tuo <em>Business</em></h1>
+    <p>Non corsi standard. Non consulenze generiche. Percorsi personalizzati costruiti su 30 anni di esperienza reale nel mondo della vendita.</p>
+  </div>
+</section>
+
+<section class="servizi-overview">
+  <div class="servizi-overview-inner">
+
+    <!-- ASSISTENZA STRATEGICA -->
+    <div class="service-block">
+      <div>
+        <div class="service-number">01</div>
+        <div class="service-tag"><i class="fa-solid fa-brain"></i> Consulenza One-to-One</div>
+        <h2>Assistenza<br><em>Strategica</em></h2>
+        <p class="service-desc">Il programma di affiancamento diretto con Roberto Giangregorio. Un metodo unico pensato per imprenditori che vogliono risultati concreti e misurabili, non teoria.</p>
+        <ul class="service-points">
+          <li><i class="fa-solid fa-check"></i> Analisi approfondita della tua situazione attuale</li>
+          <li><i class="fa-solid fa-check"></i> Piano strategico personalizzato con obiettivi precisi</li>
+          <li><i class="fa-solid fa-check"></i> Sessioni di affiancamento periodiche con Roberto</li>
+          <li><i class="fa-solid fa-check"></i> Revisioni trimestrali dei KPI e aggiustamenti</li>
+          <li><i class="fa-solid fa-check"></i> Supporto continuativo tra le sessioni</li>
+        </ul>
+        <a href="assistenza-strategica.html" class="btn-primary">Scopri il programma <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div>
+        <div class="service-visual">
+          <div class="service-visual-icon"><i class="fa-solid fa-brain"></i></div>
+          <div class="service-visual-title">Risultati Tipici</div>
+          <div class="service-visual-sub">Clienti che hanno completato l'Assistenza Strategica</div>
+          <div class="service-result-item">
+            <span class="service-result-label">Aumento chiarezza strategica</span>
+            <span class="service-result-val">+80%</span>
+          </div>
+          <div class="service-result-item">
+            <span class="service-result-label">Miglioramento decision-making</span>
+            <span class="service-result-val">+65%</span>
+          </div>
+          <div class="service-result-item">
+            <span class="service-result-label">Crescita fatturato media</span>
+            <span class="service-result-val">+28%</span>
+          </div>
+          <div class="service-result-item">
+            <span class="service-result-label">Imprenditori soddisfatti</span>
+            <span class="service-result-val">97%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PERCORSO VENDERE BENE -->
+    <div class="service-block reverse">
+      <div>
+        <div class="service-visual">
+          <div class="service-visual-icon"><i class="fa-solid fa-trophy"></i></div>
+          <div class="service-visual-title">Il Programma Più Scelto</div>
+          <div class="service-visual-sub">Il percorso formativo di riferimento per reti vendita</div>
+          <div class="service-result-item">
+            <span class="service-result-label">Aumento tasso di chiusura</span>
+            <span class="service-result-val">+40%</span>
+          </div>
+          <div class="service-result-item">
+            <span class="service-result-label">Fatturato medio post-percorso</span>
+            <span class="service-result-val">+34%</span>
+          </div>
+          <div class="service-result-item">
+            <span class="service-result-label">Riduzione turnover venditori</span>
+            <span class="service-result-val">-45%</span>
+          </div>
+          <div class="service-result-item">
+            <span class="service-result-label">Professionisti già formati</span>
+            <span class="service-result-val">165.000</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="service-number">02</div>
+        <div class="service-tag"><i class="fa-solid fa-trophy"></i> Formazione Reti Vendita</div>
+        <h2>PerCorso<br><em>Vendere Bene</em></h2>
+        <p class="service-desc">Il programma formativo più completo per costruire e guidare una rete vendita vincente. Testato su 165.000 professionisti in 30 anni di pratica reale. Non è un corso: è una trasformazione.</p>
+        <ul class="service-points">
+          <li><i class="fa-solid fa-check"></i> Sistema di vendita proprietario e testato</li>
+          <li><i class="fa-solid fa-check"></i> Formazione personalizzata per tutta la rete</li>
+          <li><i class="fa-solid fa-check"></i> KPI e strumenti di controllo delle performance</li>
+          <li><i class="fa-solid fa-check"></i> Coaching continuativo del team commerciale</li>
+          <li><i class="fa-solid fa-check"></i> Moduli su negoziazione, closing e gestione obiezioni</li>
+        </ul>
+        <a href="percorso-vendere-bene.html" class="btn-primary">Scopri il percorso <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+
+    <!-- VALORE PROFESSIONALE -->
+    <div class="service-block">
+      <div>
+        <div class="service-number">03</div>
+        <div class="service-tag"><i class="fa-solid fa-magnifying-glass-chart"></i> Selezione del Personale</div>
+        <h2>Valore<br><em>Professionale</em></h2>
+        <p class="service-desc">Ricerca e selezione di profili commerciali e manageriali. Agenzia accreditata dal Ministero del Lavoro dal 2011. Usiamo i-Profile per garantire selezioni oggettive e durature.</p>
+        <ul class="service-points">
+          <li><i class="fa-solid fa-check"></i> Profiling approfondito con i-Profile assessment</li>
+          <li><i class="fa-solid fa-check"></i> Database di candidati qualificati nel commerciale</li>
+          <li><i class="fa-solid fa-check"></i> Selezione completa in 30 giorni</li>
+          <li><i class="fa-solid fa-check"></i> Garanzia di sostituzione in caso di abbandono</li>
+          <li><i class="fa-solid fa-check"></i> Follow-up post-inserimento a 3 e 6 mesi</li>
+        </ul>
+        <a href="valore-professionale.html" class="btn-primary">Scopri il servizio <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+      <div>
+        <div class="service-visual">
+          <div class="service-visual-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+          <div class="service-visual-title">Il Nostro Standard</div>
+          <div class="service-visual-sub">Servizio di selezione personalizzato per il commerciale</div>
+          <div class="service-result-item">
+            <span class="service-result-label">Selezione completata in</span>
+            <span class="service-result-val">30 gg</span>
+          </div>
+          <div class="service-result-item">
+            <span class="service-result-label">Tasso di retention a 12 mesi</span>
+            <span class="service-result-val">82%</span>
+          </div>
+          <div class="service-result-item">
+            <span class="service-result-label">Accreditamento dal</span>
+            <span class="service-result-val">2011</span>
+          </div>
+          <div class="service-result-item">
+            <span class="service-result-label">Tool i-Profile integrato</span>
+            <span class="service-result-val"><i class="fa-solid fa-check" style="color:var(--green)"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOW WE WORK -->
+<section class="how-section">
+  <div class="how-inner">
+    <div class="section-label dark">Il Nostro Processo</div>
+    <h2 class="section-title" style="color:var(--dark)">Come Lavoriamo<br>con Te</h2>
+    <p class="section-sub">Ogni percorso inizia da un'analisi reale. Non proponiamo soluzioni prima di capire il problema.</p>
+
+    <div class="how-grid">
+      <div class="how-step">
+        <div class="how-step-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        <div class="how-step-num">01</div>
+        <div class="how-step-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+        <div class="how-step-title">Analisi Iniziale</div>
+        <div class="how-step-text">Consulenza gratuita per capire la tua situazione attuale: rete vendita, obiettivi, ostacoli, risorse disponibili.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        <div class="how-step-num">02</div>
+        <div class="how-step-icon"><i class="fa-solid fa-map"></i></div>
+        <div class="how-step-title">Piano Personalizzato</div>
+        <div class="how-step-text">Proposta su misura: quale servizio, quali obiettivi, quali KPI misureremo, in quanto tempo.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        <div class="how-step-num">03</div>
+        <div class="how-step-icon"><i class="fa-solid fa-rocket"></i></div>
+        <div class="how-step-title">Esecuzione</div>
+        <div class="how-step-text">Avvio del percorso con affiancamento continuo. Non ti lasciamo mai solo: siamo presenti in ogni fase.</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">04</div>
+        <div class="how-step-icon"><i class="fa-solid fa-chart-line"></i></div>
+        <div class="how-step-title">Misurazione & Ottimizzazione</div>
+        <div class="how-step-text">Review periodiche dei risultati. Adattiamo il percorso in base ai dati reali, non alle aspettative.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-section">
+  <div class="why-inner">
+    <div class="section-label">Perché Studio GR</div>
+    <h2 class="section-title">Cosa ci Rende<br>Diversi</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon"><i class="fa-solid fa-flask-vial"></i></div>
+        <div class="why-title">Metodo Testato sul Campo</div>
+        <div class="why-text">Tutto quello che facciamo è stato provato in situazioni reali. 30 anni di pratica significano che sappiamo cosa funziona e cosa no — prima ancora che tu ci dica il tuo problema.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i class="fa-solid fa-person-chalkboard"></i></div>
+        <div class="why-title">Roberto è Presente</div>
+        <div class="why-text">Non deleghiamo a collaboratori. Roberto è direttamente coinvolto in ogni percorso. La sua esperienza e la sua storia personale sono il valore aggiunto che non puoi comprare altrove.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon"><i class="fa-solid fa-gauge-high"></i></div>
+        <div class="why-title">Risultati Misurabili</div>
+        <div class="why-text">Ogni percorso ha KPI definiti in anticipo. Non ti vendiamo "crescita personale" astratta — ti vendiamo fatturato, tasso di chiusura, retention dei venditori. Numeri reali.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-section-bg"></div>
+  <div class="cta-section-inner">
+    <div>
+      <h2 class="cta-section-title">Non Sai da Dove<br>Iniziare?</h2>
+      <p class="cta-section-sub">Prenota una consulenza gratuita. In 30 minuti capiamo insieme quale percorso è quello giusto per te.</p>
+    </div>
+    <div class="cta-section-actions">
+      <a href="contatti.html" class="btn-dark"><i class="fa-solid fa-calendar-check"></i> Prenota Gratis</a>
+      <div class="cta-note"><i class="fa-solid fa-shield-check"></i> Nessun impegno</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo"><div class="footer-logo-mark">GR</div><div class="footer-logo-text">Studio GR</div></div>
+        <div class="footer-tagline">Da 30 anni trasformiamo imprenditori e reti vendita in macchine da risultato.</div>
+        <div class="footer-socials">
+          <a href="https://www.facebook.com/StudioGr" target="_blank" class="footer-social"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://www.linkedin.com/company/studio-g-r-srl-analisi-e-sviluppo-delle-risorse-umane/" target="_blank" class="footer-social"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://www.youtube.com/@RobertoGiangregorio" target="_blank" class="footer-social"><i class="fa-brands fa-youtube"></i></a>
+          <a href="https://x.com/studiogrmodena" target="_blank" class="footer-social"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Servizi</div>
+        <ul class="footer-links">
+          <li><a href="assistenza-strategica.html">Assistenza Strategica</a></li>
+          <li><a href="percorso-vendere-bene.html">PerCorso Vendere Bene</a></li>
+          <li><a href="valore-professionale.html">Valore Professionale</a></li>
+          <li><a href="i-profile.html">i-Profile Assessment</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Risorse</div>
+        <ul class="footer-links">
+          <li><a href="libri.html">I Libri di Roberto</a></li>
+          <li><a href="materiali-gratuiti.html">Materiali Gratuiti</a></li>
+          <li><a href="https://www.venderebene.it" target="_blank">Blog Vendere Bene</a></li>
+          <li><a href="https://www.retevendita.blog" target="_blank">Blog Rete Vendita</a></li>
+          <li><a href="testimonianze.html">Testimonianze</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contatti</div>
+        <div class="footer-contact-item"><div class="footer-contact-icon"><i class="fa-solid fa-location-dot"></i></div><div class="footer-contact-text">Modena, Emilia-Romagna<br>Italia</div></div>
+        <div class="footer-contact-item"><div class="footer-contact-icon"><i class="fa-solid fa-envelope"></i></div><div class="footer-contact-text">info@studiogr.com</div></div>
+        <div class="footer-contact-item"><div class="footer-contact-icon"><i class="fa-solid fa-calendar"></i></div><div class="footer-contact-text">Prenota online<br>consulenza gratuita</div></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Studio GR S.r.l. — Tutti i diritti riservati.</div>
+      <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Cookie Policy</a><a href="#">Note Legali</a></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

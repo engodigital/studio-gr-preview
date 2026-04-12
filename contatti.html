@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contatti — Studio GR | Prenota una Consulenza Gratuita</title>
+  <meta name="description" content="Prenota una consulenza gratuita con Roberto Giangregorio. 30 minuti per capire come Studio GR può trasformare la tua rete vendita.">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="main.css">
+  <style>
+    .contact-main { padding: 100px 48px; background: var(--dark); }
+    .contact-inner { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: start; }
+
+    .contact-form-box { background: var(--dark-3); border: 1px solid rgba(255,255,255,0.07); border-radius: 20px; padding: 48px; position: relative; overflow: hidden; }
+    .contact-form-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--gold), transparent); }
+    .contact-form-title { font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+    .contact-form-sub { font-size: 14px; color: var(--gray); margin-bottom: 32px; line-height: 1.6; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-submit { width: 100%; background: var(--gold); color: var(--dark); font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 16px; padding: 18px; border: none; border-radius: 8px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 8px; }
+    .form-submit:hover { background: var(--gold-dark); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(251,194,29,0.3); }
+    .form-privacy { font-size: 12px; color: var(--gray); margin-top: 12px; text-align: center; }
+    .form-privacy a { color: var(--gold); }
+
+    .contact-info {}
+    .contact-info-title { font-family: 'Montserrat', sans-serif; font-size: 28px; font-weight: 900; letter-spacing: -1px; line-height: 1.1; margin-bottom: 12px; }
+    .contact-info-title em { color: var(--gold); font-style: italic; }
+    .contact-info-sub { font-size: 15px; color: var(--gray-light); line-height: 1.7; margin-bottom: 40px; }
+
+    .contact-card { background: var(--dark-3); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 24px 28px; margin-bottom: 16px; display: flex; gap: 20px; align-items: flex-start; transition: border-color 0.2s; }
+    .contact-card:hover { border-color: rgba(251,194,29,0.2); }
+    .contact-card-icon { width: 44px; height: 44px; border-radius: 10px; background: rgba(251,194,29,0.1); display: flex; align-items: center; justify-content: center; font-size: 18px; color: var(--gold); flex-shrink: 0; }
+    .contact-card-title { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--gold); margin-bottom: 4px; }
+    .contact-card-text { font-size: 15px; color: var(--white); font-weight: 500; }
+    .contact-card-sub { font-size: 13px; color: var(--gray); margin-top: 2px; }
+
+    .roberto-card { background: var(--dark-3); border: 1px solid rgba(251,194,29,0.15); border-radius: 16px; padding: 32px; margin-top: 32px; display: flex; gap: 20px; align-items: center; }
+    .roberto-avatar { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); display: flex; align-items: center; justify-content: center; font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 22px; color: var(--dark); flex-shrink: 0; }
+    .roberto-name { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 800; margin-bottom: 4px; }
+    .roberto-role { font-size: 13px; color: var(--gold); margin-bottom: 8px; }
+    .roberto-quote { font-size: 13px; color: var(--gray-light); font-style: italic; line-height: 1.5; }
+
+    .why-contact { padding: 80px 48px; background: var(--dark-2); }
+    .why-contact-inner { max-width: 1400px; margin: 0 auto; }
+    .why-contact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+    .why-c-card { text-align: center; padding: 32px; }
+    .why-c-icon { width: 56px; height: 56px; border-radius: 50%; background: rgba(251,194,29,0.1); display: flex; align-items: center; justify-content: center; font-size: 22px; color: var(--gold); margin: 0 auto 16px; }
+    .why-c-title { font-family: 'Montserrat', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .why-c-text { font-size: 13px; color: var(--gray-light); line-height: 1.7; }
+
+    .faq-contact { padding: 80px 48px; background: var(--dark); }
+    .faq-contact-inner { max-width: 800px; margin: 0 auto; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="studio-gr-preview.html" class="nav-logo"><div class="nav-logo-mark">GR</div><div class="nav-logo-text">Studio GR</div></a>
+    <ul class="nav-menu">
+      <li><a href="chi-siamo.html">Chi Siamo</a></li>
+      <li><a href="servizi.html">Servizi</a></li>
+      <li><a href="risorse.html">Risorse</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="testimonianze.html">Testimonianze</a></li>
+      <li><a href="contatti.html" class="nav-cta active">Consulenza Gratuita</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-bg"></div>
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-inner">
+    <div class="page-hero-breadcrumb">
+      <a href="studio-gr-preview.html">Home</a>
+      <i class="fa-solid fa-chevron-right" style="font-size:10px"></i>
+      <span>Contatti</span>
+    </div>
+    <h1>Iniziamo a<br><em>Parlare</em></h1>
+    <p>30 minuti di consulenza gratuita con Roberto. Senza impegno, senza vendita aggressiva. Solo un dialogo onesto sulla tua situazione.</p>
+  </div>
+</section>
+
+<section class="contact-main">
+  <div class="contact-inner">
+
+    <div class="contact-form-box">
+      <div class="contact-form-title">Prenota la Tua Consulenza Gratuita</div>
+      <div class="contact-form-sub">Compila il form. Roberto ti contatta entro 24 ore per fissare la chiamata.</div>
+
+      <form>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nome *</label>
+            <input type="text" class="form-input" placeholder="Il tuo nome">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Cognome *</label>
+            <input type="text" class="form-input" placeholder="Il tuo cognome">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email *</label>
+          <input type="email" class="form-input" placeholder="tua@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Telefono</label>
+          <input type="tel" class="form-input" placeholder="+39 XXX XXX XXXX">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Azienda</label>
+          <input type="text" class="form-input" placeholder="Nome della tua azienda">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Di cosa hai bisogno?</label>
+          <select class="form-select">
+            <option value="" disabled selected>Seleziona un'opzione</option>
+            <option>Costruire/migliorare la rete vendita</option>
+            <option>Formazione venditori</option>
+            <option>Consulenza strategica personale</option>
+            <option>Selezione personale commerciale</option>
+            <option>i-Profile assessment</option>
+            <option>Altro / Non so ancora</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Raccontami la tua situazione</label>
+          <textarea class="form-input" placeholder="In poche righe, qual è la sfida principale che stai affrontando nel tuo business?"></textarea>
+        </div>
+        <button type="submit" class="form-submit">
+          <i class="fa-solid fa-calendar-check"></i>
+          Invia Richiesta di Consulenza
+        </button>
+        <div class="form-privacy">Inviando il form accetti la nostra <a href="#">Privacy Policy</a>. Non facciamo spam.</div>
+      </form>
+    </div>
+
+    <div class="contact-info">
+      <div class="contact-info-title">Parliamo del<br>tuo <em>business</em></div>
+      <div class="contact-info-sub">Non fissare la consulenza se non sei pronto a raccontarci onestamente dove sei. Partiamo sempre dalla realtà, non dalle aspettative.</div>
+
+      <div class="contact-card">
+        <div class="contact-card-icon"><i class="fa-solid fa-envelope"></i></div>
+        <div>
+          <div class="contact-card-title">Email</div>
+          <div class="contact-card-text">info@studiogr.com</div>
+          <div class="contact-card-sub">Risposta entro 24 ore lavorative</div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-icon"><i class="fa-solid fa-location-dot"></i></div>
+        <div>
+          <div class="contact-card-title">Sede</div>
+          <div class="contact-card-text">Modena, Emilia-Romagna</div>
+          <div class="contact-card-sub">Consulenze anche in tutta Italia e online</div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-icon"><i class="fa-brands fa-linkedin-in"></i></div>
+        <div>
+          <div class="contact-card-title">LinkedIn</div>
+          <div class="contact-card-text">Roberto Giangregorio</div>
+          <div class="contact-card-sub">Connettiti e seguilo per contenuti gratuiti</div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-icon"><i class="fa-brands fa-youtube"></i></div>
+        <div>
+          <div class="contact-card-title">YouTube</div>
+          <div class="contact-card-text">@RobertoGiangregorio</div>
+          <div class="contact-card-sub">Video gratuiti su vendita e reti vendita</div>
+        </div>
+      </div>
+
+      <div class="roberto-card">
+        <div class="roberto-avatar">RG</div>
+        <div>
+          <div class="roberto-name">Roberto Giangregorio</div>
+          <div class="roberto-role">Fondatore Studio GR</div>
+          <div class="roberto-quote">"Rispondo personalmente a ogni richiesta di consulenza. Se non sei pronto a cambiare qualcosa, te lo dico subito."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="why-contact">
+  <div class="why-contact-inner">
+    <div class="section-label">Perché Contattarci</div>
+    <h2 class="section-title">Cosa Succede<br>Dopo il Form</h2>
+    <div class="why-contact-grid">
+      <div class="why-c-card">
+        <div class="why-c-icon"><i class="fa-solid fa-clock"></i></div>
+        <div class="why-c-title">Risposta in 24 ore</div>
+        <div class="why-c-text">Roberto o il suo team ti contatta entro 24 ore lavorative per fissare la data della consulenza.</div>
+      </div>
+      <div class="why-c-card">
+        <div class="why-c-icon"><i class="fa-solid fa-comments"></i></div>
+        <div class="why-c-title">30 Minuti di Dialogo</div>
+        <div class="why-c-text">Una chiamata o videochiamata con Roberto. Ascoltiamo la tua situazione, facciamo le domande giuste, capire il tuo problema vero.</div>
+      </div>
+      <div class="why-c-card">
+        <div class="why-c-icon"><i class="fa-solid fa-map"></i></div>
+        <div class="why-c-title">Proposta su Misura</div>
+        <div class="why-c-text">Se c'è un percorso che fa per te, te lo proponiamo chiaramente. Se non siamo la soluzione giusta, te lo diciamo — e magari ti indichiamo dove trovare aiuto.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faq-contact">
+  <div class="faq-contact-inner">
+    <div class="section-label">FAQ</div>
+    <h2 class="section-title" style="margin-bottom:48px">Domande Prima<br>di Scrivere</h2>
+    <div class="faq-item">
+      <div class="faq-q">La consulenza è davvero gratuita?</div>
+      <div class="faq-a">Sì, completamente. Non è un "gratuito" che poi diventa un pitch di 30 minuti. È una chiamata reale in cui ascoltiamo la tua situazione e capiamo se possiamo aiutarti.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Lavorate solo con aziende strutturate o anche con piccole imprese?</div>
+      <div class="faq-a">Lavoriamo con imprenditori a tutti i livelli: dalla PMI familiare con 3 venditori all'azienda strutturata con una rete di 50 commerciali. Il metodo si adatta alla dimensione.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">In quanto tempo si vedono i risultati?</div>
+      <div class="faq-a">Dipende dal punto di partenza e dal percorso scelto. Generalmente i primi risultati misurabili (aumento del tasso di chiusura, miglioramento del pipeline) si vedono entro 3–4 mesi.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Operate solo a Modena o in tutta Italia?</div>
+      <div class="faq-a">Siamo basati a Modena ma operiamo in tutta Italia. Molte sessioni si svolgono online, con incontri in presenza per le fasi di analisi e per i training di gruppo.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div><div class="footer-logo"><div class="footer-logo-mark">GR</div><div class="footer-logo-text">Studio GR</div></div><div class="footer-tagline">Da 30 anni trasformiamo imprenditori e reti vendita in macchine da risultato.</div><div class="footer-socials"><a href="https://www.facebook.com/StudioGr" target="_blank" class="footer-social"><i class="fa-brands fa-facebook-f"></i></a><a href="https://www.linkedin.com/company/studio-g-r-srl-analisi-e-sviluppo-delle-risorse-umane/" target="_blank" class="footer-social"><i class="fa-brands fa-linkedin-in"></i></a><a href="https://www.youtube.com/@RobertoGiangregorio" target="_blank" class="footer-social"><i class="fa-brands fa-youtube"></i></a><a href="https://x.com/studiogrmodena" target="_blank" class="footer-social"><i class="fa-brands fa-x-twitter"></i></a></div></div>
+      <div><div class="footer-col-title">Servizi</div><ul class="footer-links"><li><a href="assistenza-strategica.html">Assistenza Strategica</a></li><li><a href="percorso-vendere-bene.html">PerCorso Vendere Bene</a></li><li><a href="valore-professionale.html">Valore Professionale</a></li><li><a href="i-profile.html">i-Profile Assessment</a></li></ul></div>
+      <div><div class="footer-col-title">Risorse</div><ul class="footer-links"><li><a href="libri.html">I Libri di Roberto</a></li><li><a href="materiali-gratuiti.html">Materiali Gratuiti</a></li><li><a href="https://www.venderebene.it" target="_blank">Blog Vendere Bene</a></li><li><a href="https://www.retevendita.blog" target="_blank">Blog Rete Vendita</a></li></ul></div>
+      <div><div class="footer-col-title">Contatti</div><div class="footer-contact-item"><div class="footer-contact-icon"><i class="fa-solid fa-location-dot"></i></div><div class="footer-contact-text">Modena, Italia</div></div><div class="footer-contact-item"><div class="footer-contact-icon"><i class="fa-solid fa-envelope"></i></div><div class="footer-contact-text">info@studiogr.com</div></div></div>
+    </div>
+    <div class="footer-bottom"><div class="footer-copy">© 2026 Studio GR S.r.l. — Tutti i diritti riservati.</div><div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Cookie Policy</a></div></div>
+  </div>
+</footer>
+</body>
+</html>
