@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#FFFFFF"/>
+    </linearGradient>
+    <linearGradient id="icon" gradientUnits="userSpaceOnUse" x1="100" y1="44" x2="100" y2="156">
+      <stop offset="0%" stop-color="#02519e"/>
+      <stop offset="100%" stop-color="#02519e"/>
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="100" fill="url(#bg)"/>
+  <!-- Mappa: forma con piega ai lati (ottagono piatto) -->
+  <polygon points="30,58 72,44 128,44 170,58 170,144 128,156 72,156 30,144" fill="url(#icon)"/>
+  <!-- Linea di piega sinistra -->
+  <rect x="70" y="44" width="4" height="112" fill="#1C1400" opacity="0.45"/>
+  <!-- Linea di piega destra -->
+  <rect x="126" y="44" width="4" height="112" fill="#1C1400" opacity="0.45"/>
+  <!-- Pin posizione: testa cerchio + coda triangolo -->
+  <circle cx="100" cy="82" r="14" fill="#1C1400"/>
+  <polygon points="90,93 100,120 110,93" fill="#1C1400"/>
+  <!-- Anello interno del pin -->
+  <circle cx="100" cy="82" r="6" fill="url(#icon)"/>
+</svg>

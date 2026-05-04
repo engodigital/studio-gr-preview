@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2C1F00"/>
+      <stop offset="100%" stop-color="#1A1200"/>
+    </linearGradient>
+    <linearGradient id="icon" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#B8860B"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="44" ry="44" fill="url(#bg)"/>
+  <!-- Busta email -->
+  <!-- Corpo busta -->
+  <rect x="30" y="62" width="140" height="96" rx="10" ry="10" fill="url(#icon)"/>
+  <!-- Piega superiore V -->
+  <path d="M 30,62 L 100,118 L 170,62 Z" fill="url(#icon)"/>
+  <!-- Triangolo scuro sopra per creare il V aperto -->
+  <path d="M 38,68 L 100,112 L 162,68 Z" fill="#1C1400"/>
+  <!-- Linee laterali busta (angoli) -->
+  <path d="M 30,158 L 72,114" stroke="#1C1400" stroke-width="6" stroke-linecap="round"/>
+  <path d="M 170,158 L 128,114" stroke="#1C1400" stroke-width="6" stroke-linecap="round"/>
+</svg>

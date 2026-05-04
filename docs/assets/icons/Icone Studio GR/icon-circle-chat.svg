@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2C1F00"/>
+      <stop offset="100%" stop-color="#1A1200"/>
+    </linearGradient>
+    <linearGradient id="icon" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#B8860B"/>
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="100" fill="url(#bg)"/>
+  <!-- Bolla 2 retro (oro scuro, basso-sinistra) -->
+  <rect x="22" y="72" width="116" height="76" rx="14" fill="#C8960C"/>
+  <polygon points="38,148 26,166 64,148" fill="#C8960C"/>
+  <!-- Bolla 1 fronte (gradiente giallo, alto-destra) -->
+  <rect x="62" y="28" width="106" height="76" rx="14" fill="url(#icon)"/>
+  <polygon points="76,104 60,124 102,104" fill="url(#icon)"/>
+</svg>

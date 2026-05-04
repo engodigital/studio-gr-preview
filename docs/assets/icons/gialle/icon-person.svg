@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2C1F00"/>
+      <stop offset="100%" stop-color="#1A1200"/>
+    </linearGradient>
+    <linearGradient id="icon" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#B8860B"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="44" ry="44" fill="url(#bg)"/>
+  <!-- Testa -->
+  <circle cx="100" cy="72" r="30" fill="url(#icon)"/>
+  <!-- Corpo (arco spalle) -->
+  <path d="M36 162 C36 128 60 110 100 110 C140 110 164 128 164 162 Z" fill="url(#icon)"/>
+</svg>

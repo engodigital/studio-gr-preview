@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2C1F00"/>
+      <stop offset="100%" stop-color="#1A1200"/>
+    </linearGradient>
+    <linearGradient id="icon" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#B8860B"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="44" ry="44" fill="url(#bg)"/>
+  <!-- Libro aperto -->
+  <g fill="url(#icon)">
+    <!-- Copertina sinistra -->
+    <path d="M38 60 C38 57 40 55 43 55 L94 58 L94 148 L43 145 C40 145 38 143 38 140 Z"/>
+    <!-- Pagine sinistra -->
+    <path d="M44 63 L90 66 L90 141 L44 138 Z" fill="#1A1200" opacity="0.25"/>
+    <!-- Copertina destra -->
+    <path d="M162 60 C162 57 160 55 157 55 L106 58 L106 148 L157 145 C160 145 162 143 162 140 Z"/>
+    <!-- Pagine destra -->
+    <path d="M156 63 L110 66 L110 141 L156 138 Z" fill="#1A1200" opacity="0.25"/>
+    <!-- Dorso/rilegatura -->
+    <path d="M94 58 L94 148 Q100 152 106 148 L106 58 Q100 54 94 58 Z"/>
+    <!-- Linee pagina sinistra -->
+    <rect x="50" y="78" width="34" height="3" rx="1.5" fill="#FFD700" opacity="0.5"/>
+    <rect x="50" y="88" width="28" height="3" rx="1.5" fill="#FFD700" opacity="0.5"/>
+    <rect x="50" y="98" width="32" height="3" rx="1.5" fill="#FFD700" opacity="0.5"/>
+    <rect x="50" y="108" width="26" height="3" rx="1.5" fill="#FFD700" opacity="0.5"/>
+    <!-- Linee pagina destra -->
+    <rect x="116" y="78" width="34" height="3" rx="1.5" fill="#FFD700" opacity="0.5"/>
+    <rect x="116" y="88" width="28" height="3" rx="1.5" fill="#FFD700" opacity="0.5"/>
+    <rect x="116" y="98" width="32" height="3" rx="1.5" fill="#FFD700" opacity="0.5"/>
+    <rect x="116" y="108" width="26" height="3" rx="1.5" fill="#FFD700" opacity="0.5"/>
+  </g>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2C1F00"/>
+      <stop offset="100%" stop-color="#1A1200"/>
+    </linearGradient>
+    <linearGradient id="icon" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#B8860B"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="44" ry="44" fill="url(#bg)"/>
+  <!--
+    Origine (152,152): padding 48px su tutti e 4 i lati
+    Band 3 outer r=104 → left=(48,152) top=(152,48) right=48 bottom=48
+  -->
+  <g fill="url(#icon)">
+    <!-- Punto centrale -->
+    <circle cx="152" cy="152" r="11"/>
+    <!-- Banda 1: r 24→40 -->
+    <path d="M 112,152 A 40,40 0 0,1 152,112 L 152,128 A 24,24 0 0,0 128,152 Z"/>
+    <!-- Banda 2: r 54→72 -->
+    <path d="M 80,152 A 72,72 0 0,1 152,80 L 152,98 A 54,54 0 0,0 98,152 Z"/>
+    <!-- Banda 3: r 86→104 -->
+    <path d="M 48,152 A 104,104 0 0,1 152,48 L 152,66 A 86,86 0 0,0 66,152 Z"/>
+  </g>
+</svg>

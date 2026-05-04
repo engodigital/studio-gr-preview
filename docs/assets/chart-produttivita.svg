@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="718" viewBox="0 0 700 718">
+  <rect width="700" height="718" rx="20" fill="#181818"/>
+  <text x="44" y="76" font-family="system-ui,sans-serif" font-size="20" font-weight="700" fill="#FFFFFF">Ingredienti della Produttività — Esempio Report</text>
+  <text x="44" y="136" font-family="system-ui,sans-serif" font-size="15" fill="#D0D0D0">Motivazione</text>
+  <text x="656" y="136" font-family="system-ui,sans-serif" font-size="16" font-weight="700" fill="#FBC21D" text-anchor="end">87%</text>
+  <rect x="44" y="158" width="612" height="8" rx="4" fill="#2E2E2E"/>
+  <rect x="44" y="158" width="532" height="8" rx="4" fill="#FBC21D"/>
+  <text x="44" y="194" font-family="system-ui,sans-serif" font-size="15" fill="#D0D0D0">Comunicazione</text>
+  <text x="656" y="194" font-family="system-ui,sans-serif" font-size="16" font-weight="700" fill="#FBC21D" text-anchor="end">74%</text>
+  <rect x="44" y="216" width="612" height="8" rx="4" fill="#2E2E2E"/>
+  <rect x="44" y="216" width="452" height="8" rx="4" fill="#FBC21D"/>
+  <text x="44" y="252" font-family="system-ui,sans-serif" font-size="15" fill="#D0D0D0">Orientamento al risultato</text>
+  <text x="656" y="252" font-family="system-ui,sans-serif" font-size="16" font-weight="700" fill="#FBC21D" text-anchor="end">92%</text>
+  <rect x="44" y="274" width="612" height="8" rx="4" fill="#2E2E2E"/>
+  <rect x="44" y="274" width="563" height="8" rx="4" fill="#FBC21D"/>
+  <text x="44" y="310" font-family="system-ui,sans-serif" font-size="15" fill="#D0D0D0">Leadership</text>
+  <text x="656" y="310" font-family="system-ui,sans-serif" font-size="16" font-weight="700" fill="#FBC21D" text-anchor="end">68%</text>
+  <rect x="44" y="332" width="612" height="8" rx="4" fill="#2E2E2E"/>
+  <rect x="44" y="332" width="416" height="8" rx="4" fill="#FBC21D"/>
+  <text x="44" y="368" font-family="system-ui,sans-serif" font-size="15" fill="#D0D0D0">Gestione dello stress</text>
+  <text x="656" y="368" font-family="system-ui,sans-serif" font-size="16" font-weight="700" fill="#FBC21D" text-anchor="end">81%</text>
+  <rect x="44" y="390" width="612" height="8" rx="4" fill="#2E2E2E"/>
+  <rect x="44" y="390" width="495" height="8" rx="4" fill="#FBC21D"/>
+  <text x="44" y="426" font-family="system-ui,sans-serif" font-size="15" fill="#D0D0D0">Problem solving</text>
+  <text x="656" y="426" font-family="system-ui,sans-serif" font-size="16" font-weight="700" fill="#FBC21D" text-anchor="end">79%</text>
+  <rect x="44" y="448" width="612" height="8" rx="4" fill="#2E2E2E"/>
+  <rect x="44" y="448" width="483" height="8" rx="4" fill="#FBC21D"/>
+  <text x="44" y="484" font-family="system-ui,sans-serif" font-size="15" fill="#D0D0D0">Collaborazione</text>
+  <text x="656" y="484" font-family="system-ui,sans-serif" font-size="16" font-weight="700" fill="#FBC21D" text-anchor="end">88%</text>
+  <rect x="44" y="506" width="612" height="8" rx="4" fill="#2E2E2E"/>
+  <rect x="44" y="506" width="538" height="8" rx="4" fill="#FBC21D"/>
+  <text x="44" y="542" font-family="system-ui,sans-serif" font-size="15" fill="#D0D0D0">Autonomia</text>
+  <text x="656" y="542" font-family="system-ui,sans-serif" font-size="16" font-weight="700" fill="#FBC21D" text-anchor="end">65%</text>
+  <rect x="44" y="564" width="612" height="8" rx="4" fill="#2E2E2E"/>
+  <rect x="44" y="564" width="397" height="8" rx="4" fill="#FBC21D"/>
+  <line x1="44" y1="610" x2="656" y2="610" stroke="#2E2E2E" stroke-width="1"/>
+  <text x="44" y="658" font-family="system-ui,sans-serif" font-size="15" fill="#888888">Punteggio complessivo</text>
+  <text x="656" y="658" font-family="system-ui,sans-serif" font-size="36" font-weight="700" fill="#FBC21D" text-anchor="end">79<tspan font-size="20">/100</tspan></text>
+</svg>

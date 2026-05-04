@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2C1F00"/>
+      <stop offset="100%" stop-color="#1A1200"/>
+    </linearGradient>
+    <linearGradient id="icon" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#B8860B"/>
+    </linearGradient>
+  </defs>
+  <rect width="200" height="200" rx="44" ry="44" fill="url(#bg)"/>
+  <!-- Freccia download -->
+  <!-- Stelo verticale -->
+  <rect x="88" y="42" width="24" height="72" rx="12" fill="url(#icon)"/>
+  <!-- Punta freccia -->
+  <path d="M100 148 L56 106 Q50 100 58 95 Q66 90 72 98 L100 128 L128 98 Q134 90 142 95 Q150 100 144 106 Z" fill="url(#icon)"/>
+  <!-- Linea base -->
+  <rect x="46" y="148" width="108" height="14" rx="7" fill="url(#icon)"/>
+</svg>
