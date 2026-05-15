@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checklist Pipeline GROWI — Studio GR</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f0f2f5;color:#1a1a1a;padding-bottom:60px}
+
+header{background:#0f172a;color:#fff;padding:24px 32px}
+header h1{font-size:1.3rem;font-weight:700;letter-spacing:-0.02em}
+header p{font-size:.8rem;opacity:.6;margin-top:4px}
+.prog-wrap{background:rgba(255,255,255,.15);border-radius:99px;height:8px;margin:14px 0 6px}
+.prog-fill{background:#4ade80;height:8px;border-radius:99px;transition:width .4s ease;width:0%}
+.prog-text{font-size:.8rem;opacity:.7}
+
+.container{max-width:860px;margin:24px auto;padding:0 16px}
+
+.card{background:#fff;border-radius:12px;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,.07);overflow:hidden}
+.card-head{display:flex;align-items:center;gap:12px;padding:14px 20px;cursor:pointer;user-select:none}
+.card-head:hover{background:#fafafa}
+.card-name{font-weight:600;font-size:.92rem;flex:1}
+.card-badge{font-size:.75rem;padding:3px 10px;border-radius:99px;background:#f1f5f9;color:#64748b;white-space:nowrap}
+.card-badge.done{background:#dcfce7;color:#166534}
+.card-badge.warn{background:#fef9c3;color:#854d0e}
+.card-arrow{color:#cbd5e1;font-size:.7rem;transition:transform .2s}
+.card-arrow.open{transform:rotate(180deg)}
+
+.card-body{display:none;padding:4px 20px 18px}
+.card-body.open{display:block}
+
+.group{margin-top:14px}
+.group-title{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.group-title.add{color:#2563eb}
+.group-title.rename{color:#d97706}
+.group-title.remove{color:#dc2626}
+
+.task{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid #f8f8f8}
+.task:last-child{border-bottom:none}
+.task input[type=checkbox]{margin-top:2px;width:15px;height:15px;cursor:pointer;flex-shrink:0;accent-color:#2563eb}
+.task label{cursor:pointer;font-size:.85rem;line-height:1.45;color:#374151}
+.task.checked label{text-decoration:line-through;color:#9ca3af}
+.note{font-size:.73rem;color:#f59e0b;margin-top:3px;display:block}
+
+.global .card-head{background:#eff6ff}
+.global .card-name{color:#1d4ed8}
+.workflow .card-head{background:#f0fdf4}
+.workflow .card-name{color:#166534}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Checklist Pipeline GROWI — Studio GR</h1>
+  <p>Modifiche da applicare manualmente in GHL per ogni consulente</p>
+  <div class="prog-wrap"><div class="prog-fill" id="pfill"></div></div>
+  <div class="prog-text" id="ptext">0 / 0 task completati</div>
+</header>
+
+<div class="container">
+
+<!-- ===================== GLOBALE ===================== -->
+<div class="card global">
+  <div class="card-head" onclick="tog(this)">
+    <span class="card-name">⚙️ Impostazioni Globali</span>
+    <span class="card-badge" id="b-global">0 / 4</span>
+    <span class="card-arrow">▼</span>
+  </div>
+  <div class="card-body">
+    <div class="group">
+      <div class="group-title rename">✅ Già fatto</div>
+      <div class="task checked" id="tw-g0"><input type="checkbox" id="g0" onchange="upd()" checked><label for="g0">Campi <strong>"Tipologia Lead"</strong> e <strong>"Origine Contatto"</strong> già creati come custom fields di contatto ✅</label></div>
+    </div>
+    <div class="group">
+      <div class="group-title rename">Da verificare</div>
+      <div class="task" id="tw-g1"><input type="checkbox" id="g1" onchange="upd()"><label for="g1">Verifica se i campi sono visibili nella <strong>vista pipeline (opportunità)</strong> — in GHL i campi contatto non appaiono automaticamente sulle card della pipeline. Se non si vedono: vai in Settings → Pipelines → seleziona pipeline → configura le colonne/campi visibili, oppure valuta se creare gli stessi campi anche come <strong>custom fields di opportunità</strong></label></div>
+      <div class="task" id="tw-g2"><input type="checkbox" id="g2" onchange="upd()"><label for="g2">Verifica se <strong>l'origine FB si cattura automaticamente</strong>: entra in un contatto arrivato da una campagna FB e controlla se il campo "Lead Source" (o "Origine Contatto") è già compilato con FB + nome campagna. Se è vuoto → va creato il workflow<span class="note">⚠️ Per catturare anche la campagna specifica servono utm_source + utm_campaign mappati su due campi separati, oppure un campo testo libero che li concatena</span></label></div>
+      <div class="task" id="tw-g3"><input type="checkbox" id="g3" onchange="upd()"><label for="g3">Se il tracking non c'è: <strong>creare workflow</strong> "UTM → Origine Contatto" — Trigger: Contact Created + ha utm_source compilato → Action: aggiorna campo Origine Contatto con il valore UTM. Ripetere per utm_campaign se vuoi anche il nome campagna</label></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== ANTONIO BARBATI ===================== -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <span class="card-name">Antonio Barbati</span>
+    <span class="card-badge" id="b-ab">0 / 7</span>
+    <span class="card-arrow">▼</span>
+  </div>
+  <div class="card-body">
+    <div class="group">
+      <div class="group-title add">➕ Aggiungi stage</div>
+      <div class="task" id="tw-ab1"><input type="checkbox" id="ab1" onchange="upd()"><label for="ab1">Aggiungi stage <strong>NRx1</strong> — posizione 1 (dopo LEADS)</label></div>
+      <div class="task" id="tw-ab2"><input type="checkbox" id="ab2" onchange="upd()"><label for="ab2">Aggiungi stage <strong>NRx2</strong> — posizione 2 (dopo NRx1)</label></div>
+    </div>
+    <div class="group">
+      <div class="group-title rename">✏️ Rinomina</div>
+      <div class="task" id="tw-ab3"><input type="checkbox" id="ab3" onchange="upd()"><label for="ab3">"NUMERO FALSO" → <strong>NUMERO FALSO (MAIL)</strong></label></div>
+      <div class="task" id="tw-ab4"><input type="checkbox" id="ab4" onchange="upd()"><label for="ab4">Riordina: porta NRx3 (MAIL) in posizione 3 (subito dopo NRx2) — ora è in posizione 5</label></div>
+    </div>
+    <div class="group">
+      <div class="group-title remove">🗑️ Rimuovi (prima sposta i contatti!)</div>
+      <div class="task" id="tw-ab5"><input type="checkbox" id="ab5" onchange="upd()"><label for="ab5">IN LAVORAZIONE → sposta contatti in <strong>NRx1</strong>, poi elimina stage<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-ab6"><input type="checkbox" id="ab6" onchange="upd()"><label for="ab6">APPUNTAMENTO → sposta contatti in <strong>APP QUALIFICA</strong>, poi elimina stage<span class="note">⚠️ Potrebbe avere contatti attivi — APP QUALIFICA e APP CHIUSURA già presenti ✅</span></label></div>
+      <div class="task" id="tw-ab7"><input type="checkbox" id="ab7" onchange="upd()"><label for="ab7">PERSO → usa <strong>Lost nativo GHL</strong> (clicca "..." sull'opportunità → Segna come Perso), poi elimina stage</label></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== CRISTINA ROSATO ===================== -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <span class="card-name">Cristina Rosato</span>
+    <span class="card-badge" id="b-cr">0 / 10</span>
+    <span class="card-arrow">▼</span>
+  </div>
+  <div class="card-body">
+    <div class="group">
+      <div class="group-title add">➕ Aggiungi stage</div>
+      <div class="task" id="tw-cr1"><input type="checkbox" id="cr1" onchange="upd()"><label for="cr1">Aggiungi stage <strong>NRx1</strong> — posizione 1</label></div>
+      <div class="task" id="tw-cr2"><input type="checkbox" id="cr2" onchange="upd()"><label for="cr2">Aggiungi stage <strong>NRx2</strong> — posizione 2</label></div>
+      <div class="task" id="tw-cr3"><input type="checkbox" id="cr3" onchange="upd()"><label for="cr3">Aggiungi stage <strong>APP QUALIFICA</strong> — dopo NO</label></div>
+      <div class="task" id="tw-cr4"><input type="checkbox" id="cr4" onchange="upd()"><label for="cr4">Aggiungi stage <strong>APP CHIUSURA</strong> — dopo APP QUALIFICA</label></div>
+    </div>
+    <div class="group">
+      <div class="group-title rename">✏️ Rinomina</div>
+      <div class="task" id="tw-cr5"><input type="checkbox" id="cr5" onchange="upd()"><label for="cr5">"NOx3 (MAIL)" → <strong>NRx3 (MAIL)</strong></label></div>
+      <div class="task" id="tw-cr6"><input type="checkbox" id="cr6" onchange="upd()"><label for="cr6">"NUMERO FALSO" → <strong>NUMERO FALSO (MAIL)</strong></label></div>
+    </div>
+    <div class="group">
+      <div class="group-title remove">🗑️ Rimuovi</div>
+      <div class="task" id="tw-cr7"><input type="checkbox" id="cr7" onchange="upd()"><label for="cr7">IN LAVORAZIONE → sposta in <strong>NRx1</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-cr8"><input type="checkbox" id="cr8" onchange="upd()"><label for="cr8">LEADS ALL → sposta contatti in <strong>LEADS</strong>, poi elimina</label></div>
+      <div class="task" id="tw-cr9"><input type="checkbox" id="cr9" onchange="upd()"><label for="cr9">APPUNTAMENTO → sposta in <strong>APP QUALIFICA</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-cr10"><input type="checkbox" id="cr10" onchange="upd()"><label for="cr10">PERSO + VENDITA → usa <strong>Lost/Won nativo GHL</strong>, poi elimina entrambi</label></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== ELISABETTA COSMANO ===================== -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <span class="card-name">Elisabetta Cosmano</span>
+    <span class="card-badge" id="b-ec">0 / 8</span>
+    <span class="card-arrow">▼</span>
+  </div>
+  <div class="card-body">
+    <div class="group">
+      <div class="group-title add">➕ Aggiungi stage</div>
+      <div class="task" id="tw-ec1"><input type="checkbox" id="ec1" onchange="upd()"><label for="ec1">Aggiungi stage <strong>NRx1</strong> — posizione 1</label></div>
+      <div class="task" id="tw-ec2"><input type="checkbox" id="ec2" onchange="upd()"><label for="ec2">Aggiungi stage <strong>NRx2</strong> — posizione 2</label></div>
+      <div class="task" id="tw-ec3"><input type="checkbox" id="ec3" onchange="upd()"><label for="ec3">Aggiungi stage <strong>APP QUALIFICA</strong> — dopo NO</label></div>
+      <div class="task" id="tw-ec4"><input type="checkbox" id="ec4" onchange="upd()"><label for="ec4">Aggiungi stage <strong>APP CHIUSURA</strong> — dopo APP QUALIFICA</label></div>
+    </div>
+    <div class="group">
+      <div class="group-title rename">✏️ Rinomina</div>
+      <div class="task" id="tw-ec5"><input type="checkbox" id="ec5" onchange="upd()"><label for="ec5">"NUMERO FALSO" → <strong>NUMERO FALSO (MAIL)</strong></label></div>
+    </div>
+    <div class="group">
+      <div class="group-title remove">🗑️ Rimuovi</div>
+      <div class="task" id="tw-ec6"><input type="checkbox" id="ec6" onchange="upd()"><label for="ec6">IN LAVORAZIONE → sposta in <strong>NRx1</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-ec7"><input type="checkbox" id="ec7" onchange="upd()"><label for="ec7">APPUNTAMENTO → sposta in <strong>APP QUALIFICA</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-ec8"><input type="checkbox" id="ec8" onchange="upd()"><label for="ec8">PERSO + VENDITA → usa <strong>Lost/Won nativo GHL</strong>, poi elimina entrambi</label></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== ENRICO ANSELMO ===================== -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <span class="card-name">Enrico Anselmo</span>
+    <span class="card-badge" id="b-ea">0 / 10</span>
+    <span class="card-arrow">▼</span>
+  </div>
+  <div class="card-body">
+    <div class="group">
+      <div class="group-title add">➕ Aggiungi stage</div>
+      <div class="task" id="tw-ea1"><input type="checkbox" id="ea1" onchange="upd()"><label for="ea1">Aggiungi stage <strong>NRx1</strong> — posizione 1</label></div>
+      <div class="task" id="tw-ea2"><input type="checkbox" id="ea2" onchange="upd()"><label for="ea2">Aggiungi stage <strong>NRx2</strong> — posizione 2</label></div>
+      <div class="task" id="tw-ea3"><input type="checkbox" id="ea3" onchange="upd()"><label for="ea3">Aggiungi stage <strong>APP QUALIFICA</strong> — dopo NO</label></div>
+      <div class="task" id="tw-ea4"><input type="checkbox" id="ea4" onchange="upd()"><label for="ea4">Aggiungi stage <strong>APP CHIUSURA</strong> — dopo APP QUALIFICA</label></div>
+    </div>
+    <div class="group">
+      <div class="group-title rename">✏️ Rinomina</div>
+      <div class="task" id="tw-ea5"><input type="checkbox" id="ea5" onchange="upd()"><label for="ea5">"NOx3 (MAIL)" → <strong>NRx3 (MAIL)</strong></label></div>
+      <div class="task" id="tw-ea6"><input type="checkbox" id="ea6" onchange="upd()"><label for="ea6">"NUMERO FALSO" → <strong>NUMERO FALSO (MAIL)</strong></label></div>
+    </div>
+    <div class="group">
+      <div class="group-title remove">🗑️ Rimuovi</div>
+      <div class="task" id="tw-ea7"><input type="checkbox" id="ea7" onchange="upd()"><label for="ea7">IN LAVORAZIONE → sposta in <strong>NRx1</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-ea8"><input type="checkbox" id="ea8" onchange="upd()"><label for="ea8">LEADS ALL → sposta in <strong>LEADS</strong>, poi elimina</label></div>
+      <div class="task" id="tw-ea9"><input type="checkbox" id="ea9" onchange="upd()"><label for="ea9">APPUNTAMENTO → sposta in <strong>APP QUALIFICA</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-ea10"><input type="checkbox" id="ea10" onchange="upd()"><label for="ea10">PERSO + VENDITA → usa <strong>Lost/Won nativo GHL</strong>, poi elimina entrambi</label></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== LEOLUCA MULÉ ===================== -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <span class="card-name">Leoluca Mulé</span>
+    <span class="card-badge" id="b-lm">0 / 10</span>
+    <span class="card-arrow">▼</span>
+  </div>
+  <div class="card-body">
+    <div class="group">
+      <div class="group-title add">➕ Aggiungi stage</div>
+      <div class="task" id="tw-lm1"><input type="checkbox" id="lm1" onchange="upd()"><label for="lm1">Aggiungi stage <strong>NRx1</strong> — posizione 1</label></div>
+      <div class="task" id="tw-lm2"><input type="checkbox" id="lm2" onchange="upd()"><label for="lm2">Aggiungi stage <strong>NRx2</strong> — posizione 2</label></div>
+      <div class="task" id="tw-lm3"><input type="checkbox" id="lm3" onchange="upd()"><label for="lm3">Aggiungi stage <strong>APP QUALIFICA</strong> — dopo NO</label></div>
+      <div class="task" id="tw-lm4"><input type="checkbox" id="lm4" onchange="upd()"><label for="lm4">Aggiungi stage <strong>APP CHIUSURA</strong> — dopo APP QUALIFICA</label></div>
+    </div>
+    <div class="group">
+      <div class="group-title rename">✏️ Rinomina</div>
+      <div class="task" id="tw-lm5"><input type="checkbox" id="lm5" onchange="upd()"><label for="lm5">"NOx3 (MAIL)" → <strong>NRx3 (MAIL)</strong></label></div>
+      <div class="task" id="tw-lm6"><input type="checkbox" id="lm6" onchange="upd()"><label for="lm6">"NUMERO FALSO" → <strong>NUMERO FALSO (MAIL)</strong></label></div>
+    </div>
+    <div class="group">
+      <div class="group-title remove">🗑️ Rimuovi</div>
+      <div class="task" id="tw-lm7"><input type="checkbox" id="lm7" onchange="upd()"><label for="lm7">IN LAVORAZIONE → sposta in <strong>NRx1</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-lm8"><input type="checkbox" id="lm8" onchange="upd()"><label for="lm8">LEADS ALL → sposta in <strong>LEADS</strong>, poi elimina</label></div>
+      <div class="task" id="tw-lm9"><input type="checkbox" id="lm9" onchange="upd()"><label for="lm9">APPUNTAMENTO → sposta in <strong>APP QUALIFICA</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-lm10"><input type="checkbox" id="lm10" onchange="upd()"><label for="lm10">PERSO + VENDITA → usa <strong>Lost/Won nativo GHL</strong>, poi elimina entrambi</label></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== LISA FLAMMIA ===================== -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <span class="card-name">Lisa Flammia</span>
+    <span class="card-badge" id="b-lf">0 / 11</span>
+    <span class="card-arrow">▼</span>
+  </div>
+  <div class="card-body">
+    <div class="group">
+      <div class="group-title add">➕ Aggiungi stage</div>
+      <div class="task" id="tw-lf1"><input type="checkbox" id="lf1" onchange="upd()"><label for="lf1">Aggiungi stage <strong>NRx1</strong> — posizione 1</label></div>
+      <div class="task" id="tw-lf2"><input type="checkbox" id="lf2" onchange="upd()"><label for="lf2">Aggiungi stage <strong>NRx2</strong> — posizione 2</label></div>
+      <div class="task" id="tw-lf3"><input type="checkbox" id="lf3" onchange="upd()"><label for="lf3">Aggiungi stage <strong>APP QUALIFICA</strong> — dopo NO</label></div>
+      <div class="task" id="tw-lf4"><input type="checkbox" id="lf4" onchange="upd()"><label for="lf4">Aggiungi stage <strong>APP CHIUSURA</strong> — dopo APP QUALIFICA</label></div>
+    </div>
+    <div class="group">
+      <div class="group-title rename">✏️ Rinomina</div>
+      <div class="task" id="tw-lf5"><input type="checkbox" id="lf5" onchange="upd()"><label for="lf5">"NOx3 (MAIL)" → <strong>NRx3 (MAIL)</strong></label></div>
+      <div class="task" id="tw-lf6"><input type="checkbox" id="lf6" onchange="upd()"><label for="lf6">"NUMERO FALSO" → <strong>NUMERO FALSO (MAIL)</strong></label></div>
+    </div>
+    <div class="group">
+      <div class="group-title remove">🗑️ Rimuovi</div>
+      <div class="task" id="tw-lf7"><input type="checkbox" id="lf7" onchange="upd()"><label for="lf7">IN LAVORAZIONE → sposta in <strong>NRx1</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-lf8"><input type="checkbox" id="lf8" onchange="upd()"><label for="lf8">LINKEDIN → sposta contatti in <strong>LEADS</strong>, poi elimina stage</label></div>
+      <div class="task" id="tw-lf9"><input type="checkbox" id="lf9" onchange="upd()"><label for="lf9">LEADS ALL → sposta in <strong>LEADS</strong>, poi elimina</label></div>
+      <div class="task" id="tw-lf10"><input type="checkbox" id="lf10" onchange="upd()"><label for="lf10">APPUNTAMENTO → sposta in <strong>APP QUALIFICA</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-lf11"><input type="checkbox" id="lf11" onchange="upd()"><label for="lf11">PERSO + VENDITA → usa <strong>Lost/Won nativo GHL</strong>, poi elimina entrambi</label></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== LORENZO MURANO ===================== -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <span class="card-name">Lorenzo Murano</span>
+    <span class="card-badge" id="b-lo">0 / 9</span>
+    <span class="card-arrow">▼</span>
+  </div>
+  <div class="card-body">
+    <div class="group">
+      <div class="group-title add">➕ Aggiungi stage</div>
+      <div class="task" id="tw-lo1"><input type="checkbox" id="lo1" onchange="upd()"><label for="lo1">Aggiungi stage <strong>NRx1</strong> — posizione 1</label></div>
+      <div class="task" id="tw-lo2"><input type="checkbox" id="lo2" onchange="upd()"><label for="lo2">Aggiungi stage <strong>NRx2</strong> — posizione 2</label></div>
+      <div class="task" id="tw-lo3"><input type="checkbox" id="lo3" onchange="upd()"><label for="lo3">Aggiungi stage <strong>APP QUALIFICA</strong> — dopo NO</label></div>
+      <div class="task" id="tw-lo4"><input type="checkbox" id="lo4" onchange="upd()"><label for="lo4">Aggiungi stage <strong>APP CHIUSURA</strong> — dopo APP QUALIFICA</label></div>
+    </div>
+    <div class="group">
+      <div class="group-title rename">✏️ Rinomina</div>
+      <div class="task" id="tw-lo5"><input type="checkbox" id="lo5" onchange="upd()"><label for="lo5">"NOx3 (mail)" → <strong>NRx3 (MAIL)</strong></label></div>
+      <div class="task" id="tw-lo6"><input type="checkbox" id="lo6" onchange="upd()"><label for="lo6">"NUMERO FALSO" → <strong>NUMERO FALSO (MAIL)</strong></label></div>
+    </div>
+    <div class="group">
+      <div class="group-title remove">🗑️ Rimuovi</div>
+      <div class="task" id="tw-lo7"><input type="checkbox" id="lo7" onchange="upd()"><label for="lo7">IN LAVORAZIONE → sposta in <strong>NRx1</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-lo8"><input type="checkbox" id="lo8" onchange="upd()"><label for="lo8">APPUNTAMENTO → sposta in <strong>APP QUALIFICA</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-lo9"><input type="checkbox" id="lo9" onchange="upd()"><label for="lo9">PERSO + VENDITA → usa <strong>Lost/Won nativo GHL</strong>, poi elimina entrambi</label></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== LUCREZIA FIORUCCI ===================== -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <span class="card-name">Lucrezia Fiorucci</span>
+    <span class="card-badge" id="b-lu">0 / 11</span>
+    <span class="card-arrow">▼</span>
+  </div>
+  <div class="card-body">
+    <div class="group">
+      <div class="group-title add">➕ Aggiungi stage</div>
+      <div class="task" id="tw-lu1"><input type="checkbox" id="lu1" onchange="upd()"><label for="lu1">Aggiungi stage <strong>NRx1</strong> — posizione 1</label></div>
+      <div class="task" id="tw-lu2"><input type="checkbox" id="lu2" onchange="upd()"><label for="lu2">Aggiungi stage <strong>NRx2</strong> — posizione 2</label></div>
+      <div class="task" id="tw-lu3"><input type="checkbox" id="lu3" onchange="upd()"><label for="lu3">Aggiungi stage <strong>APP QUALIFICA</strong> — dopo NO</label></div>
+      <div class="task" id="tw-lu4"><input type="checkbox" id="lu4" onchange="upd()"><label for="lu4">Aggiungi stage <strong>APP CHIUSURA</strong> — dopo APP QUALIFICA</label></div>
+    </div>
+    <div class="group">
+      <div class="group-title rename">✏️ Rinomina</div>
+      <div class="task" id="tw-lu5"><input type="checkbox" id="lu5" onchange="upd()"><label for="lu5">"LEAD" → <strong>LEADS</strong></label></div>
+      <div class="task" id="tw-lu6"><input type="checkbox" id="lu6" onchange="upd()"><label for="lu6">"KO" → <strong>NO</strong></label></div>
+      <div class="task" id="tw-lu7"><input type="checkbox" id="lu7" onchange="upd()"><label for="lu7">"NOx3 (mail)" → <strong>NRx3 (MAIL)</strong></label></div>
+      <div class="task" id="tw-lu8"><input type="checkbox" id="lu8" onchange="upd()"><label for="lu8">"NUMERO FALSO" → <strong>NUMERO FALSO (MAIL)</strong></label></div>
+    </div>
+    <div class="group">
+      <div class="group-title remove">🗑️ Rimuovi</div>
+      <div class="task" id="tw-lu9"><input type="checkbox" id="lu9" onchange="upd()"><label for="lu9">IN LAVORAZIONE → sposta in <strong>NRx1</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-lu10"><input type="checkbox" id="lu10" onchange="upd()"><label for="lu10">LEAD ALL → sposta in <strong>LEADS</strong>, poi elimina</label></div>
+      <div class="task" id="tw-lu11"><input type="checkbox" id="lu11" onchange="upd()"><label for="lu11">APPUNTAMENTO → sposta in <strong>APP QUALIFICA</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MARCO DANIEL ===================== -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <span class="card-name">Marco Daniel</span>
+    <span class="card-badge" id="b-md">0 / 10</span>
+    <span class="card-arrow">▼</span>
+  </div>
+  <div class="card-body">
+    <div class="group">
+      <div class="group-title add">➕ Aggiungi stage</div>
+      <div class="task" id="tw-md1"><input type="checkbox" id="md1" onchange="upd()"><label for="md1">Aggiungi stage <strong>NRx1</strong> — posizione 1</label></div>
+      <div class="task" id="tw-md2"><input type="checkbox" id="md2" onchange="upd()"><label for="md2">Aggiungi stage <strong>NRx2</strong> — posizione 2</label></div>
+      <div class="task" id="tw-md3"><input type="checkbox" id="md3" onchange="upd()"><label for="md3">Aggiungi stage <strong>APP QUALIFICA</strong> — dopo NO</label></div>
+      <div class="task" id="tw-md4"><input type="checkbox" id="md4" onchange="upd()"><label for="md4">Aggiungi stage <strong>APP CHIUSURA</strong> — dopo APP QUALIFICA</label></div>
+    </div>
+    <div class="group">
+      <div class="group-title rename">✏️ Rinomina</div>
+      <div class="task" id="tw-md5"><input type="checkbox" id="md5" onchange="upd()"><label for="md5">"NOx3 (MAIL)" → <strong>NRx3 (MAIL)</strong></label></div>
+      <div class="task" id="tw-md6"><input type="checkbox" id="md6" onchange="upd()"><label for="md6">"NUMERO FALSO" → <strong>NUMERO FALSO (MAIL)</strong></label></div>
+    </div>
+    <div class="group">
+      <div class="group-title remove">🗑️ Rimuovi</div>
+      <div class="task" id="tw-md7"><input type="checkbox" id="md7" onchange="upd()"><label for="md7">IN LAVORAZIONE → sposta in <strong>NRx1</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-md8"><input type="checkbox" id="md8" onchange="upd()"><label for="md8">LEADS ALL → sposta in <strong>LEADS</strong>, poi elimina</label></div>
+      <div class="task" id="tw-md9"><input type="checkbox" id="md9" onchange="upd()"><label for="md9">APPUNTAMENTO → sposta in <strong>APP QUALIFICA</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-md10"><input type="checkbox" id="md10" onchange="upd()"><label for="md10">PERSO + VENDITA → usa <strong>Lost/Won nativo GHL</strong>, poi elimina entrambi</label></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== NICOLETA TABACARU ===================== -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <span class="card-name">Nicoleta Tabacaru</span>
+    <span class="card-badge" id="b-nt">0 / 11</span>
+    <span class="card-arrow">▼</span>
+  </div>
+  <div class="card-body">
+    <div class="group">
+      <div class="group-title add">➕ Aggiungi stage</div>
+      <div class="task" id="tw-nt1"><input type="checkbox" id="nt1" onchange="upd()"><label for="nt1">Aggiungi stage <strong>NRx1</strong> — posizione 1</label></div>
+      <div class="task" id="tw-nt2"><input type="checkbox" id="nt2" onchange="upd()"><label for="nt2">Aggiungi stage <strong>NRx2</strong> — posizione 2</label></div>
+      <div class="task" id="tw-nt3"><input type="checkbox" id="nt3" onchange="upd()"><label for="nt3">Aggiungi stage <strong>APP QUALIFICA</strong> — dopo NO</label></div>
+      <div class="task" id="tw-nt4"><input type="checkbox" id="nt4" onchange="upd()"><label for="nt4">Aggiungi stage <strong>APP CHIUSURA</strong> — dopo APP QUALIFICA</label></div>
+      <div class="task" id="tw-nt5"><input type="checkbox" id="nt5" onchange="upd()"><label for="nt5">Aggiungi stage <strong>SVILUPPO</strong> — dopo RICARICO 2<span class="note">⚠️ Stage mancante in questa pipeline</span></label></div>
+    </div>
+    <div class="group">
+      <div class="group-title rename">✏️ Rinomina</div>
+      <div class="task" id="tw-nt6"><input type="checkbox" id="nt6" onchange="upd()"><label for="nt6">"LEAD" → <strong>LEADS</strong></label></div>
+      <div class="task" id="tw-nt7"><input type="checkbox" id="nt7" onchange="upd()"><label for="nt7">"NO x 3 (MAIL)" → <strong>NRx3 (MAIL)</strong></label></div>
+      <div class="task" id="tw-nt8"><input type="checkbox" id="nt8" onchange="upd()"><label for="nt8">"NUMERO FALSO" → <strong>NUMERO FALSO (MAIL)</strong></label></div>
+    </div>
+    <div class="group">
+      <div class="group-title remove">🗑️ Rimuovi</div>
+      <div class="task" id="tw-nt9"><input type="checkbox" id="nt9" onchange="upd()"><label for="nt9">IN LAVORAZIONE → sposta in <strong>NRx1</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-nt10"><input type="checkbox" id="nt10" onchange="upd()"><label for="nt10">LEAD ALL → sposta in <strong>LEADS</strong>, poi elimina</label></div>
+      <div class="task" id="tw-nt11"><input type="checkbox" id="nt11" onchange="upd()"><label for="nt11">APPUNTAMENTO → sposta in <strong>APP QUALIFICA</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== NICOLÒ CAPPI ===================== -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <span class="card-name">Nicolò Cappi</span>
+    <span class="card-badge" id="b-nc">0 / 10</span>
+    <span class="card-arrow">▼</span>
+  </div>
+  <div class="card-body">
+    <div class="group">
+      <div class="group-title add">➕ Aggiungi stage</div>
+      <div class="task" id="tw-nc1"><input type="checkbox" id="nc1" onchange="upd()"><label for="nc1">Aggiungi stage <strong>NRx1</strong> — posizione 1</label></div>
+      <div class="task" id="tw-nc2"><input type="checkbox" id="nc2" onchange="upd()"><label for="nc2">Aggiungi stage <strong>NRx2</strong> — posizione 2</label></div>
+      <div class="task" id="tw-nc3"><input type="checkbox" id="nc3" onchange="upd()"><label for="nc3">Aggiungi stage <strong>APP QUALIFICA</strong> — dopo NO</label></div>
+      <div class="task" id="tw-nc4"><input type="checkbox" id="nc4" onchange="upd()"><label for="nc4">Aggiungi stage <strong>APP CHIUSURA</strong> — dopo APP QUALIFICA</label></div>
+    </div>
+    <div class="group">
+      <div class="group-title rename">✏️ Rinomina</div>
+      <div class="task" id="tw-nc5"><input type="checkbox" id="nc5" onchange="upd()"><label for="nc5">"NOx3 (MAIL)" → <strong>NRx3 (MAIL)</strong></label></div>
+      <div class="task" id="tw-nc6"><input type="checkbox" id="nc6" onchange="upd()"><label for="nc6">"NUMERO FALSO" → <strong>NUMERO FALSO (MAIL)</strong></label></div>
+    </div>
+    <div class="group">
+      <div class="group-title remove">🗑️ Rimuovi</div>
+      <div class="task" id="tw-nc7"><input type="checkbox" id="nc7" onchange="upd()"><label for="nc7">IN LAVORAZIONE → sposta in <strong>NRx1</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-nc8"><input type="checkbox" id="nc8" onchange="upd()"><label for="nc8">LEADS ALL → sposta in <strong>LEADS</strong>, poi elimina</label></div>
+      <div class="task" id="tw-nc9"><input type="checkbox" id="nc9" onchange="upd()"><label for="nc9">APPUNTAMENTO → sposta in <strong>APP QUALIFICA</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-nc10"><input type="checkbox" id="nc10" onchange="upd()"><label for="nc10">PERSO + VENDITA → usa <strong>Lost/Won nativo GHL</strong>, poi elimina entrambi</label></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== NIK CREPALDI ===================== -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <span class="card-name">Nik Crepaldi</span>
+    <span class="card-badge" id="b-ni">0 / 13</span>
+    <span class="card-arrow">▼</span>
+  </div>
+  <div class="card-body">
+    <div class="group">
+      <div class="group-title add">➕ Aggiungi stage</div>
+      <div class="task" id="tw-ni1"><input type="checkbox" id="ni1" onchange="upd()"><label for="ni1">Aggiungi stage <strong>NRx1</strong> — posizione 1</label></div>
+      <div class="task" id="tw-ni2"><input type="checkbox" id="ni2" onchange="upd()"><label for="ni2">Aggiungi stage <strong>NRx2</strong> — posizione 2</label></div>
+      <div class="task" id="tw-ni3"><input type="checkbox" id="ni3" onchange="upd()"><label for="ni3">Aggiungi stage <strong>APP QUALIFICA</strong> — dopo NO</label></div>
+      <div class="task" id="tw-ni4"><input type="checkbox" id="ni4" onchange="upd()"><label for="ni4">Aggiungi stage <strong>APP CHIUSURA</strong> — dopo APP QUALIFICA</label></div>
+      <div class="task" id="tw-ni5"><input type="checkbox" id="ni5" onchange="upd()"><label for="ni5">Aggiungi stage <strong>RICARICO 1</strong> — dopo APP CHIUSURA<span class="note">⚠️ Stage mancante in questa pipeline</span></label></div>
+      <div class="task" id="tw-ni6"><input type="checkbox" id="ni6" onchange="upd()"><label for="ni6">Aggiungi stage <strong>RICARICO 2</strong> — dopo RICARICO 1<span class="note">⚠️ Stage mancante in questa pipeline</span></label></div>
+      <div class="task" id="tw-ni7"><input type="checkbox" id="ni7" onchange="upd()"><label for="ni7">Aggiungi stage <strong>SVILUPPO</strong> — dopo RICARICO 2<span class="note">⚠️ Stage mancante in questa pipeline</span></label></div>
+    </div>
+    <div class="group">
+      <div class="group-title rename">✏️ Rinomina</div>
+      <div class="task" id="tw-ni8"><input type="checkbox" id="ni8" onchange="upd()"><label for="ni8">"NO CI PENSO" → <strong>NO</strong></label></div>
+      <div class="task" id="tw-ni9"><input type="checkbox" id="ni9" onchange="upd()"><label for="ni9">"NOx3 (MAIL)" → <strong>NRx3 (MAIL)</strong></label></div>
+      <div class="task" id="tw-ni10"><input type="checkbox" id="ni10" onchange="upd()"><label for="ni10">"NUMERO FALSO" → <strong>NUMERO FALSO (MAIL)</strong></label></div>
+    </div>
+    <div class="group">
+      <div class="group-title remove">🗑️ Rimuovi</div>
+      <div class="task" id="tw-ni11"><input type="checkbox" id="ni11" onchange="upd()"><label for="ni11">IN LAVORAZIONE → sposta in <strong>NRx1</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-ni12"><input type="checkbox" id="ni12" onchange="upd()"><label for="ni12">LEADS ALL → sposta in <strong>LEADS</strong>, poi elimina</label></div>
+      <div class="task" id="tw-ni13"><input type="checkbox" id="ni13" onchange="upd()"><label for="ni13">APPUNTAMENTO + PERSO + VENDITA → sposta contatti, poi elimina</label></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== PIERGIACOMO BININI ===================== -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <span class="card-name">Piergiacomo Binini</span>
+    <span class="card-badge" id="b-pb">0 / 9</span>
+    <span class="card-arrow">▼</span>
+  </div>
+  <div class="card-body">
+    <div class="group">
+      <div class="group-title add">➕ Aggiungi stage</div>
+      <div class="task" id="tw-pb1"><input type="checkbox" id="pb1" onchange="upd()"><label for="pb1">Aggiungi stage <strong>NRx1</strong> — posizione 1</label></div>
+      <div class="task" id="tw-pb2"><input type="checkbox" id="pb2" onchange="upd()"><label for="pb2">Aggiungi stage <strong>NRx2</strong> — posizione 2</label></div>
+      <div class="task" id="tw-pb3"><input type="checkbox" id="pb3" onchange="upd()"><label for="pb3">Aggiungi stage <strong>APP QUALIFICA</strong> — dopo NO</label></div>
+      <div class="task" id="tw-pb4"><input type="checkbox" id="pb4" onchange="upd()"><label for="pb4">Aggiungi stage <strong>APP CHIUSURA</strong> — dopo APP QUALIFICA</label></div>
+    </div>
+    <div class="group">
+      <div class="group-title rename">✏️ Rinomina</div>
+      <div class="task" id="tw-pb5"><input type="checkbox" id="pb5" onchange="upd()"><label for="pb5">"NOx3 (MAIL)" → <strong>NRx3 (MAIL)</strong></label></div>
+      <div class="task" id="tw-pb6"><input type="checkbox" id="pb6" onchange="upd()"><label for="pb6">"NUMERO FALSO" → <strong>NUMERO FALSO (MAIL)</strong></label></div>
+    </div>
+    <div class="group">
+      <div class="group-title remove">🗑️ Rimuovi</div>
+      <div class="task" id="tw-pb7"><input type="checkbox" id="pb7" onchange="upd()"><label for="pb7">IN LAVORAZIONE → sposta in <strong>NRx1</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-pb8"><input type="checkbox" id="pb8" onchange="upd()"><label for="pb8">APPUNTAMENTO → sposta in <strong>APP QUALIFICA</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-pb9"><input type="checkbox" id="pb9" onchange="upd()"><label for="pb9">PERSO + VENDITA → usa <strong>Lost/Won nativo GHL</strong>, poi elimina entrambi</label></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== RICCARDO PIERI ===================== -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <span class="card-name">Riccardo Pieri</span>
+    <span class="card-badge" id="b-rp">0 / 10</span>
+    <span class="card-arrow">▼</span>
+  </div>
+  <div class="card-body">
+    <div class="group">
+      <div class="group-title add">➕ Aggiungi stage</div>
+      <div class="task" id="tw-rp1"><input type="checkbox" id="rp1" onchange="upd()"><label for="rp1">Aggiungi stage <strong>NRx1</strong> — posizione 1</label></div>
+      <div class="task" id="tw-rp2"><input type="checkbox" id="rp2" onchange="upd()"><label for="rp2">Aggiungi stage <strong>NRx2</strong> — posizione 2</label></div>
+      <div class="task" id="tw-rp3"><input type="checkbox" id="rp3" onchange="upd()"><label for="rp3">Aggiungi stage <strong>APP QUALIFICA</strong> — dopo NO</label></div>
+      <div class="task" id="tw-rp4"><input type="checkbox" id="rp4" onchange="upd()"><label for="rp4">Aggiungi stage <strong>APP CHIUSURA</strong> — dopo APP QUALIFICA</label></div>
+    </div>
+    <div class="group">
+      <div class="group-title rename">✏️ Rinomina</div>
+      <div class="task" id="tw-rp5"><input type="checkbox" id="rp5" onchange="upd()"><label for="rp5">"Nrx3 (MAIL)" → <strong>NRx3 (MAIL)</strong> (capitalizzazione)</label></div>
+      <div class="task" id="tw-rp6"><input type="checkbox" id="rp6" onchange="upd()"><label for="rp6">"NUMERO FALSO" → <strong>NUMERO FALSO (MAIL)</strong></label></div>
+    </div>
+    <div class="group">
+      <div class="group-title remove">🗑️ Rimuovi</div>
+      <div class="task" id="tw-rp7"><input type="checkbox" id="rp7" onchange="upd()"><label for="rp7">IN LAVORAZIONE → sposta in <strong>NRx1</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-rp8"><input type="checkbox" id="rp8" onchange="upd()"><label for="rp8">LEADS ALL → sposta in <strong>LEADS</strong>, poi elimina</label></div>
+      <div class="task" id="tw-rp9"><input type="checkbox" id="rp9" onchange="upd()"><label for="rp9">APPUNTAMENTO → sposta in <strong>APP QUALIFICA</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-rp10"><input type="checkbox" id="rp10" onchange="upd()"><label for="rp10">PERSO + VENDITA → usa <strong>Lost/Won nativo GHL</strong>, poi elimina entrambi</label></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== SARA VINCIGUERRA ===================== -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <span class="card-name">Sara Vinciguerra</span>
+    <span class="card-badge" id="b-sv">0 / 9</span>
+    <span class="card-arrow">▼</span>
+  </div>
+  <div class="card-body">
+    <div class="group">
+      <div class="group-title add">➕ Aggiungi stage</div>
+      <div class="task" id="tw-sv1"><input type="checkbox" id="sv1" onchange="upd()"><label for="sv1">Aggiungi stage <strong>NRx1</strong> — posizione 1</label></div>
+      <div class="task" id="tw-sv2"><input type="checkbox" id="sv2" onchange="upd()"><label for="sv2">Aggiungi stage <strong>NRx2</strong> — posizione 2</label></div>
+      <div class="task" id="tw-sv3"><input type="checkbox" id="sv3" onchange="upd()"><label for="sv3">Aggiungi stage <strong>APP QUALIFICA</strong> — dopo NO</label></div>
+      <div class="task" id="tw-sv4"><input type="checkbox" id="sv4" onchange="upd()"><label for="sv4">Aggiungi stage <strong>APP CHIUSURA</strong> — dopo APP QUALIFICA</label></div>
+    </div>
+    <div class="group">
+      <div class="group-title rename">✏️ Rinomina</div>
+      <div class="task" id="tw-sv5"><input type="checkbox" id="sv5" onchange="upd()"><label for="sv5">"NOx3 (MAIL)" → <strong>NRx3 (MAIL)</strong></label></div>
+      <div class="task" id="tw-sv6"><input type="checkbox" id="sv6" onchange="upd()"><label for="sv6">"NUMERO FALSO" → <strong>NUMERO FALSO (MAIL)</strong></label></div>
+    </div>
+    <div class="group">
+      <div class="group-title remove">🗑️ Rimuovi</div>
+      <div class="task" id="tw-sv7"><input type="checkbox" id="sv7" onchange="upd()"><label for="sv7">IN LAVORAZIONE → sposta in <strong>NRx1</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-sv8"><input type="checkbox" id="sv8" onchange="upd()"><label for="sv8">APPUNTAMENTO → sposta in <strong>APP QUALIFICA</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-sv9"><input type="checkbox" id="sv9" onchange="upd()"><label for="sv9">PERSO + VENDITA → usa <strong>Lost/Won nativo GHL</strong>, poi elimina entrambi</label></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== STEFANO CARAFA ===================== -->
+<div class="card">
+  <div class="card-head" onclick="tog(this)">
+    <span class="card-name">Stefano Carafa</span>
+    <span class="card-badge" id="b-sc">0 / 14</span>
+    <span class="card-arrow">▼</span>
+  </div>
+  <div class="card-body">
+    <div class="group">
+      <div class="group-title add">➕ Aggiungi stage</div>
+      <div class="task" id="tw-sc1"><input type="checkbox" id="sc1" onchange="upd()"><label for="sc1">Aggiungi stage <strong>NRx1</strong> — posizione 1</label></div>
+      <div class="task" id="tw-sc2"><input type="checkbox" id="sc2" onchange="upd()"><label for="sc2">Aggiungi stage <strong>NRx2</strong> — posizione 2</label></div>
+      <div class="task" id="tw-sc3"><input type="checkbox" id="sc3" onchange="upd()"><label for="sc3">Aggiungi stage <strong>NRx3 (MAIL)</strong> — posizione 3<span class="note">⚠️ Completamente mancante in questa pipeline</span></label></div>
+      <div class="task" id="tw-sc4"><input type="checkbox" id="sc4" onchange="upd()"><label for="sc4">Aggiungi stage <strong>APP QUALIFICA</strong> — dopo NO</label></div>
+      <div class="task" id="tw-sc5"><input type="checkbox" id="sc5" onchange="upd()"><label for="sc5">Aggiungi stage <strong>APP CHIUSURA</strong> — dopo APP QUALIFICA</label></div>
+      <div class="task" id="tw-sc6"><input type="checkbox" id="sc6" onchange="upd()"><label for="sc6">Aggiungi stage <strong>RICARICO 1</strong> — dopo APP CHIUSURA<span class="note">⚠️ Stage mancante</span></label></div>
+      <div class="task" id="tw-sc7"><input type="checkbox" id="sc7" onchange="upd()"><label for="sc7">Aggiungi stage <strong>RICARICO 2</strong> — dopo RICARICO 1<span class="note">⚠️ Stage mancante</span></label></div>
+      <div class="task" id="tw-sc8"><input type="checkbox" id="sc8" onchange="upd()"><label for="sc8">Aggiungi stage <strong>SVILUPPO</strong> — dopo RICARICO 2<span class="note">⚠️ Stage mancante</span></label></div>
+    </div>
+    <div class="group">
+      <div class="group-title rename">✏️ Rinomina</div>
+      <div class="task" id="tw-sc9"><input type="checkbox" id="sc9" onchange="upd()"><label for="sc9">"NO CI PENSO" → <strong>NO</strong></label></div>
+      <div class="task" id="tw-sc10"><input type="checkbox" id="sc10" onchange="upd()"><label for="sc10">"NUMERO FALSO" → <strong>NUMERO FALSO (MAIL)</strong></label></div>
+    </div>
+    <div class="group">
+      <div class="group-title remove">🗑️ Rimuovi</div>
+      <div class="task" id="tw-sc11"><input type="checkbox" id="sc11" onchange="upd()"><label for="sc11">IN LAVORAZIONE → sposta in <strong>NRx1</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-sc12"><input type="checkbox" id="sc12" onchange="upd()"><label for="sc12">LEADS ALL → sposta in <strong>LEADS</strong>, poi elimina</label></div>
+      <div class="task" id="tw-sc13"><input type="checkbox" id="sc13" onchange="upd()"><label for="sc13">APPUNTAMENTO → sposta in <strong>APP QUALIFICA</strong>, poi elimina<span class="note">⚠️ Potrebbe avere contatti attivi</span></label></div>
+      <div class="task" id="tw-sc14"><input type="checkbox" id="sc14" onchange="upd()"><label for="sc14">PERSO + VENDITA → usa <strong>Lost/Won nativo GHL</strong>, poi elimina entrambi</label></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== WORKFLOW ===================== -->
+<div class="card workflow">
+  <div class="card-head" onclick="tog(this)">
+    <span class="card-name">⚡ Workflow da creare (automation)</span>
+    <span class="card-badge" id="b-wf">0 / 2</span>
+    <span class="card-arrow">▼</span>
+  </div>
+  <div class="card-body">
+    <div class="group">
+      <div class="group-title add">Da creare in GHL → Automations</div>
+      <div class="task" id="tw-wf1"><input type="checkbox" id="wf1" onchange="upd()"><label for="wf1"><strong>Workflow NRx3 (MAIL)</strong> — Trigger: "Opportunity Stage Changed" → NRx3 (MAIL) [su tutte le pipeline]. Action: invia email con link calendario per prenotare appuntamento<span class="note">⚠️ Crea un workflow per pipeline oppure uno solo con condizione "ANY pipeline"</span></label></div>
+      <div class="task" id="tw-wf2"><input type="checkbox" id="wf2" onchange="upd()"><label for="wf2"><strong>Workflow NUMERO FALSO (MAIL)</strong> — Trigger: "Opportunity Stage Changed" → NUMERO FALSO (MAIL). Action: invia email specifica per numero errato/irraggiungibile</label></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<script>
+const KEY = 'growi_checklist_v1';
+
+function save(id) {
+  const state = JSON.parse(localStorage.getItem(KEY) || '{}');
+  state[id] = document.getElementById(id).checked;
+  localStorage.setItem(KEY, JSON.stringify(state));
+  const row = document.getElementById('tw-' + id);
+  if (row) row.classList.toggle('checked', state[id]);
+  upd();
+}
+
+function upd() {
+  const all = document.querySelectorAll('input[type=checkbox]');
+  let total = all.length, done = 0;
+  all.forEach(cb => { if (cb.checked) done++; });
+
+  document.getElementById('pfill').style.width = (total ? Math.round(done/total*100) : 0) + '%';
+  document.getElementById('ptext').textContent = done + ' / ' + total + ' task completati';
+
+  // update per-card badges
+  document.querySelectorAll('.card').forEach(card => {
+    const checks = card.querySelectorAll('input[type=checkbox]');
+    const cardDone = Array.from(checks).filter(c=>c.checked).length;
+    const bid = card.querySelector('[id^="b-"]');
+    if (bid) {
+      bid.textContent = cardDone + ' / ' + checks.length;
+      bid.className = 'card-badge' + (cardDone === checks.length && checks.length > 0 ? ' done' : cardDone > 0 ? ' warn' : '');
+    }
+  });
+}
+
+function tog(head) {
+  const body = head.nextElementSibling;
+  const arrow = head.querySelector('.card-arrow');
+  body.classList.toggle('open');
+  arrow.classList.toggle('open');
+}
+
+// Restore state on load
+window.addEventListener('DOMContentLoaded', () => {
+  const state = JSON.parse(localStorage.getItem(KEY) || '{}');
+  Object.keys(state).forEach(id => {
+    const el = document.getElementById(id);
+    if (el && state[id]) {
+      el.checked = true;
+      const row = document.getElementById('tw-' + id);
+      if (row) row.classList.add('checked');
+    }
+  });
+  upd();
+});
+</script>
+</body>
+</html>
